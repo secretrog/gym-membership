@@ -33,7 +33,7 @@ app.use('/api/checkin', require('./routes/checkin'));
 app.use('/api/bookings', require('./routes/bookings'));
 app.use('/api/public-memberships', require('./routes/public-memberships'));
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
     console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
 
