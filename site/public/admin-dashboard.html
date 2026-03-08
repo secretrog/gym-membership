@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121212",
+                        "card-dark": "#1e1e1e",
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 255, 0, 0.1);
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside
+            class="w-64 border-r border-slate-200 dark:border-white/10 flex flex-col bg-background-light dark:bg-background-dark shrink-0 hidden md:flex">
+            <div class="p-6 flex items-center gap-3">
+                <div class="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark">
+                    <span class="material-symbols-outlined font-bold">fitness_center</span>
+                </div>
+                <div>
+                    <h1 class="text-sm font-bold uppercase tracking-wider">Iron Pulse</h1>
+                    <p class="text-xs text-slate-500">Admin Portal</p>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-background-dark font-semibold"
+                    href="admin-dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors"
+                    href="members.html">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Members</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors"
+                    id="logoutBtn" style="cursor: pointer;">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0 p-8">
+            <header class="mb-8">
+                <h2 class="text-3xl font-bold italic tracking-tight">Dashboard Overview</h2>
+                <p class="text-slate-500">Live updates from your gym</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Stat Card: Active Members -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="material-symbols-outlined text-primary">group</span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">Active Members</p>
+                    <h3 id="statActiveMembers" class="text-3xl font-bold mt-1">--</h3>
+                </div>
+
+                <!-- Stat Card: Monthly Revenue -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="material-symbols-outlined text-primary">payments</span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">Monthly Revenue</p>
+                    <h3 id="statRevenue" class="text-3xl font-bold mt-1">$0</h3>
+                </div>
+
+                <!-- Stat Card: Today's Check-ins -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="material-symbols-outlined text-primary">how_to_reg</span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">Today's Check-ins</p>
+                    <h3 id="statCheckIns" class="text-3xl font-bold mt-1">0</h3>
+                </div>
+
+                <!-- Stat Card: Pending Memberships -->
+                <div class="glass-card p-6 rounded-2xl border-primary/20 bg-primary/5">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="material-symbols-outlined text-primary">notifications_active</span>
+                        <span id="pendingBadge" class="hidden flex h-2 w-2 rounded-full bg-primary animate-ping"></span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">Pending Requests</p>
+                    <h3 id="statPendingRequests" class="text-3xl font-bold mt-1">0</h3>
+                </div>
+
+                <!-- Stat Card: Class Bookings -->
+                <div class="glass-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="material-symbols-outlined text-primary">event_available</span>
+                        <span id="bookingsBadge"
+                            class="hidden flex h-2 w-2 rounded-full bg-primary animate-ping"></span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium">Class Bookings</p>
+                    <h3 id="statClassBookings" class="text-3xl font-bold mt-1">0</h3>
+                </div>
+            </div>
+
+            <!-- Pending Approvals Section -->
+            <div id="pendingSection" class="mt-12 hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold italic uppercase tracking-wider flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">pending_actions</span>
+                        Pending Approvals
+                    </h3>
+                </div>
+                <div id="pendingList" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- Pending items populated here -->
+                </div>
+            </div>
+
+            <!-- Class Bookings Section -->
+            <div id="bookingsSection" class="mt-12 hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-xl font-bold italic uppercase tracking-wider flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">event</span>
+                        Class Bookings
+                    </h3>
+                </div>
+                <div id="bookingsList" class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <!-- Booking items populated here -->
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mt-12">
+                <h3 class="text-xl font-bold italic uppercase tracking-wider mb-6">Quick Actions</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="members.html"
+                        class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all group">
+                        <div
+                            class="size-12 rounded-xl bg-primary/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">person_add</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Add New Member</h4>
+                            <p class="text-xs text-slate-500">Register a new gym member</p>
+                        </div>
+                    </a>
+                    <a href="check-in.html"
+                        class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all group">
+                        <div
+                            class="size-12 rounded-xl bg-blue-500/20 text-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">login</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Member Check-in</h4>
+                            <p class="text-xs text-slate-500">Record daily attendance</p>
+                        </div>
+                    </a>
+                    <a href="#"
+                        class="glass-card p-6 rounded-2xl flex items-center gap-4 hover:bg-white/5 transition-all group">
+                        <div
+                            class="size-12 rounded-xl bg-success/20 text-success flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold">Record Payment</h4>
+                            <p class="text-xs text-slate-500">Process membership dues</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-12 p-8 glass-card rounded-2xl text-center">
+                <h3 class="text-xl font-bold mb-2">Backend Successfully Enabled</h3>
+                <p class="text-slate-400 max-w-lg mx-auto">This dashboard is now connected to a live Node.js + Prisma
+                    server. All statistics shown are pulled directly from the SQLite database.</p>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initAuthGuard, handleLogout, getAuthHeaders } from './js/admin-auth.js';
+
+        initAuthGuard();
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+        async function fetchStats() {
+            try {
+                const res = await fetch('/api/dashboard/stats', { headers: getAuthHeaders() });
+                const stats = await res.json();
+
+                document.getElementById('statActiveMembers').textContent = stats.activeMembers;
+                document.getElementById('statRevenue').textContent = `$${stats.revenueThisMonth.toLocaleString()}`;
+                document.getElementById('statCheckIns').textContent = stats.checkInsToday;
+                document.getElementById('statPendingRequests').textContent = stats.pendingPayments;
+                document.getElementById('statClassBookings').textContent = stats.classBookings || 0;
+
+                if (stats.pendingPayments > 0) {
+                    document.getElementById('pendingBadge').classList.remove('hidden');
+                }
+                if (stats.classBookings > 0) {
+                    document.getElementById('bookingsBadge').classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+            }
+        }
+
+        async function fetchPending() {
+            try {
+                const res = await fetch('/api/memberships/pending', { headers: getAuthHeaders() });
+                const pending = await res.json();
+                const container = document.getElementById('pendingList');
+                const section = document.getElementById('pendingSection');
+
+                if (pending.length > 0) {
+                    section.classList.remove('hidden');
+                    container.innerHTML = pending.map(p => `
+                        <div class="glass-card p-6 rounded-2xl flex items-center justify-between border-white/5 hover:border-primary/20 transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-full bg-slate-800 flex items-center justify-center font-bold text-primary">
+                                    ${p.member.name.charAt(0)}
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">${p.member.name}</h4>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">${p.member.email} | ${p.member.phone}</p>
+                                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">${p.plan.name} • $${p.plan.price}</p>
+                                    <p class="text-[10px] text-primary/60 font-bold uppercase tracking-widest">via ${p.payments[0]?.paymentMethod || 'Cash'}</p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-end gap-2">
+                                <button onclick="approveRequest('${p.id}')" class="bg-primary text-background-dark px-6 py-2 rounded-xl font-black uppercase tracking-widest text-[10px] hover:scale-105 transition-transform">
+                                    Approve & Activate
+                                </button>
+                                <button onclick="dismissRequest('${p.id}')" class="bg-white/5 border border-white/10 text-slate-400 px-6 py-2 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/20 transition-all">
+                                    Dismiss
+                                </button>
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    section.classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function fetchBookings() {
+            try {
+                const res = await fetch('/api/bookings', { headers: getAuthHeaders() });
+                const bookings = await res.json();
+                const container = document.getElementById('bookingsList');
+                const section = document.getElementById('bookingsSection');
+
+                if (bookings.length > 0) {
+                    section.classList.remove('hidden');
+                    container.innerHTML = bookings.map(b => `
+                        <div class="glass-card p-6 rounded-2xl flex items-center justify-between border-white/5 hover:border-primary/20 transition-all">
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-full bg-primary/20 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-primary">event</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-sm">${b.className}</h4>
+                                    <p class="text-[10px] text-primary font-bold uppercase tracking-widest">${b.classTime} • ${b.instructor}</p>
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-1">${b.bookerName} • ${b.bookerPhone}</p>
+                                    <p class="text-[10px] text-slate-500 tracking-wider">${new Date(b.createdAt).toLocaleString()}</p>
+                                </div>
+                            </div>
+                            <button onclick="dismissBooking('${b.id}')" class="bg-white/5 border border-white/10 text-slate-400 px-4 py-2 rounded-xl font-bold uppercase tracking-widest text-[10px] hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/20 transition-all">
+                                Dismiss
+                            </button>
+                        </div>
+                    `).join('');
+                } else {
+                    section.classList.add('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        window.approveRequest = async (id) => {
+            if (!confirm('Approve this membership and activate the account?')) return;
+            try {
+                const res = await fetch(`/api/memberships/approve/${id}`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders()
+                });
+                if (res.ok) {
+                    alert('Membership Approved!');
+                    fetchStats();
+                    fetchPending();
+                }
+            } catch (err) { alert('Error approving request'); }
+        };
+
+        window.dismissRequest = async (id) => {
+            if (!confirm('Dismiss this membership request? This cannot be undone.')) return;
+            try {
+                const res = await fetch(`/api/memberships/dismiss/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                if (res.ok) {
+                    fetchStats();
+                    fetchPending();
+                }
+            } catch (err) { alert('Error dismissing request'); }
+        };
+
+        window.dismissBooking = async (id) => {
+            if (!confirm('Dismiss this class booking?')) return;
+            try {
+                const res = await fetch(`/api/bookings/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+                if (res.ok) {
+                    fetchStats();
+                    fetchBookings();
+                }
+            } catch (err) { alert('Error dismissing booking'); }
+        };
+
+        fetchStats();
+        fetchPending();
+        fetchBookings();
+        setInterval(() => {
+            fetchStats();
+            fetchPending();
+            fetchBookings();
+        }, 10000); // Poll every 10s for notifications
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

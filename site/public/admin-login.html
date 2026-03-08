@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 255, 0, 0.1);
+        }
+
+        input::placeholder {
+            color: #6b7280 !important;
+            opacity: 0.6 !important;
+        }
+
+        input {
+            position: relative;
+            z-index: 1;
+            color: #ffffff;
+            caret-color: #D4FF00;
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-[#121212] flex items-center justify-center min-h-screen p-4">
+    <div class="w-full max-w-md">
+        <div class="text-center mb-10">
+            <div class="inline-flex items-center justify-center size-16 rounded-full bg-[#D4FF00] text-[#121212] mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-white tracking-tight">Admin Portal</h1>
+            <p class="text-slate-400 mt-2">Enter credentials to manage your gym</p>
+        </div>
+
+        <div class="glass-card rounded-2xl p-8 shadow-2xl">
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">Email Address</label>
+                    <input type="email" id="email" required
+                        class="w-full bg-[#1e1e1e] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#D4FF00] transition-all"
+                        placeholder="admin@example.com" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-2">Password</label>
+                    <input type="password" id="password" required
+                        class="w-full bg-[#1e1e1e] border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-[#D4FF00] transition-all"
+                        placeholder="••••••••" />
+                </div>
+                <div id="errorMessage"
+                    class="hidden text-red-500 text-sm font-medium bg-red-500/10 p-3 rounded-lg text-center">
+                    Invalid credentials
+                </div>
+                <button type="submit"
+                    class="w-full bg-[#D4FF00] text-[#121212] font-bold py-3.5 rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-lg shadow-[#D4FF00]/10">
+                    Sign In
+                </button>
+            </form>
+        </div>
+        <a href="index.html"
+            class="flex items-center justify-center gap-2 mt-8 text-slate-500 hover:text-white transition-colors group">
+            <span class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1"></span>
+            <span class="text-[10px] font-black uppercase tracking-[0.2em]">Back to site</span>
+        </a>
+        <p class="text-center text-slate-500 mt-8 text-sm">
+            &copy; 2026 IronPulse Fitness. All rights reserved.
+        </p>
+    </div>
+
+    <script type="module">
+        import { handleLogin } from './js/admin-auth.js';
+
+        const form = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const errorMsg = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async (e) => {
+            await handleLogin(e, emailInput.value, passwordInput.value, errorMsg);
+        });
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

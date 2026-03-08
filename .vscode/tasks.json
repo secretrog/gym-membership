@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Auto-run Backend",
+            "type": "shell",
+            "command": "npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/backend"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new",
+                "group": "backend"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "custom",
+                "pattern": {
+                    "regexp": "🚀 Server running on"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "🚀 Server running on",
+                    "endsPattern": "🚀 Server running on"
+                }
+            }
+        }
+    ]
+}

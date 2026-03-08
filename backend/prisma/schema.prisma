@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("staff") // "owner", "staff"
+  isActive     Boolean  @default(true)
+  member       Member?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Member {
+  id               String       @id @default(uuid())
+  name             String
+  phone            String       @unique
+  email            String?
+  dob              DateTime?
+  gender           String?      // "male", "female", "other"
+  address          String?
+  photoUrl         String?
+  emergencyContact String?
+  joinedDate       DateTime     @default(now())
+  status           String       @default("active") // "active", "expired", "suspended", "blocked", "pending"
+  notes            String?
+  streak           Int          @default(0)
+  goalProgress     Float        @default(0)
+  lastScanDate     DateTime?    // Daily limit check
+  userId           String?      @unique
+  user             User?        @relation(fields: [userId], references: [id])
+  memberships      Membership[]
+  payments         Payment[]
+  attendance       Attendance[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+}
+
+model MembershipPlan {
+  id           String       @id @default(uuid())
+  name         String       // e.g., "Monthly Basic"
+  durationDays Int          // 30, 90, 180, 365
+  price        Float
+  description  String?
+  isActive     Boolean      @default(true)
+  memberships  Membership[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Membership {
+  id              String         @id @default(uuid())
+  memberId        String
+  member          Member         @relation(fields: [memberId], references: [id])
+  planId          String
+  plan            MembershipPlan @relation(fields: [planId], references: [id])
+  startDate       DateTime?      // Null until approved
+  endDate         DateTime?      // Null until approved
+  status          String         @default("pending") // "pending", "active", "expired", "cancelled"
+  renewalReminded Boolean        @default(false)
+  payments        Payment[]
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model Payment {
+  id            String     @id @default(uuid())
+  membershipId  String
+  membership    Membership @relation(fields: [membershipId], references: [id])
+  memberId      String
+  member        Member     @relation(fields: [memberId], references: [id])
+  amount        Float
+  amountDue     Float
+  paymentDate   DateTime?
+  paymentMethod String     // "cash", "upi", "card", "bank_transfer", "online"
+  status        String     @default("pending") // "paid", "pending", "partial", "overdue"
+  notes         String?
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+}
+
+model Attendance {
+  id        String    @id @default(uuid())
+  memberId  String
+  member    Member    @relation(fields: [memberId], references: [id])
+  checkIn   DateTime  @default(now())
+  checkOut  DateTime?
+  expiresAt DateTime? // 4-hour window
+  isActive  Boolean   @default(true)
+  date      DateTime  @default(now())
+}
+
+model ClassBooking {
+  id          String   @id @default(uuid())
+  className   String
+  classTime   String
+  instructor  String
+  difficulty  String
+  bookerName  String
+  bookerEmail String?
+  bookerPhone String
+  status      String   @default("pending") // "pending", "confirmed", "dismissed"
+  createdAt   DateTime @default(now())
+}
+
+model DailyQR {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  date      DateTime @unique // One QR per day
+  gymLat    Float    // Gym latitude
+  gymLng    Float    // Gym longitude
+  radius    Float    @default(200) // Allowed radius in meters
+  createdAt DateTime @default(now())
+}

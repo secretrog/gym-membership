@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Members</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121212",
+                        "card-dark": "#1e1e1e",
+                        "success": "#10b981",
+                        "warning": "#f59e0b",
+                        "danger": "#ef4444",
+                    },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 255, 0, 0.1);
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside
+            class="w-64 border-r border-slate-200 dark:border-white/10 flex flex-col bg-background-light dark:bg-background-dark shrink-0 hidden md:flex">
+            <div class="p-6 flex items-center gap-3">
+                <div class="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark">
+                    <span class="material-symbols-outlined font-bold">fitness_center</span>
+                </div>
+                <div>
+                    <h1 class="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-slate-100">Iron Pulse
+                    </h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Admin Portal</p>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                    href="admin-dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-background-dark font-semibold"
+                    href="members.html">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Members</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                    href="check-in.html">
+                    <span class="material-symbols-outlined">nest_clock_farsight_analog</span>
+                    <span>Check-in</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+                    id="logoutBtn" style="cursor: pointer;">
+                    <span class="material-symbols-outlined">logout</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col min-w-0">
+            <header
+                class="h-20 border-b border-slate-200 dark:border-white/10 px-4 md:px-8 flex items-center justify-between bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-10">
+                <div class="flex items-center gap-4 flex-1">
+                    <div class="relative w-full max-w-md hidden sm:block">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                        <input id="searchInput"
+                            class="w-full bg-slate-100 dark:bg-card-dark border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary text-sm"
+                            placeholder="Search members..." type="text" />
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-4 md:p-8 flex-1 flex flex-col gap-6">
+                <div class="flex justify-between items-center">
+                    <h2 id="memberCount" class="text-2xl font-bold italic tracking-tight">Member Directory (0)</h2>
+                    <button id="addMemberBtn"
+                        class="bg-primary text-background-dark px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined">person_add</span>
+                        <span>Add Member</span>
+                    </button>
+                </div>
+
+                <div
+                    class="bg-card-dark rounded-xl border border-white/5 flex-1 flex flex-col min-h-[500px] overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left whitespace-nowrap">
+                            <thead
+                                class="bg-white/5 border-b border-white/5 text-slate-400 text-xs uppercase tracking-wider sticky top-0 z-10 backdrop-blur-md">
+                                <tr>
+                                    <th class="px-6 py-4 font-semibold">Member</th>
+                                    <th class="px-6 py-4 font-semibold">Contact</th>
+                                    <th class="px-6 py-4 font-semibold">Status</th>
+                                    <th class="px-6 py-4 font-semibold text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberTableBody" class="divide-y divide-white/5">
+                                <!-- Members loaded dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Member Modal -->
+    <div id="addMemberModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/80 backdrop-blur-sm"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-card w-full max-w-lg rounded-2xl p-8 shadow-2xl animate-in zoom-in duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Add New Member</h3>
+                    <button id="closeModalBtn" class="text-slate-400 hover:text-white"><span
+                            class="material-symbols-outlined">close</span></button>
+                </div>
+
+                <form id="addMemberForm" class="space-y-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                            <input type="text" name="name" required
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm"
+                                placeholder="John Doe" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Phone Number</label>
+                            <input type="tel" name="phone" required
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm"
+                                placeholder="1234567890" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Email
+                                (Optional)</label>
+                            <input type="email" name="email"
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm"
+                                placeholder="john@example.com" />
+                        </div>
+                    </div>
+
+                    <div id="modalError"
+                        class="hidden text-red-500 text-xs font-bold bg-red-500/10 p-3 rounded-lg text-center"></div>
+
+                    <button type="submit"
+                        class="w-full bg-primary text-background-dark py-3.5 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg">
+                        Create Member
+                    </button>
+                </form>
+
+                <div id="successState" class="hidden text-center space-y-4 py-4">
+                    <div
+                        class="size-16 rounded-full bg-success/20 text-success flex items-center justify-center mx-auto mb-4">
+                        <span class="material-symbols-outlined text-4xl">check_circle</span>
+                    </div>
+                    <h4 class="text-xl font-bold">Member Created!</h4>
+                    <p class="text-slate-400 text-sm">Provide these credentials to the member for portal access:</p>
+
+                    <div class="space-y-3">
+                        <div class="bg-white/5 border border-white/10 rounded-xl p-4 text-left">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Portal
+                                Username (Email)</p>
+                            <p id="generatedEmail" class="text-sm font-bold text-white">--</p>
+                        </div>
+                        <div class="bg-primary/10 border border-primary/20 rounded-xl p-6">
+                            <p class="text-[10px] font-black uppercase tracking-widest text-primary/60 mb-2">Access Code
+                                (Password)</p>
+                            <span id="generatedCode"
+                                class="text-4xl font-black text-primary tracking-widest">000000</span>
+                        </div>
+                    </div>
+
+                    <button id="finishBtn"
+                        class="w-full bg-slate-800 text-white py-3 rounded-xl font-bold hover:bg-slate-700 mt-4 transition-colors">Close
+                        and Refresh</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Member Modal -->
+    <div id="editMemberModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/80 backdrop-blur-sm"
+            onclick="document.getElementById('editMemberModal').classList.add('hidden')"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-card w-full max-w-lg rounded-2xl p-8 shadow-2xl">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold">Edit Member</h3>
+                    <button onclick="document.getElementById('editMemberModal').classList.add('hidden')"
+                        class="text-slate-400 hover:text-white"><span
+                            class="material-symbols-outlined">close</span></button>
+                </div>
+                <form id="editMemberForm" class="space-y-4">
+                    <input type="hidden" id="editMemberId" />
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="col-span-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                            <input type="text" id="editName" required
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Phone Number</label>
+                            <input type="tel" id="editPhone" required
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Email</label>
+                            <input type="email" id="editEmail"
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm" />
+                        </div>
+                        <div class="col-span-2">
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Status</label>
+                            <select id="editStatus"
+                                class="w-full bg-background-dark border border-white/10 rounded-xl px-4 py-3 focus:ring-primary text-sm">
+                                <option value="active">Active</option>
+                                <option value="inactive">Inactive</option>
+                                <option value="blocked">Blocked</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="editModalError"
+                        class="hidden text-red-500 text-xs font-bold bg-red-500/10 p-3 rounded-lg text-center"></div>
+                    <button type="submit"
+                        class="w-full bg-primary text-background-dark py-3.5 rounded-xl font-bold hover:opacity-90 transition-all shadow-lg">
+                        Save Changes
+                    </button>
+                    <button type="button" id="deleteMemberBtn"
+                        class="w-full bg-red-500/10 text-red-500 border border-red-500/20 py-3 rounded-xl font-bold hover:bg-red-500 hover:text-white transition-all text-sm uppercase tracking-widest mt-3">
+                        Delete Member
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initAuthGuard, handleLogout, getAuthHeaders } from './js/admin-auth.js';
+
+        initAuthGuard();
+        document.getElementById('logoutBtn').addEventListener('click', handleLogout);
+
+        const memberTableBody = document.getElementById('memberTableBody');
+        const searchInput = document.getElementById('searchInput');
+        const memberCountEl = document.getElementById('memberCount');
+        const addMemberBtn = document.getElementById('addMemberBtn');
+        const modal = document.getElementById('addMemberModal');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const addMemberForm = document.getElementById('addMemberForm');
+        const successState = document.getElementById('successState');
+        const generatedCodeEl = document.getElementById('generatedCode');
+        const generatedEmailEl = document.getElementById('generatedEmail');
+        const finishBtn = document.getElementById('finishBtn');
+        const modalError = document.getElementById('modalError');
+
+        // Modal Handlers
+        addMemberBtn.onclick = () => {
+            modal.classList.remove('hidden');
+            addMemberForm.classList.remove('hidden');
+            successState.classList.add('hidden');
+            addMemberForm.reset();
+        };
+        closeModalBtn.onclick = () => modal.classList.add('hidden');
+        finishBtn.onclick = () => {
+            modal.classList.add('hidden');
+            fetchMembers();
+        };
+
+        addMemberForm.onsubmit = async (e) => {
+            e.preventDefault();
+            modalError.classList.add('hidden');
+            const formData = new FormData(addMemberForm);
+            const data = Object.fromEntries(formData.entries());
+
+            try {
+                const res = await fetch('/api/members', {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(data)
+                });
+
+                const result = await res.json();
+                if (res.ok) {
+                    addMemberForm.classList.add('hidden');
+                    successState.classList.remove('hidden');
+                    generatedCodeEl.textContent = result.accessCode;
+                    generatedEmailEl.textContent = result.member.email || `${result.member.phone}@ironpulse.com`;
+                } else {
+                    modalError.textContent = result.message || 'Failed to create member';
+                    modalError.classList.remove('hidden');
+                }
+            } catch (err) {
+                modalError.textContent = 'Server connection error';
+                modalError.classList.remove('hidden');
+            }
+        };
+
+        async function fetchMembers(search = '') {
+            try {
+                const url = search ? `/api/members?search=${encodeURIComponent(search)}` : '/api/members';
+                const res = await fetch(url, { headers: getAuthHeaders() });
+                const members = await res.json();
+
+                renderMembers(members);
+                memberCountEl.textContent = `Member Directory (${members.length})`;
+            } catch (err) {
+                console.error('Fetch error:', err);
+                memberTableBody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-red-400">Failed to load members</td></tr>';
+            }
+        }
+
+        function renderMembers(members) {
+            if (members.length === 0) {
+                memberTableBody.innerHTML = '<tr><td colspan="4" class="p-8 text-center text-slate-500">No members found</td></tr>';
+                return;
+            }
+
+            memberTableBody.innerHTML = members.map(m => `
+                <tr class="hover:bg-white/5 transition-colors group">
+                    <td class="px-6 py-4 flex items-center gap-3">
+                        <div class="size-10 rounded-full bg-slate-700 flex items-center justify-center font-bold text-slate-400">
+                            ${m.name.charAt(0)}
+                        </div>
+                        <div><span class="font-bold text-slate-100">${m.name}</span></div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="text-sm font-bold font-mono text-slate-300">${m.phone}</p>
+                        <p class="text-xs text-slate-500">${m.email || 'No email'}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <span class="flex items-center gap-1.5 ${m.status === 'active' ? 'text-success' : 'text-danger'} text-xs font-bold uppercase tracking-wider">
+                            <span class="size-2 rounded-full ${m.status === 'active' ? 'bg-success' : 'bg-danger'}"></span> ${m.status}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <button onclick="openEditModal('${m.id}', '${m.name.replace(/'/g, "\\'")}', '${m.phone}', '${m.email || ''}', '${m.status}')" class="text-slate-400 hover:text-primary p-2 transition-colors" title="Edit Member"><span class="material-symbols-outlined">edit</span></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        let searchTimeout;
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => fetchMembers(e.target.value), 300);
+        });
+
+        fetchMembers();
+
+        // Edit Member Logic
+        window.openEditModal = (id, name, phone, email, status) => {
+            document.getElementById('editMemberId').value = id;
+            document.getElementById('editName').value = name;
+            document.getElementById('editPhone').value = phone;
+            document.getElementById('editEmail').value = email;
+            document.getElementById('editStatus').value = status;
+            document.getElementById('editModalError').classList.add('hidden');
+            document.getElementById('editMemberModal').classList.remove('hidden');
+        };
+
+        document.getElementById('editMemberForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const editError = document.getElementById('editModalError');
+            editError.classList.add('hidden');
+
+            const id = document.getElementById('editMemberId').value;
+            const data = {
+                name: document.getElementById('editName').value,
+                phone: document.getElementById('editPhone').value,
+                email: document.getElementById('editEmail').value || null,
+                status: document.getElementById('editStatus').value
+            };
+
+            try {
+                const res = await fetch(`/api/members/${id}`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(data)
+                });
+
+                if (res.ok) {
+                    document.getElementById('editMemberModal').classList.add('hidden');
+                    fetchMembers();
+                } else {
+                    const result = await res.json();
+                    editError.textContent = result.message || 'Failed to update member';
+                    editError.classList.remove('hidden');
+                }
+            } catch (err) {
+                editError.textContent = 'Server connection error';
+                editError.classList.remove('hidden');
+            }
+        };
+
+        // Delete Member
+        document.getElementById('deleteMemberBtn').onclick = async () => {
+            const id = document.getElementById('editMemberId').value;
+            const name = document.getElementById('editName').value;
+
+            if (!confirm(`Are you sure you want to permanently delete "${name}"? This will remove all their data including memberships, payments, and attendance records. This cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const res = await fetch(`/api/members/${id}`, {
+                    method: 'DELETE',
+                    headers: getAuthHeaders()
+                });
+
+                if (res.ok) {
+                    document.getElementById('editMemberModal').classList.add('hidden');
+                    fetchMembers();
+                } else {
+                    const result = await res.json();
+                    alert(result.message || 'Failed to delete member');
+                }
+            } catch (err) {
+                alert('Server connection error');
+            }
+        };
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

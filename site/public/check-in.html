@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Admin Check-In</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-dark": "#121212",
+                        "card-dark": "#1e1e1e",
+                        "border-dark": "#2d2d2d",
+                        "success": "#10b981",
+                        "danger": "#ef4444",
+                    },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-[#121212] font-display text-slate-100 antialiased overflow-hidden">
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 border-r border-border-dark flex flex-col bg-[#121212]">
+            <div class="p-6 flex items-center gap-3">
+                <div class="size-10 rounded-full bg-primary flex items-center justify-center text-background-dark">
+                    <span class="material-symbols-outlined font-bold">fitness_center</span>
+                </div>
+                <div>
+                    <h1 class="text-sm font-bold uppercase tracking-wider">Iron Pulse</h1>
+                    <p class="text-xs text-slate-500">Admin Portal</p>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 space-y-2 mt-4">
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors"
+                    href="admin-dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors"
+                    href="members.html">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Members</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary text-background-dark font-bold"
+                    href="check-in.html">
+                    <span class="material-symbols-outlined">badge</span>
+                    <span>Check-in</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-white/5 transition-colors"
+                    href="index.html">
+                    <span class="material-symbols-outlined">public</span>
+                    <span>View Public Site</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col h-screen overflow-hidden">
+            <header class="h-20 border-b border-border-dark px-8 flex items-center justify-between shrink-0">
+                <h2 class="text-2xl font-bold italic uppercase tracking-tighter">Facility <span
+                        class="text-primary">Check-In</span></h2>
+                <div id="connectionStatus" class="flex items-center gap-4">
+                    <div class="flex flex-col items-end">
+                        <p class="text-sm font-bold text-success flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">fiber_manual_record</span>
+                            System Online
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <div class="flex-1 overflow-auto p-8 flex flex-col lg:flex-row gap-8">
+                <!-- Left: Verifier -->
+                <section class="flex-1 max-w-2xl space-y-8">
+                    <div
+                        class="bg-card-dark border border-white/10 rounded-3xl p-10 text-center relative overflow-hidden">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none">
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-primary text-6xl mb-6 relative animate-pulse">badge</span>
+                        <h3 class="text-2xl font-black italic mb-2 uppercase">Verify Member Access</h3>
+                        <p class="text-slate-500 mb-8 text-sm font-medium">Search by Phone, Email, or Member ID</p>
+
+                        <form id="verifyForm" class="relative group max-w-md mx-auto">
+                            <input id="searchId"
+                                class="w-full bg-background-dark border-2 border-white/10 rounded-2xl py-5 pl-6 pr-16 text-xl font-bold tracking-widest focus:border-primary outline-none transition-all"
+                                placeholder="ID / PHONE / EMAIL" type="text" autofocus />
+                            <button type="submit"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 bg-primary text-background-dark p-3 rounded-xl hover:scale-105 transition-transform">
+                                <span class="material-symbols-outlined font-black">search</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Result Area -->
+                    <div id="resultCard" class="hidden bg-card-dark rounded-3xl overflow-hidden border border-white/10">
+                        <div id="statusHeader"
+                            class="px-8 py-4 flex justify-between items-center text-xs font-black uppercase tracking-widest">
+                            <span class="flex items-center gap-2">
+                                <span class="material-symbols-outlined text-base">verified</span>
+                                Verification Result
+                            </span>
+                            <span id="timeNow">JUST NOW</span>
+                        </div>
+
+                        <div class="p-10 flex gap-8 items-start">
+                            <div
+                                class="size-24 rounded-full bg-slate-700 flex items-center justify-center text-3xl font-black text-white shrink-0 border-4 border-white/5">
+                                <span id="resInitial">?</span>
+                            </div>
+                            <div class="flex-1 space-y-4">
+                                <div>
+                                    <h4 id="resName"
+                                        class="text-3xl font-black italic uppercase italic tracking-tighter">--</h4>
+                                    <p id="resId" class="text-slate-500 text-xs font-bold font-mono tracking-widest">--
+                                    </p>
+                                </div>
+                                <div class="flex flex-wrap gap-3">
+                                    <span id="resPlan"
+                                        class="px-3 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest">--</span>
+                                    <span id="resStatus"
+                                        class="px-3 py-1 rounded-full bg-white/5 text-white text-[10px] font-black uppercase tracking-widest">--</span>
+                                    <span id="resSession"
+                                        class="hidden px-3 py-1 rounded-full bg-success/20 text-success text-[10px] font-black uppercase tracking-widest animate-pulse">Session
+                                        Active</span>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-1">Workout
+                                    Streak</p>
+                                <p id="resStreak" class="text-3xl font-black italic text-primary">--</p>
+                            </div>
+                        </div>
+
+                        <!-- Payment & Plan Details -->
+                        <div class="grid grid-cols-2 border-t border-white/5">
+                            <div class="p-8 border-r border-white/5">
+                                <h5 class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-4">
+                                    Membership Info</h5>
+                                <div class="space-y-2">
+                                    <p class="text-sm font-bold flex justify-between"><span>Plan:</span> <span
+                                            id="infoPlan" class="text-white">--</span></p>
+                                    <p class="text-sm font-bold flex justify-between"><span>Expires:</span> <span
+                                            id="infoExpiry" class="text-white">--</span></p>
+                                </div>
+                            </div>
+                            <div class="p-8">
+                                <h5 class="text-[10px] text-slate-500 font-black uppercase tracking-widest mb-4">Recent
+                                    Payment</h5>
+                                <div class="space-y-2">
+                                    <p class="text-sm font-bold flex justify-between"><span>Status:</span> <span
+                                            id="infoPayStatus" class="text-success">--</span></p>
+                                    <p class="text-sm font-bold flex justify-between"><span>Amount:</span> <span
+                                            id="infoAmount" class="text-white">--</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="p-6 bg-white/5 flex gap-4">
+                            <button id="blockBtn"
+                                class="flex-1 bg-danger/10 text-danger border border-danger/20 py-4 rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-danger hover:text-white transition-all">Block
+                                User Account</button>
+                            <button onclick="location.reload()"
+                                class="flex-1 bg-white/5 border border-white/10 text-slate-400 py-4 rounded-xl font-black uppercase tracking-widest text-[10px] hover:bg-white/10 hover:text-white transition-all">Clear
+                                Search</button>
+                        </div>
+                    </div>
+
+                    <div id="errorMsg"
+                        class="hidden p-6 rounded-2xl bg-danger/10 border border-danger/20 text-danger text-center font-bold">
+                        Member not found
+                    </div>
+                </section>
+
+                <!-- Right: QR Generator + Activity Stats -->
+                <aside class="w-full lg:w-96 space-y-6">
+                    <!-- Daily QR Generator -->
+                    <div class="bg-card-dark rounded-3xl p-8 border border-white/10">
+                        <h4
+                            class="text-sm font-black italic uppercase tracking-widest mb-6 underline decoration-primary decoration-4 underline-offset-8">
+                            Daily QR Code</h4>
+
+                        <div id="qrPlaceholder" class="text-center py-6">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-4 block">qr_code_2</span>
+                            <p class="text-slate-500 text-xs font-bold mb-6">Generate today's attendance QR code for
+                                members to scan</p>
+                            <button id="generateQrBtn"
+                                class="w-full bg-primary text-background-dark py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:scale-[1.02] active:scale-[0.98] transition-all">
+                                Generate Today's QR
+                            </button>
+                        </div>
+
+                        <div id="qrDisplay" class="hidden text-center">
+                            <div class="bg-white rounded-2xl p-4 inline-block mb-4">
+                                <img id="qrImage" src="" alt="Daily QR Code" class="w-64 h-64" />
+                            </div>
+                            <p
+                                class="text-xs text-success font-black uppercase tracking-widest flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm animate-pulse">fiber_manual_record</span>
+                                QR Active for Today
+                            </p>
+                            <p id="qrToken" class="text-[10px] text-slate-600 font-mono mt-2 break-all"></p>
+                        </div>
+
+                        <p id="qrError" class="hidden text-red-400 text-xs font-bold text-center mt-4"></p>
+                    </div>
+
+                    <div class="bg-card-dark rounded-3xl p-8 border border-white/10">
+                        <h4
+                            class="text-sm font-black italic uppercase tracking-widest mb-6 underline decoration-primary decoration-4 underline-offset-8">
+                            Recent Admissions</h4>
+                        <div id="recentActivity" class="space-y-4">
+                            <!-- Populated via API or simulated -->
+                            <p class="text-slate-500 text-xs italic">Waiting for check-ins...</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+
+    <script type="module">
+        import { initAuthGuard, getAuthHeaders } from './js/admin-auth.js';
+
+        initAuthGuard();
+
+        const verifyForm = document.getElementById('verifyForm');
+        const searchInput = document.getElementById('searchId');
+        const resultCard = document.getElementById('resultCard');
+        const errorMsg = document.getElementById('errorMsg');
+        const blockBtn = document.getElementById('blockBtn');
+        const recentActivity = document.getElementById('recentActivity');
+
+        let currentMemberId = null;
+
+        // Load recent activity on page load
+        fetchRecentActivity();
+
+        async function fetchRecentActivity() {
+            try {
+                const res = await fetch('/api/checkin/recent', {
+                    headers: getAuthHeaders()
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    renderRecentActivity(data);
+                }
+            } catch (err) { console.error('Error fetching recent activity:', err); }
+        }
+
+        function renderRecentActivity(activities) {
+            if (!activities || activities.length === 0) {
+                recentActivity.innerHTML = '<p class="text-slate-500 text-xs italic">No recent check-ins.</p>';
+                return;
+            }
+
+            recentActivity.innerHTML = activities.map(act => `
+                <div class="flex items-center gap-4 group">
+                    <div class="size-10 rounded-full bg-white/5 flex items-center justify-center text-xs font-bold text-slate-400 border border-white/10 group-hover:border-primary/50 transition-colors">
+                        ${act.member.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs font-bold text-slate-200">${act.member.name}</p>
+                        <p class="text-[10px] text-slate-500 font-mono tracking-tighter">${new Date(act.checkIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</p>
+                    </div>
+                    <span class="material-symbols-outlined text-success text-sm">check_circle</span>
+                </div>
+            `).join('');
+        }
+
+        verifyForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const id = searchInput.value.trim();
+            if (!id) return;
+
+            errorMsg.classList.add('hidden');
+            resultCard.classList.add('hidden');
+
+            try {
+                const res = await fetch(`/api/checkin/verify/${encodeURIComponent(id)}`, {
+                    headers: getAuthHeaders()
+                });
+                const member = await res.json();
+
+                if (res.ok) {
+                    currentMemberId = member.id;
+                    displayMember(member);
+                    fetchRecentActivity(); // Refresh list if a check-in just happened (or after search)
+                } else {
+                    errorMsg.textContent = member.message || 'Member not found';
+                    errorMsg.classList.remove('hidden');
+                }
+            } catch (err) {
+                errorMsg.textContent = 'Connection error';
+                errorMsg.classList.remove('hidden');
+            }
+        };
+
+        function displayMember(m) {
+            document.getElementById('resName').textContent = m.name;
+            document.getElementById('resId').textContent = `ID: ${m.id.split('-')[0].toUpperCase()}`;
+            document.getElementById('resInitial').textContent = m.name.charAt(0).toUpperCase();
+            document.getElementById('resStreak').textContent = `${m.streak} DAYS`;
+
+            const activeSub = m.memberships.find(s => s.status === 'active') || m.memberships[0];
+            document.getElementById('resPlan').textContent = activeSub?.plan?.name || 'NO PLAN';
+            document.getElementById('resStatus').textContent = m.status.toUpperCase();
+
+            const sessionBadge = document.getElementById('resSession');
+            if (m.attendance && m.attendance.length > 0) {
+                sessionBadge.classList.remove('hidden');
+                const expiry = new Date(m.attendance[0].expiresAt);
+                sessionBadge.textContent = `Session Active (Until ${expiry.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
+            } else {
+                sessionBadge.classList.add('hidden');
+            }
+
+            // Color status header
+            const header = document.getElementById('statusHeader');
+            header.className = 'px-8 py-4 flex justify-between items-center text-xs font-black uppercase tracking-widest ';
+            if (m.status === 'blocked') {
+                header.classList.add('bg-danger/20', 'text-danger');
+                blockBtn.textContent = 'Unblock Account';
+                blockBtn.onclick = () => updateStatus('active');
+            } else if (m.status === 'pending') {
+                header.classList.add('bg-warning/20', 'text-warning');
+                blockBtn.textContent = 'Block Account';
+                blockBtn.onclick = () => updateStatus('blocked');
+            } else {
+                header.classList.add('bg-success/20', 'text-success');
+                blockBtn.textContent = 'Block Account';
+                blockBtn.onclick = () => updateStatus('blocked');
+            }
+
+            document.getElementById('infoPlan').textContent = activeSub?.plan?.name || '--';
+            document.getElementById('infoExpiry').textContent = activeSub?.endDate ? new Date(activeSub.endDate).toLocaleDateString() : 'N/A';
+
+            const lastPay = m.payments[0];
+            document.getElementById('infoPayStatus').textContent = lastPay?.status.toUpperCase() || '--';
+            document.getElementById('infoPayStatus').className = `font-bold ${lastPay?.status === 'paid' ? 'text-success' : 'text-danger'}`;
+            document.getElementById('infoAmount').textContent = lastPay ? `$${lastPay.amount}` : '--';
+
+            resultCard.classList.remove('hidden');
+        }
+
+        async function updateStatus(newStatus) {
+            try {
+                const route = newStatus === 'blocked' ? 'block' : 'unblock';
+                const res = await fetch(`/api/checkin/${route}/${currentMemberId}`, {
+                    method: 'PUT',
+                    headers: getAuthHeaders()
+                });
+                if (res.ok) {
+                    alert(`Member ${newStatus === 'blocked' ? 'blocked' : 'unblocked'} successfully`);
+                    location.reload();
+                } else {
+                    const data = await res.json();
+                    alert(data.message || 'Error updating status');
+                }
+            } catch (err) { alert('Error updating status'); }
+        }
+
+        // ===== QR Code Generation =====
+        const generateQrBtn = document.getElementById('generateQrBtn');
+        const qrPlaceholder = document.getElementById('qrPlaceholder');
+        const qrDisplay = document.getElementById('qrDisplay');
+        const qrImage = document.getElementById('qrImage');
+        const qrToken = document.getElementById('qrToken');
+        const qrError = document.getElementById('qrError');
+
+        // Check if QR already exists for today on page load
+        async function checkTodayQR() {
+            try {
+                const res = await fetch('/api/checkin/today-qr', { headers: getAuthHeaders() });
+                const data = await res.json();
+                if (data.exists) {
+                    showQR(data.qrUrl, data.token);
+                }
+            } catch (err) {
+                console.error('Error checking QR:', err);
+            }
+        }
+
+        function showQR(qrUrl, token) {
+            qrPlaceholder.classList.add('hidden');
+            qrDisplay.classList.remove('hidden');
+            qrImage.src = qrUrl;
+            qrToken.textContent = token;
+        }
+
+        generateQrBtn.addEventListener('click', async () => {
+            qrError.classList.add('hidden');
+            generateQrBtn.disabled = true;
+            generateQrBtn.textContent = 'Getting location...';
+
+            if (!navigator.geolocation) {
+                qrError.textContent = 'Geolocation not supported by your browser';
+                qrError.classList.remove('hidden');
+                generateQrBtn.disabled = false;
+                generateQrBtn.textContent = "Generate Today's QR";
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                async (position) => {
+                    generateQrBtn.textContent = 'Generating...';
+                    try {
+                        const res = await fetch('/api/checkin/generate-qr', {
+                            method: 'POST',
+                            headers: getAuthHeaders(),
+                            body: JSON.stringify({
+                                latitude: position.coords.latitude,
+                                longitude: position.coords.longitude
+                            })
+                        });
+
+                        const data = await res.json();
+                        if (res.ok) {
+                            showQR(data.qrUrl, data.token);
+                        } else {
+                            qrError.textContent = data.message || 'Failed to generate QR';
+                            qrError.classList.remove('hidden');
+                        }
+                    } catch (err) {
+                        qrError.textContent = 'Server error while generating QR';
+                        qrError.classList.remove('hidden');
+                    }
+                    generateQrBtn.disabled = false;
+                    generateQrBtn.textContent = "Generate Today's QR";
+                },
+                (err) => {
+                    qrError.textContent = 'Location access denied. Enable location to generate QR.';
+                    qrError.classList.remove('hidden');
+                    generateQrBtn.disabled = false;
+                    generateQrBtn.textContent = "Generate Today's QR";
+                },
+                { enableHighAccuracy: true }
+            );
+        });
+
+        checkTodayQR();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

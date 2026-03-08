@@ -1,0 +1,3971 @@
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Premium Gym Public Showcase</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121212",
+                        "card-dark": "#1e1e1e",
+                        "border-dark": "#2d2d2d",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        /* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: inline-block;
+            vertical-align: middle;
+
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden]:where(:not([hidden=until-found])) {
+            display: none
+        }
+
+        [type='text'],
+        input:where(:not([type])),
+        [type='email'],
+        [type='url'],
+        [type='password'],
+        [type='number'],
+        [type='date'],
+        [type='datetime-local'],
+        [type='month'],
+        [type='search'],
+        [type='tel'],
+        [type='time'],
+        [type='week'],
+        [multiple],
+        textarea,
+        select {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            border-color: #6b7280;
+            border-width: 1px;
+            border-radius: 0px;
+            padding-top: 0.5rem;
+            padding-right: 0.75rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            --tw-shadow: 0 0 #0000;
+        }
+
+        [type='text']:focus,
+        input:where(:not([type])):focus,
+        [type='email']:focus,
+        [type='url']:focus,
+        [type='password']:focus,
+        [type='number']:focus,
+        [type='date']:focus,
+        [type='datetime-local']:focus,
+        [type='month']:focus,
+        [type='search']:focus,
+        [type='tel']:focus,
+        [type='time']:focus,
+        [type='week']:focus,
+        [multiple]:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-inset: var(--tw-empty,
+                    /*!*/
+                    /*!*/
+                );
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: #2563eb;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+            border-color: #2563eb
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #6b7280;
+            opacity: 1
+        }
+
+        ::-webkit-datetime-edit-fields-wrapper {
+            padding: 0
+        }
+
+        ::-webkit-date-and-time-value {
+            min-height: 1.5em;
+            text-align: inherit
+        }
+
+        ::-webkit-datetime-edit {
+            display: inline-flex
+        }
+
+        ::-webkit-datetime-edit,
+        ::-webkit-datetime-edit-year-field,
+        ::-webkit-datetime-edit-month-field,
+        ::-webkit-datetime-edit-day-field,
+        ::-webkit-datetime-edit-hour-field,
+        ::-webkit-datetime-edit-minute-field,
+        ::-webkit-datetime-edit-second-field,
+        ::-webkit-datetime-edit-millisecond-field,
+        ::-webkit-datetime-edit-meridiem-field {
+            padding-top: 0;
+            padding-bottom: 0
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            print-color-adjust: exact
+        }
+
+        [multiple],
+        [size]:where(select:not([size="1"])) {
+            background-image: initial;
+            background-position: initial;
+            background-repeat: unset;
+            background-size: initial;
+            padding-right: 0.75rem;
+            print-color-adjust: unset
+        }
+
+        [type='checkbox'],
+        [type='radio'] {
+            -webkit-appearance: none;
+            appearance: none;
+            padding: 0;
+            print-color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            flex-shrink: 0;
+            height: 1rem;
+            width: 1rem;
+            color: #2563eb;
+            background-color: #fff;
+            border-color: #6b7280;
+            border-width: 1px;
+            --tw-shadow: 0 0 #0000
+        }
+
+        [type='checkbox'] {
+            border-radius: 0px
+        }
+
+        [type='radio'] {
+            border-radius: 100%
+        }
+
+        [type='checkbox']:focus,
+        [type='radio']:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-inset: var(--tw-empty,
+                    /*!*/
+                    /*!*/
+                );
+            --tw-ring-offset-width: 2px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: #2563eb;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)
+        }
+
+        [type='checkbox']:checked,
+        [type='radio']:checked {
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat
+        }
+
+        [type='checkbox']:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+
+        @media (forced-colors: active) {
+            [type='checkbox']:checked {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='radio']:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+
+        @media (forced-colors: active) {
+            [type='radio']:checked {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='checkbox']:checked:hover,
+        [type='checkbox']:checked:focus,
+        [type='radio']:checked:hover,
+        [type='radio']:checked:focus {
+            border-color: transparent;
+            background-color: currentColor
+        }
+
+        [type='checkbox']:indeterminate {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @media (forced-colors: active) {
+            [type='checkbox']:indeterminate {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='checkbox']:indeterminate:hover,
+        [type='checkbox']:indeterminate:focus {
+            border-color: transparent;
+            background-color: currentColor
+        }
+
+        [type='file'] {
+            background: unset;
+            border-color: inherit;
+            border-width: 0;
+            border-radius: 0;
+            padding: 0;
+            font-size: unset;
+            line-height: inherit
+        }
+
+        [type='file']:focus {
+            outline: 1px solid ButtonText;
+            outline: 1px auto -webkit-focus-ring-color
+        }
+
+        .pointer-events-none {
+            pointer-events: none
+        }
+
+        .absolute {
+            position: absolute
+        }
+
+        .relative {
+            position: relative
+        }
+
+        .sticky {
+            position: sticky
+        }
+
+        .inset-0 {
+            inset: 0px
+        }
+
+        .left-1\/2 {
+            left: 50%
+        }
+
+        .right-0 {
+            right: 0px
+        }
+
+        .top-0 {
+            top: 0px
+        }
+
+        .z-0 {
+            z-index: 0
+        }
+
+        .z-10 {
+            z-index: 10
+        }
+
+        .z-20 {
+            z-index: 20
+        }
+
+        .z-50 {
+            z-index: 50
+        }
+
+        .col-span-1 {
+            grid-column: span 1 / span 1
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .mb-10 {
+            margin-bottom: 2.5rem
+        }
+
+        .mb-12 {
+            margin-bottom: 3rem
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem
+        }
+
+        .inline-block {
+            display: inline-block
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .grid {
+            display: grid
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .h-40 {
+            height: 10rem
+        }
+
+        .h-\[80vh\] {
+            height: 80vh
+        }
+
+        .h-auto {
+            height: auto
+        }
+
+        .h-full {
+            height: 100%
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+        .max-w-2xl {
+            max-width: 42rem
+        }
+
+        .max-w-4xl {
+            max-width: 56rem
+        }
+
+        .max-w-7xl {
+            max-width: 80rem
+        }
+
+        .max-w-xl {
+            max-width: 36rem
+        }
+
+        .flex-grow {
+            flex-grow: 1
+        }
+
+        .border-collapse {
+            border-collapse: collapse
+        }
+
+        .-translate-x-1\/2 {
+            --tw-translate-x: -50%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .-translate-y-1\/2 {
+            --tw-translate-y: -50%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .-translate-y-1\/4 {
+            --tw-translate-y: -25%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .translate-x-1\/4 {
+            --tw-translate-x: 25%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .scale-105 {
+            --tw-scale-x: 1.05;
+            --tw-scale-y: 1.05;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .auto-rows-\[250px\] {
+            grid-auto-rows: 250px
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr))
+        }
+
+        .flex-col {
+            flex-direction: column
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap
+        }
+
+        .items-end {
+            align-items: flex-end
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .items-baseline {
+            align-items: baseline
+        }
+
+        .justify-center {
+            justify-content: center
+        }
+
+        .justify-between {
+            justify-content: space-between
+        }
+
+        .gap-1 {
+            gap: 0.25rem
+        }
+
+        .gap-10 {
+            gap: 2.5rem
+        }
+
+        .gap-12 {
+            gap: 3rem
+        }
+
+        .gap-2 {
+            gap: 0.5rem
+        }
+
+        .gap-3 {
+            gap: 0.75rem
+        }
+
+        .gap-4 {
+            gap: 1rem
+        }
+
+        .gap-8 {
+            gap: 2rem
+        }
+
+        .space-y-3> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(0.75rem * var(--tw-space-y-reverse))
+        }
+
+        .space-y-4> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+        }
+
+        .divide-y> :not([hidden])~ :not([hidden]) {
+            --tw-divide-y-reverse: 0;
+            border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+            border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
+        }
+
+        .divide-border-dark> :not([hidden])~ :not([hidden]) {
+            --tw-divide-opacity: 1;
+            border-color: rgb(45 45 45 / var(--tw-divide-opacity, 1))
+        }
+
+        .overflow-hidden {
+            overflow: hidden
+        }
+
+        .overflow-x-auto {
+            overflow-x: auto
+        }
+
+        .overflow-x-hidden {
+            overflow-x: hidden
+        }
+
+        .rounded {
+            border-radius: 0.125rem
+        }
+
+        .border {
+            border-width: 1px
+        }
+
+        .border-2 {
+            border-width: 2px
+        }
+
+        .border-y {
+            border-top-width: 1px;
+            border-bottom-width: 1px
+        }
+
+        .border-b {
+            border-bottom-width: 1px
+        }
+
+        .border-t {
+            border-top-width: 1px
+        }
+
+        .border-border-dark {
+            --tw-border-opacity: 1;
+            border-color: rgb(45 45 45 / var(--tw-border-opacity, 1))
+        }
+
+        .border-orange-500\/20 {
+            border-color: rgb(249 115 22 / 0.2)
+        }
+
+        .border-primary {
+            --tw-border-opacity: 1;
+            border-color: rgb(212 255 0 / var(--tw-border-opacity, 1))
+        }
+
+        .border-primary\/20 {
+            border-color: rgb(212 255 0 / 0.2)
+        }
+
+        .border-primary\/30 {
+            border-color: rgb(212 255 0 / 0.3)
+        }
+
+        .border-primary\/40 {
+            border-color: rgb(212 255 0 / 0.4)
+        }
+
+        .border-red-500\/20 {
+            border-color: rgb(239 68 68 / 0.2)
+        }
+
+        .border-slate-100 {
+            --tw-border-opacity: 1;
+            border-color: rgb(241 245 249 / var(--tw-border-opacity, 1))
+        }
+
+        .border-slate-700 {
+            --tw-border-opacity: 1;
+            border-color: rgb(51 65 85 / var(--tw-border-opacity, 1))
+        }
+
+        .border-white\/20 {
+            border-color: rgb(255 255 255 / 0.2)
+        }
+
+        .bg-background-dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(18 18 18 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-background-dark\/90 {
+            background-color: rgb(18 18 18 / 0.9)
+        }
+
+        .bg-background-light {
+            --tw-bg-opacity: 1;
+            background-color: rgb(248 248 245 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-card-dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(30 30 30 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-card-dark\/30 {
+            background-color: rgb(30 30 30 / 0.3)
+        }
+
+        .bg-orange-500\/10 {
+            background-color: rgb(249 115 22 / 0.1)
+        }
+
+        .bg-primary {
+            --tw-bg-opacity: 1;
+            background-color: rgb(212 255 0 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-primary\/10 {
+            background-color: rgb(212 255 0 / 0.1)
+        }
+
+        .bg-red-500\/10 {
+            background-color: rgb(239 68 68 / 0.1)
+        }
+
+        .bg-gradient-to-b {
+            background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
+        }
+
+        .bg-gradient-to-t {
+            background-image: linear-gradient(to top, var(--tw-gradient-stops))
+        }
+
+        .from-background-dark\/60 {
+            --tw-gradient-from: rgb(18 18 18 / 0.6) var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .from-background-dark\/80 {
+            --tw-gradient-from: rgb(18 18 18 / 0.8) var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .via-background-dark\/40 {
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), rgb(18 18 18 / 0.4) var(--tw-gradient-via-position), var(--tw-gradient-to)
+        }
+
+        .to-background-dark {
+            --tw-gradient-to: #121212 var(--tw-gradient-to-position)
+        }
+
+        .to-transparent {
+            --tw-gradient-to: transparent var(--tw-gradient-to-position)
+        }
+
+        .object-cover {
+            object-fit: cover
+        }
+
+        .p-10 {
+            padding: 2.5rem
+        }
+
+        .p-12 {
+            padding: 3rem
+        }
+
+        .p-4 {
+            padding: 1rem
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .px-10 {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem
+        }
+
+        .px-12 {
+            padding-left: 3rem;
+            padding-right: 3rem
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem
+        }
+
+        .py-24 {
+            padding-top: 6rem;
+            padding-bottom: 6rem
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        .py-5 {
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem
+        }
+
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem
+        }
+
+        .pt-8 {
+            padding-top: 2rem
+        }
+
+        .text-left {
+            text-align: left
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-right {
+            text-align: right
+        }
+
+        .font-display {
+            font-family: Inter, sans-serif
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem
+        }
+
+        .text-6xl {
+            font-size: 3.75rem;
+            line-height: 1
+        }
+
+        .text-\[300px\] {
+            font-size: 300px
+        }
+
+        .text-base {
+            font-size: 1rem;
+            line-height: 1.5rem
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem
+        }
+
+        .font-black {
+            font-weight: 900
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .font-medium {
+            font-weight: 500
+        }
+
+        .uppercase {
+            text-transform: uppercase
+        }
+
+        .italic {
+            font-style: italic
+        }
+
+        .leading-none {
+            line-height: 1
+        }
+
+        .leading-relaxed {
+            line-height: 1.625
+        }
+
+        .tracking-\[0\.2em\] {
+            letter-spacing: 0.2em
+        }
+
+        .tracking-\[0\.3em\] {
+            letter-spacing: 0.3em
+        }
+
+        .tracking-tighter {
+            letter-spacing: -0.05em
+        }
+
+        .tracking-wider {
+            letter-spacing: 0.05em
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.1em
+        }
+
+        .text-background-dark {
+            --tw-text-opacity: 1;
+            color: rgb(18 18 18 / var(--tw-text-opacity, 1))
+        }
+
+        .text-background-dark\/80 {
+            color: rgb(18 18 18 / 0.8)
+        }
+
+        .text-orange-500 {
+            --tw-text-opacity: 1;
+            color: rgb(249 115 22 / var(--tw-text-opacity, 1))
+        }
+
+        .text-primary {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .text-red-500 {
+            --tw-text-opacity: 1;
+            color: rgb(239 68 68 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-100 {
+            --tw-text-opacity: 1;
+            color: rgb(241 245 249 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-300 {
+            --tw-text-opacity: 1;
+            color: rgb(203 213 225 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-400 {
+            --tw-text-opacity: 1;
+            color: rgb(148 163 184 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-500 {
+            --tw-text-opacity: 1;
+            color: rgb(100 116 139 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-600 {
+            --tw-text-opacity: 1;
+            color: rgb(71 85 105 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-900 {
+            --tw-text-opacity: 1;
+            color: rgb(15 23 42 / var(--tw-text-opacity, 1))
+        }
+
+        .text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity, 1))
+        }
+
+        .line-through {
+            -webkit-text-decoration-line: line-through;
+            text-decoration-line: line-through
+        }
+
+        .antialiased {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .opacity-10 {
+            opacity: 0.1
+        }
+
+        .shadow-\[0_0_30px_rgba\(212\2c 255\2c 0\2c 0\.1\)\] {
+            --tw-shadow: 0 0 30px rgba(212, 255, 0, 0.1);
+            --tw-shadow-colored: 0 0 30px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .grayscale {
+            --tw-grayscale: grayscale(100%);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .backdrop-blur-md {
+            --tw-backdrop-blur: blur(12px);
+            -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
+        }
+
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .transition-colors {
+            transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .transition-transform {
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .duration-500 {
+            transition-duration: 500ms
+        }
+
+        .duration-700 {
+            transition-duration: 700ms
+        }
+
+        .hover\:scale-105:hover {
+            --tw-scale-x: 1.05;
+            --tw-scale-y: 1.05;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .hover\:border-slate-500:hover {
+            --tw-border-opacity: 1;
+            border-color: rgb(100 116 139 / var(--tw-border-opacity, 1))
+        }
+
+        .hover\:bg-primary:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(212 255 0 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-slate-100:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-white\/10:hover {
+            background-color: rgb(255 255 255 / 0.1)
+        }
+
+        .hover\:bg-white\/5:hover {
+            background-color: rgb(255 255 255 / 0.05)
+        }
+
+        .hover\:text-background-dark:hover {
+            --tw-text-opacity: 1;
+            color: rgb(18 18 18 / var(--tw-text-opacity, 1))
+        }
+
+        .hover\:text-primary:hover {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .hover\:brightness-110:hover {
+            --tw-brightness: brightness(1.1);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .hover\:grayscale-0:hover {
+            --tw-grayscale: grayscale(0);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .group:hover .group-hover\:translate-x-1 {
+            --tw-translate-x: 0.25rem;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .group:hover .group-hover\:scale-110 {
+            --tw-scale-x: 1.1;
+            --tw-scale-y: 1.1;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .group:hover .group-hover\:text-primary {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .dark\:bg-background-dark:is(.dark *) {
+            --tw-bg-opacity: 1;
+            background-color: rgb(18 18 18 / var(--tw-bg-opacity, 1))
+        }
+
+        .dark\:text-slate-100:is(.dark *) {
+            --tw-text-opacity: 1;
+            color: rgb(241 245 249 / var(--tw-text-opacity, 1))
+        }
+
+        @media (min-width: 768px) {
+            .md\:col-span-1 {
+                grid-column: span 1 / span 1
+            }
+
+            .md\:col-span-2 {
+                grid-column: span 2 / span 2
+            }
+
+            .md\:row-span-1 {
+                grid-row: span 1 / span 1
+            }
+
+            .md\:row-span-2 {
+                grid-row: span 2 / span 2
+            }
+
+            .md\:block {
+                display: block
+            }
+
+            .md\:flex {
+                display: flex
+            }
+
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr))
+            }
+
+            .md\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr))
+            }
+
+            .md\:flex-row {
+                flex-direction: row
+            }
+
+            .md\:p-20 {
+                padding: 5rem
+            }
+
+            .md\:text-5xl {
+                font-size: 3rem;
+                line-height: 1
+            }
+
+            .md\:text-8xl {
+                font-size: 6rem;
+                line-height: 1
+            }
+
+            .md\:text-xl {
+                font-size: 1.25rem;
+                line-height: 1.75rem
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:px-20 {
+                padding-left: 5rem;
+                padding-right: 5rem
+            }
+
+            .lg\:px-6 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem
+            }
+
+            .lg\:text-sm {
+                font-size: 0.875rem;
+                line-height: 1.25rem
+            }
+        }
+    </style>
+    <style>
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        /* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: block;
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden]:where(:not([hidden=until-found])) {
+            display: none
+        }
+
+        [type='text'],
+        input:where(:not([type])),
+        [type='email'],
+        [type='url'],
+        [type='password'],
+        [type='number'],
+        [type='date'],
+        [type='datetime-local'],
+        [type='month'],
+        [type='search'],
+        [type='tel'],
+        [type='time'],
+        [type='week'],
+        [multiple],
+        textarea,
+        select {
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            border-color: #6b7280;
+            border-width: 1px;
+            border-radius: 0px;
+            padding-top: 0.5rem;
+            padding-right: 0.75rem;
+            padding-bottom: 0.5rem;
+            padding-left: 0.75rem;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            --tw-shadow: 0 0 #0000;
+        }
+
+        [type='text']:focus,
+        input:where(:not([type])):focus,
+        [type='email']:focus,
+        [type='url']:focus,
+        [type='password']:focus,
+        [type='number']:focus,
+        [type='date']:focus,
+        [type='datetime-local']:focus,
+        [type='month']:focus,
+        [type='search']:focus,
+        [type='tel']:focus,
+        [type='time']:focus,
+        [type='week']:focus,
+        [multiple]:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-inset: var(--tw-empty,
+                    /*!*/
+                    /*!*/
+                );
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: #2563eb;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+            border-color: #2563eb
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #6b7280;
+            opacity: 1
+        }
+
+        ::-webkit-datetime-edit-fields-wrapper {
+            padding: 0
+        }
+
+        ::-webkit-date-and-time-value {
+            min-height: 1.5em;
+            text-align: inherit
+        }
+
+        ::-webkit-datetime-edit {
+            display: inline-flex
+        }
+
+        ::-webkit-datetime-edit,
+        ::-webkit-datetime-edit-year-field,
+        ::-webkit-datetime-edit-month-field,
+        ::-webkit-datetime-edit-day-field,
+        ::-webkit-datetime-edit-hour-field,
+        ::-webkit-datetime-edit-minute-field,
+        ::-webkit-datetime-edit-second-field,
+        ::-webkit-datetime-edit-millisecond-field,
+        ::-webkit-datetime-edit-meridiem-field {
+            padding-top: 0;
+            padding-bottom: 0
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            print-color-adjust: exact
+        }
+
+        [multiple],
+        [size]:where(select:not([size="1"])) {
+            background-image: initial;
+            background-position: initial;
+            background-repeat: unset;
+            background-size: initial;
+            padding-right: 0.75rem;
+            print-color-adjust: unset
+        }
+
+        [type='checkbox'],
+        [type='radio'] {
+            -webkit-appearance: none;
+            appearance: none;
+            padding: 0;
+            print-color-adjust: exact;
+            display: inline-block;
+            vertical-align: middle;
+            background-origin: border-box;
+            -webkit-user-select: none;
+            user-select: none;
+            flex-shrink: 0;
+            height: 1rem;
+            width: 1rem;
+            color: #2563eb;
+            background-color: #fff;
+            border-color: #6b7280;
+            border-width: 1px;
+            --tw-shadow: 0 0 #0000
+        }
+
+        [type='checkbox'] {
+            border-radius: 0px
+        }
+
+        [type='radio'] {
+            border-radius: 100%
+        }
+
+        [type='checkbox']:focus,
+        [type='radio']:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            --tw-ring-inset: var(--tw-empty,
+                    /*!*/
+                    /*!*/
+                );
+            --tw-ring-offset-width: 2px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: #2563eb;
+            --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+            --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+            box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)
+        }
+
+        [type='checkbox']:checked,
+        [type='radio']:checked {
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat
+        }
+
+        [type='checkbox']:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z'/%3e%3c/svg%3e");
+        }
+
+        @media (forced-colors: active) {
+            [type='checkbox']:checked {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='radio']:checked {
+            background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+        }
+
+        @media (forced-colors: active) {
+            [type='radio']:checked {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='checkbox']:checked:hover,
+        [type='checkbox']:checked:focus,
+        [type='radio']:checked:hover,
+        [type='radio']:checked:focus {
+            border-color: transparent;
+            background-color: currentColor
+        }
+
+        [type='checkbox']:indeterminate {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 16 16'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 8h8'/%3e%3c/svg%3e");
+            border-color: transparent;
+            background-color: currentColor;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        @media (forced-colors: active) {
+            [type='checkbox']:indeterminate {
+                -webkit-appearance: auto;
+                appearance: auto
+            }
+        }
+
+        [type='checkbox']:indeterminate:hover,
+        [type='checkbox']:indeterminate:focus {
+            border-color: transparent;
+            background-color: currentColor
+        }
+
+        [type='file'] {
+            background: unset;
+            border-color: inherit;
+            border-width: 0;
+            border-radius: 0;
+            padding: 0;
+            font-size: unset;
+            line-height: inherit
+        }
+
+        [type='file']:focus {
+            outline: 1px solid ButtonText;
+            outline: 1px auto -webkit-focus-ring-color
+        }
+
+        .pointer-events-none {
+            pointer-events: none
+        }
+
+        .absolute {
+            position: absolute
+        }
+
+        .relative {
+            position: relative
+        }
+
+        .sticky {
+            position: sticky
+        }
+
+        .inset-0 {
+            inset: 0px
+        }
+
+        .left-1\/2 {
+            left: 50%
+        }
+
+        .right-0 {
+            right: 0px
+        }
+
+        .top-0 {
+            top: 0px
+        }
+
+        .z-0 {
+            z-index: 0
+        }
+
+        .z-10 {
+            z-index: 10
+        }
+
+        .z-20 {
+            z-index: 20
+        }
+
+        .z-50 {
+            z-index: 50
+        }
+
+        .col-span-1 {
+            grid-column: span 1 / span 1
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .mb-10 {
+            margin-bottom: 2.5rem
+        }
+
+        .mb-12 {
+            margin-bottom: 3rem
+        }
+
+        .mb-16 {
+            margin-bottom: 4rem
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem
+        }
+
+        .ml-2 {
+            margin-left: 0.5rem
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem
+        }
+
+        .inline-block {
+            display: inline-block
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .grid {
+            display: grid
+        }
+
+        .hidden {
+            display: none
+        }
+
+        .h-40 {
+            height: 10rem
+        }
+
+        .h-\[80vh\] {
+            height: 80vh
+        }
+
+        .h-auto {
+            height: auto
+        }
+
+        .h-full {
+            height: 100%
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+        .max-w-2xl {
+            max-width: 42rem
+        }
+
+        .max-w-4xl {
+            max-width: 56rem
+        }
+
+        .max-w-7xl {
+            max-width: 80rem
+        }
+
+        .max-w-xl {
+            max-width: 36rem
+        }
+
+        .flex-grow {
+            flex-grow: 1
+        }
+
+        .border-collapse {
+            border-collapse: collapse
+        }
+
+        .-translate-x-1\/2 {
+            --tw-translate-x: -50%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .-translate-y-1\/2 {
+            --tw-translate-y: -50%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .-translate-y-1\/4 {
+            --tw-translate-y: -25%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .translate-x-1\/4 {
+            --tw-translate-x: 25%;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .scale-105 {
+            --tw-scale-x: 1.05;
+            --tw-scale-y: 1.05;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .auto-rows-\[250px\] {
+            grid-auto-rows: 250px
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr))
+        }
+
+        .flex-col {
+            flex-direction: column
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap
+        }
+
+        .items-end {
+            align-items: flex-end
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .items-baseline {
+            align-items: baseline
+        }
+
+        .justify-center {
+            justify-content: center
+        }
+
+        .justify-between {
+            justify-content: space-between
+        }
+
+        .gap-1 {
+            gap: 0.25rem
+        }
+
+        .gap-10 {
+            gap: 2.5rem
+        }
+
+        .gap-12 {
+            gap: 3rem
+        }
+
+        .gap-2 {
+            gap: 0.5rem
+        }
+
+        .gap-3 {
+            gap: 0.75rem
+        }
+
+        .gap-4 {
+            gap: 1rem
+        }
+
+        .gap-8 {
+            gap: 2rem
+        }
+
+        .space-y-3> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(0.75rem * var(--tw-space-y-reverse))
+        }
+
+        .space-y-4> :not([hidden])~ :not([hidden]) {
+            --tw-space-y-reverse: 0;
+            margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
+            margin-bottom: calc(1rem * var(--tw-space-y-reverse))
+        }
+
+        .divide-y> :not([hidden])~ :not([hidden]) {
+            --tw-divide-y-reverse: 0;
+            border-top-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
+            border-bottom-width: calc(1px * var(--tw-divide-y-reverse))
+        }
+
+        .divide-border-dark> :not([hidden])~ :not([hidden]) {
+            --tw-divide-opacity: 1;
+            border-color: rgb(45 45 45 / var(--tw-divide-opacity, 1))
+        }
+
+        .overflow-hidden {
+            overflow: hidden
+        }
+
+        .overflow-x-auto {
+            overflow-x: auto
+        }
+
+        .overflow-x-hidden {
+            overflow-x: hidden
+        }
+
+        .rounded {
+            border-radius: 0.125rem
+        }
+
+        .border {
+            border-width: 1px
+        }
+
+        .border-2 {
+            border-width: 2px
+        }
+
+        .border-y {
+            border-top-width: 1px;
+            border-bottom-width: 1px
+        }
+
+        .border-b {
+            border-bottom-width: 1px
+        }
+
+        .border-t {
+            border-top-width: 1px
+        }
+
+        .border-border-dark {
+            --tw-border-opacity: 1;
+            border-color: rgb(45 45 45 / var(--tw-border-opacity, 1))
+        }
+
+        .border-orange-500\/20 {
+            border-color: rgb(249 115 22 / 0.2)
+        }
+
+        .border-primary {
+            --tw-border-opacity: 1;
+            border-color: rgb(212 255 0 / var(--tw-border-opacity, 1))
+        }
+
+        .border-primary\/20 {
+            border-color: rgb(212 255 0 / 0.2)
+        }
+
+        .border-primary\/30 {
+            border-color: rgb(212 255 0 / 0.3)
+        }
+
+        .border-primary\/40 {
+            border-color: rgb(212 255 0 / 0.4)
+        }
+
+        .border-red-500\/20 {
+            border-color: rgb(239 68 68 / 0.2)
+        }
+
+        .border-slate-100 {
+            --tw-border-opacity: 1;
+            border-color: rgb(241 245 249 / var(--tw-border-opacity, 1))
+        }
+
+        .border-slate-700 {
+            --tw-border-opacity: 1;
+            border-color: rgb(51 65 85 / var(--tw-border-opacity, 1))
+        }
+
+        .border-white\/20 {
+            border-color: rgb(255 255 255 / 0.2)
+        }
+
+        .bg-background-dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(18 18 18 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-background-dark\/90 {
+            background-color: rgb(18 18 18 / 0.9)
+        }
+
+        .bg-background-light {
+            --tw-bg-opacity: 1;
+            background-color: rgb(248 248 245 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-card-dark {
+            --tw-bg-opacity: 1;
+            background-color: rgb(30 30 30 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-card-dark\/30 {
+            background-color: rgb(30 30 30 / 0.3)
+        }
+
+        .bg-orange-500\/10 {
+            background-color: rgb(249 115 22 / 0.1)
+        }
+
+        .bg-primary {
+            --tw-bg-opacity: 1;
+            background-color: rgb(212 255 0 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-primary\/10 {
+            background-color: rgb(212 255 0 / 0.1)
+        }
+
+        .bg-red-500\/10 {
+            background-color: rgb(239 68 68 / 0.1)
+        }
+
+        .bg-gradient-to-b {
+            background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
+        }
+
+        .bg-gradient-to-t {
+            background-image: linear-gradient(to top, var(--tw-gradient-stops))
+        }
+
+        .from-background-dark\/60 {
+            --tw-gradient-from: rgb(18 18 18 / 0.6) var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .from-background-dark\/80 {
+            --tw-gradient-from: rgb(18 18 18 / 0.8) var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .via-background-dark\/40 {
+            --tw-gradient-to: rgb(18 18 18 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), rgb(18 18 18 / 0.4) var(--tw-gradient-via-position), var(--tw-gradient-to)
+        }
+
+        .to-background-dark {
+            --tw-gradient-to: #121212 var(--tw-gradient-to-position)
+        }
+
+        .to-transparent {
+            --tw-gradient-to: transparent var(--tw-gradient-to-position)
+        }
+
+        .object-cover {
+            object-fit: cover
+        }
+
+        .p-10 {
+            padding: 2.5rem
+        }
+
+        .p-12 {
+            padding: 3rem
+        }
+
+        .p-4 {
+            padding: 1rem
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .px-10 {
+            padding-left: 2.5rem;
+            padding-right: 2.5rem
+        }
+
+        .px-12 {
+            padding-left: 3rem;
+            padding-right: 3rem
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem
+        }
+
+        .py-24 {
+            padding-top: 6rem;
+            padding-bottom: 6rem
+        }
+
+        .py-4 {
+            padding-top: 1rem;
+            padding-bottom: 1rem
+        }
+
+        .py-5 {
+            padding-top: 1.25rem;
+            padding-bottom: 1.25rem
+        }
+
+        .py-6 {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem
+        }
+
+        .pt-8 {
+            padding-top: 2rem
+        }
+
+        .text-left {
+            text-align: left
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-right {
+            text-align: right
+        }
+
+        .font-display {
+            font-family: Inter, sans-serif
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem
+        }
+
+        .text-6xl {
+            font-size: 3.75rem;
+            line-height: 1
+        }
+
+        .text-\[300px\] {
+            font-size: 300px
+        }
+
+        .text-base {
+            font-size: 1rem;
+            line-height: 1.5rem
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem
+        }
+
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem
+        }
+
+        .font-black {
+            font-weight: 900
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .font-medium {
+            font-weight: 500
+        }
+
+        .uppercase {
+            text-transform: uppercase
+        }
+
+        .italic {
+            font-style: italic
+        }
+
+        .leading-none {
+            line-height: 1
+        }
+
+        .leading-relaxed {
+            line-height: 1.625
+        }
+
+        .tracking-\[0\.2em\] {
+            letter-spacing: 0.2em
+        }
+
+        .tracking-\[0\.3em\] {
+            letter-spacing: 0.3em
+        }
+
+        .tracking-tighter {
+            letter-spacing: -0.05em
+        }
+
+        .tracking-wider {
+            letter-spacing: 0.05em
+        }
+
+        .tracking-widest {
+            letter-spacing: 0.1em
+        }
+
+        .text-background-dark {
+            --tw-text-opacity: 1;
+            color: rgb(18 18 18 / var(--tw-text-opacity, 1))
+        }
+
+        .text-background-dark\/80 {
+            color: rgb(18 18 18 / 0.8)
+        }
+
+        .text-orange-500 {
+            --tw-text-opacity: 1;
+            color: rgb(249 115 22 / var(--tw-text-opacity, 1))
+        }
+
+        .text-primary {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .text-red-500 {
+            --tw-text-opacity: 1;
+            color: rgb(239 68 68 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-100 {
+            --tw-text-opacity: 1;
+            color: rgb(241 245 249 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-300 {
+            --tw-text-opacity: 1;
+            color: rgb(203 213 225 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-400 {
+            --tw-text-opacity: 1;
+            color: rgb(148 163 184 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-500 {
+            --tw-text-opacity: 1;
+            color: rgb(100 116 139 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-600 {
+            --tw-text-opacity: 1;
+            color: rgb(71 85 105 / var(--tw-text-opacity, 1))
+        }
+
+        .text-slate-900 {
+            --tw-text-opacity: 1;
+            color: rgb(15 23 42 / var(--tw-text-opacity, 1))
+        }
+
+        .text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity, 1))
+        }
+
+        .line-through {
+            -webkit-text-decoration-line: line-through;
+            text-decoration-line: line-through
+        }
+
+        .antialiased {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale
+        }
+
+        .opacity-10 {
+            opacity: 0.1
+        }
+
+        .shadow-\[0_0_30px_rgba\(212\2c 255\2c 0\2c 0\.1\)\] {
+            --tw-shadow: 0 0 30px rgba(212, 255, 0, 0.1);
+            --tw-shadow-colored: 0 0 30px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .grayscale {
+            --tw-grayscale: grayscale(100%);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .backdrop-blur-md {
+            --tw-backdrop-blur: blur(12px);
+            -webkit-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+            backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
+        }
+
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .transition-colors {
+            transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .transition-transform {
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .duration-500 {
+            transition-duration: 500ms
+        }
+
+        .duration-700 {
+            transition-duration: 700ms
+        }
+
+        .hover\:scale-105:hover {
+            --tw-scale-x: 1.05;
+            --tw-scale-y: 1.05;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .hover\:border-slate-500:hover {
+            --tw-border-opacity: 1;
+            border-color: rgb(100 116 139 / var(--tw-border-opacity, 1))
+        }
+
+        .hover\:bg-primary:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(212 255 0 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-slate-100:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(241 245 249 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-white\/10:hover {
+            background-color: rgb(255 255 255 / 0.1)
+        }
+
+        .hover\:bg-white\/5:hover {
+            background-color: rgb(255 255 255 / 0.05)
+        }
+
+        .hover\:text-background-dark:hover {
+            --tw-text-opacity: 1;
+            color: rgb(18 18 18 / var(--tw-text-opacity, 1))
+        }
+
+        .hover\:text-primary:hover {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .hover\:brightness-110:hover {
+            --tw-brightness: brightness(1.1);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .hover\:grayscale-0:hover {
+            --tw-grayscale: grayscale(0);
+            filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
+        }
+
+        .group:hover .group-hover\:translate-x-1 {
+            --tw-translate-x: 0.25rem;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .group:hover .group-hover\:scale-110 {
+            --tw-scale-x: 1.1;
+            --tw-scale-y: 1.1;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .group:hover .group-hover\:text-primary {
+            --tw-text-opacity: 1;
+            color: rgb(212 255 0 / var(--tw-text-opacity, 1))
+        }
+
+        .dark\:bg-background-dark:is(.dark *) {
+            --tw-bg-opacity: 1;
+            background-color: rgb(18 18 18 / var(--tw-bg-opacity, 1))
+        }
+
+        .dark\:text-slate-100:is(.dark *) {
+            --tw-text-opacity: 1;
+            color: rgb(241 245 249 / var(--tw-text-opacity, 1))
+        }
+
+        @media (min-width: 768px) {
+            .md\:col-span-1 {
+                grid-column: span 1 / span 1
+            }
+
+            .md\:col-span-2 {
+                grid-column: span 2 / span 2
+            }
+
+            .md\:row-span-1 {
+                grid-row: span 1 / span 1
+            }
+
+            .md\:row-span-2 {
+                grid-row: span 2 / span 2
+            }
+
+            .md\:block {
+                display: block
+            }
+
+            .md\:flex {
+                display: flex
+            }
+
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, minmax(0, 1fr))
+            }
+
+            .md\:grid-cols-4 {
+                grid-template-columns: repeat(4, minmax(0, 1fr))
+            }
+
+            .md\:flex-row {
+                flex-direction: row
+            }
+
+            .md\:p-20 {
+                padding: 5rem
+            }
+
+            .md\:text-5xl {
+                font-size: 3rem;
+                line-height: 1
+            }
+
+            .md\:text-8xl {
+                font-size: 6rem;
+                line-height: 1
+            }
+
+            .md\:text-xl {
+                font-size: 1.25rem;
+                line-height: 1.75rem
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:px-20 {
+                padding-left: 5rem;
+                padding-right: 5rem
+            }
+
+            .lg\:px-6 {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem
+            }
+
+            .lg\:text-sm {
+                font-size: 0.875rem;
+                line-height: 1.25rem
+            }
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+    <div class="relative flex h-auto min-screen w-full flex-col">
+        <!-- Navigation -->
+        <header
+            class="fixed top-0 z-50 w-full border-b border-border-dark bg-background-dark/90 backdrop-blur-md px-6 lg:px-20 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+                    <h2 class="text-xl font-black tracking-tighter italic">PREMIUM<span class="text-primary">GYM</span>
+                    </h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-10">
+                    <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
+                        href="#classes">Classes</a>
+                    <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
+                        href="#memberships">Memberships</a>
+                    <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
+                        href="gallery.html">Gallery</a>
+                    <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
+                        href="#footer">Contact</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <a href="#memberships"
+                        class="bg-primary text-background-dark px-6 py-2 text-sm font-black uppercase tracking-widest hover:scale-105 transition-transform inline-block">
+                        Join Now
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <a href="user-login.html"
+                            class="border border-primary/30 text-primary px-4 lg:px-6 py-2 text-xs lg:text-sm font-black uppercase tracking-widest hover:bg-primary hover:text-background-dark transition-all inline-block">
+                            User Login
+                        </a>
+                        <a href="admin-login.html"
+                            class="border border-white/20 text-white px-4 lg:px-6 py-2 text-xs lg:text-sm font-black uppercase tracking-widest hover:bg-white/10 transition-colors inline-block ml-2">
+                            Admin Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="h-16"></div>
+        <!-- Hero Section -->
+        <section class="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div
+                    class="absolute inset-0 bg-gradient-to-b from-background-dark/60 via-background-dark/40 to-background-dark z-10">
+                </div>
+                <img class="w-full h-full object-cover" data-alt="Interior of a modern high-end gym with weights"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DjOrmc8nRwlXjG5dWzTSdq1GDYQ2fdxLMTgsQ-WtMZ90Lgnm7ZN5MPT8208MGbi-Q_vSAd-AWCMG70hP532B3Fhcjao-_9p5NGT4lF1aG65LmHq3t1yGkhsZVJg3LnwZnJHaD0bTypOoVCmMfRfUIY__Dgt7LwIKFsXD13PNTNr3FxpaUjOT6PCtxQ4CBk68jsCmezKFS1jN9QY9VhFYn8NQT6DJAWo_FFwaYoSs9Gf9OWRiF94ARzk1Jfa3M65Efs5o3neGXQ">
+            </div>
+            <div class="relative z-20 text-center px-4 max-w-4xl">
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6 italic">
+                    UNLEASH YOUR <span class="text-primary">POTENTIAL</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-300 max-w-2xl mx-auto mb-10 font-medium">
+                    Experience the pinnacle of fitness in our world-class facility. Elite trainers, premium equipment,
+                    and a community driven by results.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#memberships"
+                        class="bg-primary text-background-dark px-10 py-4 text-base font-black uppercase tracking-widest hover:brightness-110 transition-all inline-block">
+                        Ready to Start
+                    </a>
+                    <a href="#classes"
+                        class="border-2 border-slate-100 text-slate-100 px-10 py-4 text-base font-black uppercase tracking-widest hover:bg-slate-100 hover:text-background-dark transition-all inline-block">
+                        View Schedule
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Facilities Gallery (Masonry Style) -->
+        <section id="facilities" class="py-24 px-6 lg:px-20 max-w-7xl mx-auto w-full">
+            <div class="flex items-end justify-between mb-12">
+                <div>
+                    <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">The Environment</span>
+                    <h2 class="text-4xl font-black mt-2 italic">OUR FACILITIES</h2>
+                </div>
+                <div class="hidden md:block">
+                    <a href="gallery.html"
+                        class="text-primary flex items-center gap-2 font-bold uppercase tracking-widest text-sm group">
+                        See All
+                        <span
+                            class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
+                <div class="md:col-span-2 md:row-span-2 relative overflow-hidden group cursor-pointer"
+                    onclick="openFacilityInfo('cardio')">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-alt="Main workout area with cardio machines"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBatwoGd9x3R1o_SViTkDoQJRe8OJG_2pBndEi4Ku_0XSwG3BhtudTIgbDo78fkNHqtFPd36YPFo9IAKAxusFWHCuw1tezwhfkd0JpRKvp1HK-NUzcvWjzI_YoRdigKT9TP5ADZerU8chO7y7LMdc99id2QeKkqyPBGWoIad2qvb2-m0m53EOBaGNdbZaaFwTg8E0H9hAHDEDm8SpMct0vBwOAa6Wq3a8YTuD1bOOfl5tKoryPrp-amHRweVFnFa0jiqVe_O9DsaQ">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent flex items-end p-6">
+                        <h3 class="font-bold text-xl uppercase italic">Cardio Deck</h3>
+                    </div>
+                </div>
+                <div class="md:col-span-1 md:row-span-1 relative overflow-hidden group cursor-pointer"
+                    onclick="openFacilityInfo('iron')">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-alt="Free weights area with dumbbells"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMktqlcE5iSfjPuc5GgjW8A9cZMrCMQXs9TXod0rXlEi5kdWURUdaked3XTnAYcuyLk82O5pAOtBpYoXZBR0ZSbYqRUSMFN13j2xWxWU4IJqTojVaixSk-s1o9ZVmohjvSu3aPxIGNKkHTQNpZMX4LMbn6Qdv6rd0g0P1zLGYbPXaEpkhWy2IX3XJspAEXATQSsrv7FYcN_zjVWUpOsuuJg7mO6OXNvcQfOGIOeo8Ve2SRbAilHz4dZuFOqdvpZSPmHBudaebRUQ">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent flex items-end p-4">
+                        <h3 class="font-bold text-lg uppercase italic">Iron Zone</h3>
+                    </div>
+                </div>
+                <div class="md:col-span-1 md:row-span-2 relative overflow-hidden group cursor-pointer"
+                    onclick="openFacilityInfo('olympic')">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-alt="Olympic lifting platforms and racks"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Bc0Ow9-mDJuFko0-QHU9HL5-MDAUfLd3JtBhI9pKvA7DCP5axKSLGUQKAqFnHrcUHDxMjWD1Wc3tghlXFOKD29eVHExIGpCatRnzzK7ORao4Mg4-IRucWWI2v8tdcMIYzWWA9o02QOd4AWfkeEq-nMa5YeUgpB2qAifPSQEbv-m1AYoJHBeOphsZMdGtQUQ0mRmklAmolENicGPXvecHoLVxuoS21Kz4SKBJu3KRNVGlpsUTnXasVhrlt9jneDRnuAtaq3fJNQ">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent flex items-end p-6">
+                        <h3 class="font-bold text-lg uppercase italic">Olympic Racks</h3>
+                    </div>
+                </div>
+                <div class="md:col-span-1 md:row-span-1 relative overflow-hidden group cursor-pointer"
+                    onclick="openFacilityInfo('zen')">
+                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        data-alt="Yoga studio with mats"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuC47K24qF2cfzVizzsZn_ZYBMhicJp3zEvgmubFZsMJD3ZfofBwKiWawpAY3FCpw96BRA_TDNf1NGsj_OyVfwsQzKMFRO5DtF6KdAS8e59KZetsJgGmQ85QpDPl7D5v0TE7G7Ylv1dQxbWTwHC6kPIKQ6WtYvKSD4McRWqjOC97dhM8pM5bqTqVNOki5NMP81ANePSDwiH-olxoXVaKhWoPJ4o0R0uIvZkReao-A1Epn7yZVQ7YH4qoN6J71Y3V2XVFkIH1-t7BXA">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent flex items-end p-4">
+                        <h3 class="font-bold text-lg uppercase italic">Zen Studio</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facility Info Modal -->
+        <div id="facilityModal" class="fixed inset-0 z-[100] hidden">
+            <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md" onclick="closeFacilityModal()"></div>
+            <div class="absolute inset-0 flex items-center justify-center p-4">
+                <div
+                    class="bg-card-dark w-full max-w-2xl rounded-3xl overflow-hidden border border-primary/20 relative">
+                    <button onclick="closeFacilityModal()"
+                        class="absolute top-4 right-4 z-10 text-white/60 hover:text-white bg-black/40 rounded-full p-1 transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    <img id="facilityImg" src="" class="w-full h-56 object-cover">
+                    <div class="p-8">
+                        <h3 id="facilityName" class="text-2xl font-black italic uppercase tracking-tight mb-2"></h3>
+                        <p id="facilityDesc" class="text-slate-400 text-sm leading-relaxed mb-6"></p>
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
+                                <span
+                                    class="material-symbols-outlined text-primary text-xl mb-2 block">fitness_center</span>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Equipment
+                                </p>
+                                <p id="facilityEquipment" class="text-sm font-medium text-slate-300"></p>
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-4 border border-white/5">
+                                <span class="material-symbols-outlined text-primary text-xl mb-2 block">schedule</span>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mb-1">Hours</p>
+                                <p id="facilityHours" class="text-sm font-medium text-slate-300"></p>
+                            </div>
+                        </div>
+                        <div id="facilityFeatures" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const facilityData = {
+                cardio: {
+                    name: 'Cardio Deck',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBatwoGd9x3R1o_SViTkDoQJRe8OJG_2pBndEi4Ku_0XSwG3BhtudTIgbDo78fkNHqtFPd36YPFo9IAKAxusFWHCuw1tezwhfkd0JpRKvp1HK-NUzcvWjzI_YoRdigKT9TP5ADZerU8chO7y7LMdc99id2QeKkqyPBGWoIad2qvb2-m0m53EOBaGNdbZaaFwTg8E0H9hAHDEDm8SpMct0vBwOAa6Wq3a8YTuD1bOOfl5tKoryPrp-amHRweVFnFa0jiqVe_O9DsaQ',
+                    desc: 'Our state-of-the-art Cardio Deck features premium treadmills, ellipticals, rowing machines, and stationary bikes. Perfect for warming up, endurance training, or full cardio sessions with built-in entertainment screens.',
+                    equipment: 'Treadmills, Ellipticals, Rowing Machines, Bikes',
+                    hours: '5:00 AM – 11:00 PM Daily',
+                    features: ['Heart Rate Monitoring', 'Personal Screens', 'Climate Controlled', 'Towel Service']
+                },
+                iron: {
+                    name: 'Iron Zone',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAMktqlcE5iSfjPuc5GgjW8A9cZMrCMQXs9TXod0rXlEi5kdWURUdaked3XTnAYcuyLk82O5pAOtBpYoXZBR0ZSbYqRUSMFN13j2xWxWU4IJqTojVaixSk-s1o9ZVmohjvSu3aPxIGNKkHTQNpZMX4LMbn6Qdv6rd0g0P1zLGYbPXaEpkhWy2IX3XJspAEXATQSsrv7FYcN_zjVWUpOsuuJg7mO6OXNvcQfOGIOeo8Ve2SRbAilHz4dZuFOqdvpZSPmHBudaebRUQ',
+                    desc: 'The Iron Zone is loaded with free weights ranging from 5 to 150 lbs, adjustable benches, and cable machines. Ideal for bodybuilding, strength training, and muscle isolation exercises.',
+                    equipment: 'Dumbbells, Barbells, Cable Machines, Benches',
+                    hours: '5:00 AM – 11:00 PM Daily',
+                    features: ['Full Dumbbell Rack', 'Adjustable Benches', 'Mirror Walls', 'Chalk Available']
+                },
+                olympic: {
+                    name: 'Olympic Racks',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA5Bc0Ow9-mDJuFko0-QHU9HL5-MDAUfLd3JtBhI9pKvA7DCP5axKSLGUQKAqFnHrcUHDxMjWD1Wc3tghlXFOKD29eVHExIGpCatRnzzK7ORao4Mg4-IRucWWI2v8tdcMIYzWWA9o02QOd4AWfkeEq-nMa5YeUgpB2qAifPSQEbv-m1AYoJHBeOphsZMdGtQUQ0mRmklAmolENicGPXvecHoLVxuoS21Kz4SKBJu3KRNVGlpsUTnXasVhrlt9jneDRnuAtaq3fJNQ',
+                    desc: 'Dedicated Olympic lifting platforms with competition-grade bumper plates and power racks. Designed for serious lifters focusing on squats, deadlifts, cleans, and snatches.',
+                    equipment: 'Power Racks, Bumper Plates, Olympic Bars, Platforms',
+                    hours: '5:00 AM – 11:00 PM Daily',
+                    features: ['Competition Bars', 'Deadlift Platforms', 'Lifting Belts', 'Spotter Arms']
+                },
+                zen: {
+                    name: 'Zen Studio',
+                    img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC47K24qF2cfzVizzsZn_ZYBMhicJp3zEvgmubFZsMJD3ZfofBwKiWawpAY3FCpw96BRA_TDNf1NGsj_OyVfwsQzKMFRO5DtF6KdAS8e59KZetsJgGmQ85QpDPl7D5v0TE7G7Ylv1dQxbWTwHC6kPIKQ6WtYvKSD4McRWqjOC97dhM8pM5bqTqVNOki5NMP81ANePSDwiH-olxoXVaKhWoPJ4o0R0uIvZkReao-A1Epn7yZVQ7YH4qoN6J71Y3V2XVFkIH1-t7BXA',
+                    desc: 'A peaceful sanctuary for yoga, meditation, and stretching. The Zen Studio features bamboo flooring, ambient lighting, and premium yoga mats for a calming workout experience.',
+                    equipment: 'Yoga Mats, Blocks, Straps, Resistance Bands',
+                    hours: '6:00 AM – 10:00 PM Daily',
+                    features: ['Ambient Lighting', 'Sound System', 'Private Classes', 'Meditation Space']
+                }
+            };
+
+            function openFacilityInfo(key) {
+                const f = facilityData[key];
+                if (!f) return;
+                document.getElementById('facilityImg').src = f.img;
+                document.getElementById('facilityName').textContent = f.name;
+                document.getElementById('facilityDesc').textContent = f.desc;
+                document.getElementById('facilityEquipment').textContent = f.equipment;
+                document.getElementById('facilityHours').textContent = f.hours;
+                document.getElementById('facilityFeatures').innerHTML = f.features.map(t =>
+                    `<span class="px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full border border-primary/20">${t}</span>`
+                ).join('');
+                document.getElementById('facilityModal').classList.remove('hidden');
+            }
+
+            function closeFacilityModal() {
+                document.getElementById('facilityModal').classList.add('hidden');
+            }
+        </script>
+        <!-- Class Schedule Table -->
+        <section id="classes" class="py-24 bg-card-dark/30 border-y border-border-dark px-6 lg:px-20">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-12 text-center">
+                    <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">Join a Class</span>
+                    <h2 class="text-4xl font-black mt-2 italic">WEEKLY SCHEDULE</h2>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="border-b border-border-dark">
+                                <th class="py-6 text-left text-sm uppercase tracking-widest font-bold text-slate-400">
+                                    Class</th>
+                                <th class="py-6 text-left text-sm uppercase tracking-widest font-bold text-slate-400">
+                                    Time</th>
+                                <th class="py-6 text-left text-sm uppercase tracking-widest font-bold text-slate-400">
+                                    Instructor</th>
+                                <th class="py-6 text-left text-sm uppercase tracking-widest font-bold text-slate-400">
+                                    Difficulty</th>
+                                <th class="py-6 text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-border-dark">
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-8 font-black text-xl italic group-hover:text-primary transition-colors">
+                                    HIIT BLAST</td>
+                                <td class="py-8 text-slate-300 font-bold uppercase">08:00 AM</td>
+                                <td class="py-8 text-slate-300">Alex 'The Beast'</td>
+                                <td class="py-8">
+                                    <span
+                                        class="px-3 py-1 bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20 uppercase">Advanced</span>
+                                </td>
+                                <td class="py-8 text-right">
+                                    <button
+                                        onclick="openBookingModal('HIIT BLAST','08:00 AM','Alex The Beast','Advanced')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all">Book
+                                        Spot</button>
+                                </td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-8 font-black text-xl italic group-hover:text-primary transition-colors">
+                                    POWERLIFTING 101</td>
+                                <td class="py-8 text-slate-300 font-bold uppercase">10:30 AM</td>
+                                <td class="py-8 text-slate-300">Sarah Strong</td>
+                                <td class="py-8">
+                                    <span
+                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase">Intermediate</span>
+                                </td>
+                                <td class="py-8 text-right">
+                                    <button
+                                        onclick="openBookingModal('POWERLIFTING 101','10:30 AM','Sarah Strong','Intermediate')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all">Book
+                                        Spot</button>
+                                </td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-8 font-black text-xl italic group-hover:text-primary transition-colors">
+                                    FLOW YOGA</td>
+                                <td class="py-8 text-slate-300 font-bold uppercase">12:00 PM</td>
+                                <td class="py-8 text-slate-300">Elena Zen</td>
+                                <td class="py-8">
+                                    <span
+                                        class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold border border-primary/20 uppercase">All
+                                        Levels</span>
+                                </td>
+                                <td class="py-8 text-right">
+                                    <button onclick="openBookingModal('FLOW YOGA','12:00 PM','Elena Zen','All Levels')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all">Book
+                                        Spot</button>
+                                </td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-8 font-black text-xl italic group-hover:text-primary transition-colors">
+                                    NIGHT PUMP</td>
+                                <td class="py-8 text-slate-300 font-bold uppercase">06:00 PM</td>
+                                <td class="py-8 text-slate-300">Marcus Thorne</td>
+                                <td class="py-8">
+                                    <span
+                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase">Intermediate</span>
+                                </td>
+                                <td class="py-8 text-right">
+                                    <button
+                                        onclick="openBookingModal('NIGHT PUMP','06:00 PM','Marcus Thorne','Intermediate')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all">Book
+                                        Spot</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <!-- Memberships Section -->
+        <section id="memberships" class="py-24 px-6 lg:px-20 max-w-7xl mx-auto w-full">
+            <div class="mb-16 text-center">
+                <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">Flexible Plans</span>
+                <h2 class="text-4xl font-black mt-2 italic">MEMBERSHIP LEVELS</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Basic Card -->
+                <div
+                    class="bg-card-dark border border-border-dark p-10 flex flex-col hover:border-slate-500 transition-colors">
+                    <h3 class="text-xl font-black italic uppercase mb-2">Basic</h3>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-4xl font-black">RS 1200</span>
+                        <span class="text-slate-400 text-sm font-bold">/MO</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Access to cardio &amp; weights
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Locker room access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-500 line-through">
+                            <span class="material-symbols-outlined text-slate-600 text-lg">cancel</span>
+                            Group fitness classes
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-500 line-through">
+                            <span class="material-symbols-outlined text-slate-600 text-lg">cancel</span>
+                            Personal trainer session
+                        </li>
+                    </ul>
+                    <button onclick="openJoinModal('Basic')"
+                        class="w-full border-2 border-slate-700 py-4 font-black uppercase tracking-widest hover:bg-slate-100 hover:text-background-dark transition-all">Select
+                        Plan</button>
+                </div>
+                <!-- Pro Card (Highlighted) -->
+                <div
+                    class="bg-card-dark border-2 border-primary p-10 flex flex-col relative scale-105 shadow-[0_0_30px_rgba(212,255,0,0.1)]">
+                    <div
+                        class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-primary text-background-dark px-4 py-1 text-xs font-black uppercase tracking-widest">
+                        Most Popular</div>
+                    <h3 class="text-xl font-black italic uppercase mb-2">Pro</h3>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-4xl font-black text-primary">RS 2500</span>
+                        <span class="text-slate-400 text-sm font-bold">/MO</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Unlimited facility access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            All group fitness classes
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            2 Guest passes monthly
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            1 PT assessment/month
+                        </li>
+                    </ul>
+                    <button onclick="openJoinModal('Pro')"
+                        class="w-full bg-primary text-background-dark py-4 font-black uppercase tracking-widest hover:brightness-110 transition-all">Join
+                        Pro</button>
+                </div>
+                <!-- Elite Card -->
+                <div
+                    class="bg-card-dark border border-border-dark p-10 flex flex-col hover:border-slate-500 transition-colors">
+                    <h3 class="text-xl font-black italic uppercase mb-2">Elite</h3>
+                    <div class="flex items-baseline gap-1 mb-8">
+                        <span class="text-4xl font-black">RS 5000</span>
+                        <span class="text-slate-400 text-sm font-bold">/MO</span>
+                    </div>
+                    <ul class="space-y-4 mb-12 flex-grow">
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            24/7 VIP Access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Priority class booking
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Sauna &amp; Spa access
+                        </li>
+                        <li class="flex items-center gap-3 text-sm text-slate-300">
+                            <span class="material-symbols-outlined text-primary text-lg">check_circle</span>
+                            Personalized nutrition plan
+                        </li>
+                    </ul>
+                    <button onclick="openJoinModal('Elite')"
+                        class="w-full border-2 border-slate-700 py-4 font-black uppercase tracking-widest hover:bg-slate-100 hover:text-background-dark transition-all">Go
+                        Elite</button>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-24 px-6 lg:px-20">
+            <div
+                class="max-w-7xl mx-auto bg-primary p-12 md:p-20 flex flex-col md:flex-row items-center justify-between gap-10 overflow-hidden relative">
+                <div class="absolute right-0 top-0 opacity-10 pointer-events-none">
+                    <span
+                        class="material-symbols-outlined text-[300px] -translate-y-1/4 translate-x-1/4">fitness_center</span>
+                </div>
+                <div class="relative z-10 max-w-xl">
+                    <h2 class="text-background-dark text-4xl md:text-5xl font-black italic uppercase leading-none mb-4">
+                        Ready to transform your life?</h2>
+                    <p class="text-background-dark/80 font-bold uppercase tracking-wider text-sm">Join the elite fitness
+                        community today.</p>
+                </div>
+                <div class="relative z-10">
+                    <a href="#memberships"
+                        class="bg-background-dark text-primary px-12 py-5 text-lg font-black uppercase tracking-widest hover:scale-105 transition-transform inline-block">Get
+                        Started</a>
+                </div>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer id="footer" class="bg-background-dark border-t border-border-dark py-16 px-6 lg:px-20">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-3 mb-6">
+                        <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+                        <h2 class="text-xl font-black tracking-tighter italic">PREMIUM<span
+                                class="text-primary">GYM</span></h2>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed mb-6">The definitive fitness experience designed
+                        for those who demand excellence from themselves and their equipment.</p>
+                    <div class="flex gap-4">
+                        <a class="text-slate-400 hover:text-primary" href="mailto:akk013192@gmail.com"><span
+                                class="material-symbols-outlined">mail</span></a>
+                        <button id="shareBtn" class="text-slate-400 hover:text-primary cursor-pointer relative"
+                            onclick="copyToClipboard()"><span class="material-symbols-outlined">share</span>
+                            <span id="copyTooltip"
+                                class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-background-dark text-[10px] font-bold px-2 py-1 rounded opacity-0 transition-opacity pointer-events-none whitespace-nowrap">Link
+                                copied!</span>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-black uppercase italic mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-slate-400 text-sm font-bold uppercase tracking-widest">
+                        <li><a class="hover:text-primary" href="#">Classes</a></li>
+                        <li><a class="hover:text-primary" href="#">Trainers</a></li>
+                        <li><a class="hover:text-primary" href="#">Shop</a></li>
+                        <li><a class="hover:text-primary" href="#">Events</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-black uppercase italic mb-6">Support</h4>
+                    <ul class="space-y-3 text-slate-400 text-sm font-bold uppercase tracking-widest">
+                        <li><a class="hover:text-primary" href="#">Contact Us</a></li>
+                        <li><a class="hover:text-primary" href="#">Privacy Policy</a></li>
+                        <li><a class="hover:text-primary" href="#">Terms of Service</a></li>
+                        <li><a class="hover:text-primary" href="#">Careers</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-black uppercase italic mb-6">Location</h4>
+                    <div class="relative h-40 w-full mb-4 grayscale hover:grayscale-0 transition-all duration-700">
+                        <img class="w-full h-full object-cover rounded" data-alt="Map location showing the gym"
+                            data-location="Los Angeles"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzUdTXXy7BxhqfuNYWBtV4mSMWvNODbpTV7HpnPMdh_A-qIahbv1B1ZHHZ3ibJY696dEhN3NZqIbufTvthQyJx4HJUg8J0k2g5BNV-Z8O7LQeuKvd0jsA-xXb4xNb7TDlcYHQT7XmBzjH5qQh4FATEsks9-fE2YJ1HhbdgMnCvyMZjUU5PnwrYwRvWC_kP-XOcQbVuNddMKfjhp_4Ad1f0KHNFLW7a5CdwX6JC05_R7HRGeolbyWs5Snlh6_S8gkBtyixZQwx_Ew">
+                    </div>
+                    <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">123 Fitness Way, Platinum
+                        District, LA</p>
+                </div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto pt-8 border-t border-border-dark flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
+                <p>© 2026 PREMIUM GYM. ALL RIGHTS RESERVED.</p>
+                <p>DESIGNED FOR THE ELITE</p>
+            </div>
+        </footer>
+    </div>
+    <!-- Join Modal -->
+    <div id="joinModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div
+                class="bg-card-dark w-full max-w-lg rounded-3xl p-8 border border-primary/20 animate-in zoom-in duration-300 relative">
+
+                <!-- Step 1: Payment Method -->
+                <div id="stepPayment">
+                    <h4 id="selectedPlanName" class="text-3xl font-black italic uppercase mb-2">Join Plan</h4>
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-8">Select your preferred
+                        payment method</p>
+
+                    <div class="space-y-4">
+                        <button onclick="selectPayment('online')"
+                            class="w-full flex items-center justify-between p-6 rounded-2xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-primary">credit_card</span>
+                                <div class="text-left">
+                                    <span class="font-bold block">UPI / Online</span>
+                                    <span class="text-xs text-slate-500">Pay now via secure link</span>
+                                </div>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-slate-500 group-hover:text-primary">arrow_forward</span>
+                        </button>
+                        <button onclick="selectPayment('cash')"
+                            class="w-full flex items-center justify-between p-6 rounded-2xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+                            <div class="flex items-center gap-4">
+                                <span class="material-symbols-outlined text-primary">payments</span>
+                                <div class="text-left">
+                                    <span class="font-bold block">Pay Cash at Desk</span>
+                                    <span class="text-xs text-slate-500">Hand cash to admin later</span>
+                                </div>
+                            </div>
+                            <span
+                                class="material-symbols-outlined text-slate-500 group-hover:text-primary">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2: User Details -->
+                <div id="stepDetails" class="hidden">
+                    <h4 class="text-2xl font-black italic uppercase mb-2">Almost There!</h4>
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-8">Enter your details to
+                        finalize request</p>
+
+                    <form id="joinForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Full
+                                Name</label>
+                            <input type="text" id="joinName" required
+                                class="w-full bg-background-dark border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Email
+                                Address</label>
+                            <input type="email" id="joinEmail" required
+                                class="w-full bg-background-dark border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Phone
+                                Number</label>
+                            <input type="tel" id="joinPhone" required placeholder="Will be used as your password"
+                                class="w-full bg-background-dark border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:ring-1 focus:ring-primary transition-colors">
+                        </div>
+
+                        <!-- System messages -->
+                        <div id="joinMessage" class="hidden rounded-lg p-3 text-sm font-medium mt-4"></div>
+
+                        <button type="submit" id="submitJoinBtn"
+                            class="w-full bg-primary text-background-dark py-4 rounded-xl font-black uppercase tracking-widest hover:brightness-110 transition-all mt-6 flex justify-center items-center gap-2">
+                            <span>Submit Request</span>
+                            <span class="material-symbols-outlined hidden animate-spin"
+                                id="joinSpinner">progress_activity</span>
+                        </button>
+                    </form>
+                </div>
+
+                <button onclick="closeJoinModal()"
+                    class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-card-dark w-full max-w-lg rounded-3xl p-8 border border-primary/20 relative">
+                <button onclick="closeBookingModal()"
+                    class="absolute top-6 right-6 text-slate-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+
+                <!-- Class Info Header -->
+                <div class="mb-8">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4 block">event</span>
+                    <h4 id="bookingClassName" class="text-3xl font-black italic uppercase tracking-tighter"></h4>
+                    <div class="flex flex-wrap gap-3 mt-3">
+                        <span id="bookingTime"
+                            class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">schedule</span>
+                            <span></span>
+                        </span>
+                        <span id="bookingInstructor"
+                            class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold uppercase tracking-widest rounded-full flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">person</span>
+                            <span></span>
+                        </span>
+                        <span id="bookingDifficulty"
+                            class="px-3 py-1 bg-white/5 text-slate-300 text-xs font-bold uppercase tracking-widest rounded-full"></span>
+                    </div>
+                    <p class="text-slate-500 text-sm mt-4 leading-relaxed">Ready to reserve your spot? Click confirm and
+                        we'll book it under your membership account.</p>
+                </div>
+
+                <div id="bookingMessage" class="hidden rounded-lg p-3 text-sm font-medium mb-4"></div>
+
+                <button id="submitBookingBtn" onclick="submitBooking()"
+                    class="w-full bg-primary text-background-dark py-4 rounded-xl font-black uppercase tracking-widest hover:brightness-110 transition-all flex items-center justify-center gap-2">
+                    <span>Confirm Booking</span>
+                    <span class="material-symbols-outlined hidden animate-spin"
+                        id="bookingSpinner">progress_activity</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script for Class Booking -->
+    <script>
+        let bookingClassData = {};
+
+        function openBookingModal(className, classTime, instructor, difficulty) {
+            // Check if user is logged in as a member
+            const token = sessionStorage.getItem('memberAuthToken');
+            if (!token) {
+                alert('Please log in as a member to book a class.');
+                window.location.href = 'user-login.html';
+                return;
+            }
+
+            bookingClassData = { className, classTime, instructor, difficulty };
+
+            document.getElementById('bookingClassName').textContent = className;
+            document.getElementById('bookingTime').querySelector('span:last-child').textContent = classTime;
+            document.getElementById('bookingInstructor').querySelector('span:last-child').textContent = instructor;
+            document.getElementById('bookingDifficulty').textContent = difficulty;
+
+            document.getElementById('bookingMessage').classList.add('hidden');
+            document.getElementById('bookingModal').classList.remove('hidden');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.add('hidden');
+        }
+
+        async function submitBooking() {
+            const token = sessionStorage.getItem('memberAuthToken');
+            const msgEl = document.getElementById('bookingMessage');
+            const btn = document.getElementById('submitBookingBtn');
+            const spinner = document.getElementById('bookingSpinner');
+
+            msgEl.classList.add('hidden');
+            btn.disabled = true;
+            spinner.classList.remove('hidden');
+
+            try {
+                const res = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({
+                        className: bookingClassData.className,
+                        classTime: bookingClassData.classTime,
+                        instructor: bookingClassData.instructor,
+                        difficulty: bookingClassData.difficulty
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.message || 'Booking failed');
+
+                msgEl.textContent = '✅ ' + data.message;
+                msgEl.className = 'rounded-lg p-3 text-sm font-medium mb-4 bg-green-500/10 text-green-500 border border-green-500/20';
+                msgEl.classList.remove('hidden');
+
+                setTimeout(() => {
+                    closeBookingModal();
+                }, 2000);
+
+            } catch (err) {
+                msgEl.textContent = err.message;
+                msgEl.className = 'rounded-lg p-3 text-sm font-medium mb-4 bg-red-500/10 text-red-500 border border-red-500/20';
+                msgEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        }
+    </script>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-background-dark/95 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()"
+            class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <img id="lightbox-img" src=""
+            class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+    </div>
+
+    <!-- Script for Share Button -->
+    <script>
+        function copyToClipboard() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                const tooltip = document.getElementById('copyTooltip');
+                tooltip.style.opacity = '1';
+                setTimeout(() => { tooltip.style.opacity = '0'; }, 1500);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = window.location.href;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                const tooltip = document.getElementById('copyTooltip');
+                tooltip.style.opacity = '1';
+                setTimeout(() => { tooltip.style.opacity = '0'; }, 1500);
+            });
+        }
+    </script>
+
+    <!-- Script to handle Lightbox -->
+    <script>
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape" && !document.getElementById('lightbox').classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+
+        document.getElementById('lightbox').addEventListener('click', function (event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
+    </script>
+
+    <!-- Script to handle Join Logic -->
+    <script>
+        let availablePlans = [];
+        let selectedPlan = null;
+        let selectedPaymentMethod = null;
+
+        // Fetch plans on load so we have the IDs
+        async function fetchPlans() {
+            try {
+                const res = await fetch('/api/memberships/plans');
+                if (res.ok) {
+                    availablePlans = await res.json();
+                }
+            } catch (err) {
+                console.error("Failed to fetch plans", err);
+            }
+        }
+
+        // Execute on page load
+        fetchPlans();
+
+        function openJoinModal(planName) {
+            selectedPlan = availablePlans.find(p => p.name.toLowerCase() === planName.toLowerCase());
+
+            if (!selectedPlan) {
+                alert("Plan details not loaded yet or plan not found. Please try again in a moment.");
+                return;
+            }
+
+            document.getElementById('selectedPlanName').textContent = `Join ${planName}`;
+
+            // Reset modal state
+            document.getElementById('stepPayment').classList.remove('hidden');
+            document.getElementById('stepDetails').classList.add('hidden');
+            document.getElementById('joinForm').reset();
+            document.getElementById('joinMessage').classList.add('hidden');
+
+            // Show modal
+            document.getElementById('joinModal').classList.remove('hidden');
+        }
+
+        function closeJoinModal() {
+            document.getElementById('joinModal').classList.add('hidden');
+        }
+
+        function selectPayment(method) {
+            selectedPaymentMethod = method;
+            // Simulated transaction for online payment
+            if (method === 'online') {
+                alert("Redirecting to UPI/Card Payment Gateway... \n\n(Simulation Complete!)");
+            }
+
+            // Move to step 2
+            document.getElementById('stepPayment').classList.add('hidden');
+            document.getElementById('stepDetails').classList.remove('hidden');
+        }
+
+        document.getElementById('joinForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('joinName').value;
+            const email = document.getElementById('joinEmail').value;
+            const phone = document.getElementById('joinPhone').value;
+
+            const msgEl = document.getElementById('joinMessage');
+            const btn = document.getElementById('submitJoinBtn');
+            const spinner = document.getElementById('joinSpinner');
+
+            msgEl.classList.add('hidden');
+            btn.disabled = true;
+            spinner.classList.remove('hidden');
+
+            try {
+                const res = await fetch('/api/public-memberships/request', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        phone,
+                        planId: selectedPlan.id,
+                        paymentMethod: selectedPaymentMethod
+                    })
+                });
+
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || 'Failed to submit request');
+                }
+
+                // Show success
+                msgEl.textContent = data.message;
+                msgEl.className = 'rounded-lg p-3 text-sm font-medium mt-4 bg-green-500/10 text-green-500 border border-green-500/20';
+                msgEl.classList.remove('hidden');
+
+                // Close after 2.5 seconds
+                setTimeout(() => {
+                    closeJoinModal();
+                    // Optionally scroll to top or suggest admin logic
+                    alert(`Request sent! Your username will be: ${email}\nYour password will be: ${phone}\n(Waiting for admin approval)`);
+                }, 2500);
+
+            } catch (err) {
+                msgEl.textContent = err.message;
+                msgEl.className = 'rounded-lg p-3 text-sm font-medium mt-4 bg-red-500/10 text-red-500 border border-red-500/20';
+                msgEl.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                spinner.classList.add('hidden');
+            }
+        });
+    </script>
+
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+
+
+    <!-- Code injected by live-server -->
+    <script>
+        // <![CDATA[  <-- For SVG support
+        if ('WebSocket' in window) {
+            (function () {
+                function refreshCSS() {
+                    var sheets = [].slice.call(document.getElementsByTagName("link"));
+                    var head = document.getElementsByTagName("head")[0];
+                    for (var i = 0; i < sheets.length; ++i) {
+                        var elem = sheets[i];
+                        var parent = elem.parentElement || head;
+                        parent.removeChild(elem);
+                        var rel = elem.rel;
+                        if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                            var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                            elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                        }
+                        parent.appendChild(elem);
+                    }
+                }
+                var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+                var address = protocol + window.location.host + window.location.pathname + '/ws';
+                var socket = new WebSocket(address);
+                socket.onmessage = function (msg) {
+                    if (msg.data == 'reload') window.location.reload();
+                    else if (msg.data == 'refreshcss') refreshCSS();
+                };
+                if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+                    console.log('Live reload enabled.');
+                    sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+                }
+            })();
+        }
+        else {
+            console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+        }
+        // ]]>
+    </script>
+
+
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

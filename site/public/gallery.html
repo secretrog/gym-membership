@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#121212",
+                        "slate-card": "#1E1E1E",
+                        "slate-border": "#2D2D2D",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                },
+            },
+        }
+    </script>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="layout-container flex h-full grow flex-col">
+        <!-- Top Navigation -->
+        <header
+            class="flex items-center justify-between border-b border-slate-border px-6 md:px-10 py-4 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+            <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <div class="bg-primary p-1.5 rounded-sm">
+                    <span class="material-symbols-outlined text-background-dark font-bold">fitness_center</span>
+                </div>
+                <h2 class="text-slate-100 text-xl font-black tracking-tighter uppercase italic text-3xl">PREMIUM<span
+                        class="text-primary">GYM</span></h2>
+            </a>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-slate-400 hover:text-primary text-sm font-semibold transition-colors"
+                    href="index.html">Home</a>
+                <a class="text-slate-400 hover:text-primary text-sm font-semibold transition-colors"
+                    href="index.html#classes">Classes</a>
+                <a class="text-slate-400 hover:text-primary text-sm font-semibold transition-colors"
+                    href="index.html#memberships">Memberships</a>
+                <a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1"
+                    href="gallery.html">Gallery</a>
+
+            </nav>
+            <div class="flex items-center gap-4">
+                <button class="p-2 rounded hover:bg-slate-card text-slate-400 transition-colors">
+                    <span class="material-symbols-outlined">notifications</span>
+                </button>
+            </div>
+        </header>
+        <main class="max-w-7xl mx-auto w-full px-4 md:px-10 py-8">
+            <!-- Profile Header & View Toggle -->
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-100 tracking-tight mb-2">MEMBER GALLERY</h1>
+                    <p class="text-slate-400 text-sm">Visual tracking of your fitness journey and facility access.</p>
+                </div>
+                <div class="flex bg-slate-card p-1 rounded-lg w-full md:w-auto">
+
+                </div>
+            </div>
+            <!-- Main Comparison Section -->
+            <section class="mb-12">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-lg font-bold flex items-center gap-2">
+                        <span class="w-1 h-6 bg-primary"></span>
+                        TRANSFORMATION SPOTLIGHT
+                    </h3>
+                    <button
+                        class="bg-primary text-background-dark text-xs font-black px-4 py-2 rounded hover:opacity-90 transition-opacity uppercase tracking-widest flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm">upload</span>
+                        Upload New Photo
+                    </button>
+                </div>
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-slate-card p-4 rounded-xl border border-slate-border relative overflow-hidden">
+                    <!-- Before -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative group aspect-[4/5] overflow-hidden rounded-lg cursor-pointer">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10 pointer-events-none">
+                        </div>
+                        <img alt="Before transformation photo"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Man standing before starting fitness journey"
+                            src="https://instagram.fhyd11-2.fna.fbcdn.net/v/t51.82787-15/587634893_18542182981047570_6529311981268465523_n.jpg?stp=dst-jpg_e35_p640x640_sh0.08_tt6&_nc_cat=103&ig_cache_key=Mzc4Mzg0NTAyNzY4MTEyMzg2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjEyNDJ4MTY1Ni5zZHIuQzMifQ%3D%3D&_nc_ohc=4tdncHORtzoQ7kNvwF8Bklp&_nc_oc=AdlGQIhozn3ZfYkFVeIK-MrB4rG_4KSfVABwoPKvjCsN0kc-DHn80j9Q4nOjz555_aAuC4KbKr2Q4E14-rhb22aM&_nc_ad=z-m&_nc_cid=2034&_nc_zt=23&_nc_ht=instagram.fhyd11-2.fna&_nc_gid=vjKPcKj7nLG7eTkZ6P_r8A&_nc_ss=8&oh=00_AfxkLZriNj4zQ0yGCy-e7HAfmqU1ECvRTwsS5n_SfnTBZA&oe=69AF6F31" />
+                        <div
+                            class="absolute top-4 left-4 z-20 bg-background-dark/80 backdrop-blur px-3 py-1 border border-slate-border">
+                            <span class="text-primary font-black text-xs uppercase tracking-tighter">Day 01</span>
+                        </div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <p class="text-primary text-3xl font-black tracking-tighter italic">BEFORE</p>
+                            <p class="text-slate-300 text-xs font-medium uppercase mt-1">Jan 12, 2023</p>
+                        </div>
+                    </div>
+                    <!-- After -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative group aspect-[4/5] overflow-hidden rounded-lg border-2 border-primary cursor-pointer">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/80 via-transparent to-transparent z-10 pointer-events-none">
+                        </div>
+                        <img alt="After transformation photo"
+                            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            data-alt="Muscular man showing fitness results"
+                            src="https://instagram.fhyd11-1.fna.fbcdn.net/v/t51.82787-15/630831363_18556539151047570_7125797237467492404_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=111&ig_cache_key=MzgzMTYxODU1ODI2Mjk3ODMwOA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzMifQ%3D%3D&_nc_ohc=3Ad3AAg2Rz4Q7kNvwHrco18&_nc_oc=AdlzOR_VbaZaiuz3YU2EMNcXDTJTJpQHmpmsFo7HK87_cGb-RiJHdECphamBSdKi0Xrra6B4hTXW6i2l6nhKBtK0&_nc_ad=z-m&_nc_cid=2034&_nc_zt=23&_nc_ht=instagram.fhyd11-1.fna&_nc_gid=NSKkj0dWq6e56CnhxiKh4A&_nc_ss=8&oh=00_AfwUjTquRFakRgDr8LM9EmvWD2xQ_nfngOQk-UypBgmBsw&oe=69AF6D3C" />
+                        <div class="absolute top-4 left-4 z-20 bg-primary px-3 py-1">
+                            <span class="text-background-dark font-black text-xs uppercase tracking-tighter">Day
+                                240</span>
+                        </div>
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <p class="text-primary text-3xl font-black tracking-tighter italic">AFTER</p>
+                            <p class="text-slate-300 text-xs font-medium uppercase mt-1">Sep 15, 2023</p>
+                        </div>
+                    </div>
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 hidden md:flex items-center justify-center bg-primary text-background-dark rounded-full p-2 border-4 border-background-dark shadow-2xl">
+                        <span class="material-symbols-outlined font-black">compare_arrows</span>
+                    </div>
+                </div>
+            </section>
+            <!-- Gallery Grid -->
+            <section>
+                <div class="flex items-center gap-4 mb-8">
+                    <h3 class="text-lg font-bold">PROGRESS HISTORY</h3>
+                    <div class="h-px grow bg-slate-border"></div>
+                    <div class="flex gap-2">
+                        <button
+                            class="p-1.5 bg-slate-card border border-slate-border rounded hover:border-primary transition-colors">
+                            <span class="material-symbols-outlined text-sm">grid_view</span>
+                        </button>
+                        <button class="p-1.5 bg-background-dark border border-slate-border rounded text-slate-500">
+                            <span class="material-symbols-outlined text-sm">view_agenda</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="columns-1 sm:columns-2 lg:columns-4 gap-4 space-y-4">
+                    <!-- Gallery Item 1 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Gym interior and heavy weights"
+                            src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Oct 12, 2023</p>
+                            <p class="text-slate-300 text-xs">Iron Paradise Setup</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 2 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Man performing intense battle ropes exercise"
+                            src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Sep 28, 2023</p>
+                            <p class="text-slate-300 text-xs">Battle Ropes Conditioning</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 3 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Rows of dumbbells on a rack"
+                            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Sep 15, 2023</p>
+                            <p class="text-slate-300 text-xs">Dumbbell Rack Detail</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 4 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Woman lifting heavy barbell"
+                            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Aug 30, 2023</p>
+                            <p class="text-slate-300 text-xs">Deadlift PR Day</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 5 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Kettlebells lined up on gym floor"
+                            src="https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Aug 12, 2023</p>
+                            <p class="text-slate-300 text-xs">Crossfit Kettlebell Setup</p>
+                        </div>
+                    </div>
+                    <!-- Gallery Item 6 -->
+                    <div onclick="openLightbox(this.querySelector('img').src)"
+                        class="relative break-inside-avoid group cursor-pointer overflow-hidden rounded-lg bg-slate-card border border-slate-border">
+                        <img class="w-full h-auto object-cover grayscale group-hover:grayscale-0 transition-all"
+                            data-alt="Man gripping a pullup bar"
+                            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=800&auto=format&fit=crop" />
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-4 flex flex-col justify-end pointer-events-none">
+                            <p class="text-primary font-bold text-sm">Jul 20, 2023</p>
+                            <p class="text-slate-300 text-xs">Back & Shoulders</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+        <footer class="border-t border-slate-border mt-20 py-10 px-6 md:px-10 bg-background-dark">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3 opacity-50 grayscale">
+                    <div class="bg-slate-300 p-1.5 rounded-sm">
+                        <span class="material-symbols-outlined text-background-dark font-bold">fitness_center</span>
+                    </div>
+                    <h2 class="text-slate-100 text-xl font-black tracking-tighter uppercase">EliteGym</h2>
+                </div>
+                <div class="flex gap-8">
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs font-bold tracking-widest uppercase"
+                        href="#">Privacy</a>
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs font-bold tracking-widest uppercase"
+                        href="#">Terms</a>
+                    <a class="text-slate-500 hover:text-primary transition-colors text-xs font-bold tracking-widest uppercase"
+                        href="#">Contact</a>
+                </div>
+                <p class="text-slate-600 text-[10px] font-bold tracking-widest uppercase">© 2026 ELITEGYM GLOBAL
+                    HOLDINGS</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Profile Info Modal -->
+    <div id="profileModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md" onclick="closeProfileModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-slate-card w-full max-w-md rounded-2xl p-8 border border-slate-border relative">
+                <button onclick="closeProfileModal()"
+                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div class="flex items-center gap-4 mb-6">
+                    <div id="profileInitial"
+                        class="h-14 w-14 rounded-full bg-primary flex items-center justify-center text-background-dark font-black text-2xl">
+                        ?
+                    </div>
+                    <div>
+                        <h3 id="profileName" class="text-xl font-black italic uppercase">--</h3>
+                        <p id="profileEmail" class="text-slate-400 text-xs font-medium">--</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div
+                        class="flex items-center justify-between p-4 bg-background-dark rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">card_membership</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Plan</span>
+                        </div>
+                        <span id="profilePlan" class="text-sm font-bold text-primary">--</span>
+                    </div>
+                    <div
+                        class="flex items-center justify-between p-4 bg-background-dark rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">event</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Start Date</span>
+                        </div>
+                        <span id="profileStart" class="text-sm font-bold">--</span>
+                    </div>
+                    <div
+                        class="flex items-center justify-between p-4 bg-background-dark rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">event_busy</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">End Date</span>
+                        </div>
+                        <span id="profileEnd" class="text-sm font-bold">--</span>
+                    </div>
+                    <div
+                        class="flex items-center justify-between p-4 bg-background-dark rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Status</span>
+                        </div>
+                        <span id="profileStatus" class="text-sm font-bold uppercase">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-background-dark/95 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <button onclick="closeLightbox()"
+            class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <img id="lightbox-img" src=""
+            class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
+    </div>
+
+    <script>
+        let memberProfileData = null;
+
+        // Fetch member profile on load
+        async function loadMemberProfile() {
+            const token = sessionStorage.getItem('memberAuthToken');
+            if (!token) return;
+
+            try {
+                const res = await fetch('/api/user/profile', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                if (!res.ok) return;
+                const user = await res.json();
+                memberProfileData = user;
+
+                // Update navbar
+                document.getElementById('navUserName').textContent = user.name;
+                document.getElementById('navUserPlan').textContent = user.planName || user.membershipStatus || '--';
+                document.getElementById('navUserAvatar').textContent = user.name.charAt(0).toUpperCase();
+            } catch (err) {
+                console.error('Failed to load profile:', err);
+            }
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return 'N/A';
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function openProfileInfo() {
+            if (!memberProfileData) {
+                alert('Please log in to view your profile.');
+                return;
+            }
+            const u = memberProfileData;
+            document.getElementById('profileInitial').textContent = u.name.charAt(0).toUpperCase();
+            document.getElementById('profileName').textContent = u.name;
+            document.getElementById('profileEmail').textContent = u.email || '--';
+            document.getElementById('profilePlan').textContent = u.planName || '--';
+            document.getElementById('profileStart').textContent = formatDate(u.startDate);
+            document.getElementById('profileEnd').textContent = formatDate(u.expiryDate || u.endDate);
+
+            const statusEl = document.getElementById('profileStatus');
+            statusEl.textContent = u.membershipStatus || '--';
+            if (u.membershipStatus === 'active') {
+                statusEl.className = 'text-sm font-bold uppercase text-green-400';
+            } else {
+                statusEl.className = 'text-sm font-bold uppercase text-orange-400';
+            }
+
+            document.getElementById('profileModal').classList.remove('hidden');
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profileModal').classList.add('hidden');
+        }
+
+        // Lightbox functions
+        function openLightbox(src) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+            }, 300);
+        }
+
+        document.addEventListener('keydown', function (event) {
+            if (event.key === "Escape" && !document.getElementById('lightbox').classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+
+        document.getElementById('lightbox').addEventListener('click', function (event) {
+            if (event.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Load profile on page load
+        loadMemberProfile();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

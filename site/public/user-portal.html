@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Member Portal</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+        rel="stylesheet" />
+    <script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#d4ff00",
+                        "background-dark": "#121212",
+                        "card-dark": "#1e1e1e",
+                        "border-dark": "#2d2d2d",
+                    },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(30, 30, 30, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 255, 0, 0.1);
+        }
+
+        .plan-card:hover {
+            border-color: #d4ff00;
+        }
+
+        .pulse-btn {
+            box-shadow: 0 0 15px rgba(212, 255, 0, 0.3);
+        }
+
+        .pulse-btn:hover {
+            box-shadow: 0 0 30px rgba(212, 255, 0, 0.5);
+        }
+    </style>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1a1a1a">
+</head>
+
+<body class="bg-[#121212] font-display text-slate-100 antialiased overflow-x-hidden">
+    <div class="relative flex h-auto min-h-screen w-full flex-col">
+        <!-- Navigation -->
+        <header
+            class="sticky top-0 z-50 w-full border-b border-border-dark bg-[#121212]/90 backdrop-blur-md px-6 lg:px-20 py-4">
+            <div class="max-w-7xl mx-auto flex items-center justify-between">
+                <a href="user-portal.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+
+                    <h2 class="text-xl font-black tracking-tighter italic uppercase">IRON<span
+                            class="text-primary">PULSE</span></h2>
+                </a>
+                <nav class="hidden md:flex items-center gap-10">
+                    <a class="text-sm font-bold uppercase tracking-widest text-primary"
+                        href="user-portal.html">Dashboard</a>
+                    <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
+                        href="#book">Book</a>
+                </nav>
+
+                </nav>
+                <div class="flex items-center gap-6">
+                    <!-- Notification Bell -->
+                    <div class="relative">
+                        <button id="notiBtn"
+                            class="text-slate-400 hover:text-primary transition-colors flex items-center relative p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                                fill="currentColor">
+                                <path
+                                    d="M160-200v-80h80v-280q0-83 50-147.5T420-792v-28q0-25 17.5-42.5T480-880q25 0 42.5 17.5T540-820v28q80 20 130 84.5T720-560v280h80v80H160Zm320-300Zm0 420q-33 0-56.5-23.5T400-160h160q0 33-23.5 56.5T480-80ZM320-280h320v-280q0-66-47-113t-113-47q-66 0-113 47t-47 113v280Z" />
+                            </svg>
+                            <span id="notiBadge"
+                                class="absolute top-2 right-2 h-2.5 w-2.5 bg-red-500 rounded-full border-2 border-[#121212] hidden"></span>
+                        </button>
+
+                        <!-- Notification Dropdown -->
+                        <div id="notiDropdown"
+                            class="absolute right-0 mt-4 w-72 bg-card-dark border border-white/10 rounded-2xl p-4 shadow-2xl hidden z-[60]">
+                            <div class="flex items-center justify-between mb-4 pb-2 border-b border-white/5">
+                                <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-500">
+                                    Notifications</h4>
+                                <span id="notiCount"
+                                    class="text-[10px] bg-primary text-black px-1.5 rounded-sm font-bold">0</span>
+                            </div>
+                            <div id="notiList" class="space-y-3 max-h-60 overflow-y-auto">
+                                <p class="text-xs text-slate-500 text-center py-4">No new notifications</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-3 pr-6 border-r border-white/10 hidden sm:flex cursor-pointer hover:opacity-80 transition-opacity"
+                        onclick="openProfileInfo()">
+                        <div class="text-right">
+                            <p class="text-[10px] text-slate-500 font-black uppercase tracking-widest">Active Member</p>
+                            <p id="memberName" class="text-sm font-black italic">--</p>
+                        </div>
+                        <div id="memberInitial"
+                            class="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold border border-background-dark text-xl">
+                            ?
+                        </div>
+                    </div>
+                    <button id="logoutBtn"
+                        class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
+                        <span
+                            class="text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Logout</span>
+
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Notification Bar (Hidden by default) -->
+        <div id="notificationBar"
+            class="hidden bg-primary text-background-dark py-2 px-6 text-center text-xs font-black uppercase tracking-widest animate-pulse">
+            Your membership request is pending approval.
+        </div>
+
+        <!-- Hero Section -->
+        <section class="relative h-[40vh] w-full flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <div class="absolute inset-0 bg-gradient-to-b from-[#121212]/60 via-[#121212]/40 to-[#121212] z-10">
+                </div>
+                <img class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DjOrmc8nRwlXjG5dWzTSdq1GDYQ2fdxLMTgsQ-WtMZ90Lgnm7ZN5MPT8208MGbi-Q_vSAd-AWCMG70hP532B3Fhcjao-_9p5NGT4lF1aG65LmHq3t1yGkhsZVJg3LnwZnJHaD0bTypOoVCmMfRfUIY__Dgt7LwIKFsXD13PNTNr3FxpaUjOT6PCtxQ4CBk68jsCmezKFS1jN9QY9VhFYn8NQT6DJAWo_FFwaYoSs9Gf9OWRiF94ARzk1Jfa3M65Efs5o3neGXQ" />
+            </div>
+            <div class="relative z-20 text-center px-4 max-w-4xl">
+                <span class="text-primary font-black uppercase tracking-[0.4em] text-sm mb-4 block">Welcome Back</span>
+                <h1 id="heroName"
+                    class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-6 italic uppercase">
+                    MEMBER <span class="text-primary">PORTAL</span>
+                </h1>
+
+                <!-- Active Check-in Badge -->
+                <div id="activeCheckIn"
+                    class="hidden inline-flex items-center gap-2 bg-success/20 text-green-400 border border-success/30 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mt-4">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    Active Session: <span id="timeRemaining" class="text-white">--:--</span> left
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Grid -->
+        <section class="py-8 bg-primary text-[#121212]">
+            <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center border-r border-black/10 last:border-0">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Session Streak</p>
+                    <p id="statStreak" class="text-3xl font-black italic">-- DAYS</p>
+                </div>
+                <div class="text-center border-r border-black/10 last:border-0 lg:block hidden">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Status</p>
+                    <p id="statStatus" class="text-3xl font-black italic uppercase">--</p>
+                </div>
+                <div class="text-center border-r border-black/10 last:border-0">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Goal Progress</p>
+                    <p id="statProgress" class="text-3xl font-black italic">--%</p>
+                </div>
+                <div class="text-center">
+                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Next Renewal</p>
+                    <p id="statExpiry" class="text-3xl font-black italic">--</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Workspace -->
+        <section class="py-16 px-6 lg:px-20 max-w-7xl mx-auto w-full">
+
+            <!-- Check-in Section (Only if Active) -->
+            <div id="checkInSection" class="hidden mb-16 p-12 glass-card rounded-3xl text-center border-primary/20">
+                <div class="flex flex-col items-center mb-6">
+                    <span class="material-symbols-outlined text-primary text-5xl mb-2">qr_code_scanner</span>
+                    <span class="text-4xl font-black italic uppercase tracking-tighter text-primary">Scan QR Code</span>
+                </div>
+                <h3 class="text-3xl font-black italic mb-4 uppercase tracking-tighter">Enter the Iron Circle</h3>
+                <p class="text-slate-400 max-w-lg mx-auto mb-8 font-medium">Scan the QR code displayed at the gym to
+                    check in and update your streak.</p>
+
+                <!-- QR Scanner Container -->
+                <div id="qrScannerArea" class="hidden max-w-sm mx-auto mb-6">
+                    <div id="qrReader" class="rounded-2xl overflow-hidden border-2 border-primary/30"></div>
+                    <button id="stopScanBtn"
+                        class="mt-4 text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">
+                        Cancel Scanning
+                    </button>
+                </div>
+
+                <button id="startScanBtn"
+                    class="bg-primary text-background-dark px-12 py-4 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform pulse-btn">
+                    Open Camera & Scan
+                </button>
+                <p id="scanFeedback" class="hidden mt-6 text-sm font-bold uppercase tracking-widest"></p>
+            </div>
+
+            <!-- Plan Selection (Only if Not Active or Expired) -->
+            <div id="planSection" class="hidden space-y-12">
+                <div class="text-center">
+                    <h3 class="text-4xl font-black italic mb-2 uppercase tracking-tighter">Choose Your <span
+                            class="text-primary">Pulse</span></h3>
+                    <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Unlock unlimited access and
+                        classes</p>
+                </div>
+                <div id="plansGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Plans loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Generic Info -->
+            <section id="book">
+                <div id="activeWelcome" class="hidden p-12 glass-card rounded-3xl text-center">
+                    <h3 class="text-2xl font-black italic mb-4 uppercase">Unlock Your Potential</h3>
+                    <p class="text-slate-400 max-w-2xl mx-auto mb-8 font-medium">Your membership is active. Track your
+                        attendance, manage your subsciption, and access premium training plans here.</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button onclick="document.getElementById('classSchedule').scrollIntoView({behavior:'smooth'})"
+                            class="bg-primary text-[#121212] px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform">Book
+                            Session</button>
+                        <button onclick="downloadSessions()"
+                            class="border border-white/20 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-white/5 transition-colors">Download
+                            Plan</button>
+                    </div>
+                </div>
+            </section>
+            <!-- Class Schedule (Members Only) -->
+            <div id="classSchedule" class="hidden mt-16">
+                <div class="mb-10 text-center">
+                    <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">Your Classes</span>
+                    <h2 class="text-3xl font-black mt-2 italic uppercase">Book a Session</h2>
+                </div>
+                <div class="overflow-x-auto glass-card rounded-3xl p-8">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/10">
+                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                    Class</th>
+                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                    Time</th>
+                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                    Instructor</th>
+                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                    Difficulty</th>
+                                <th class="py-4 text-right"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/5">
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                    HIIT BLAST</td>
+                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">08:00 AM</td>
+                                <td class="py-6 text-slate-300 text-sm">Alex 'The Beast'</td>
+                                <td class="py-6"><span
+                                        class="px-3 py-1 bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20 uppercase rounded-full">Advanced</span>
+                                </td>
+                                <td class="py-6 text-right"><button
+                                        onclick="bookClass('HIIT BLAST','08:00 AM','Alex The Beast','Advanced')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                        Spot</button></td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                    POWERLIFTING 101</td>
+                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">10:30 AM</td>
+                                <td class="py-6 text-slate-300 text-sm">Sarah Strong</td>
+                                <td class="py-6"><span
+                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
+                                </td>
+                                <td class="py-6 text-right"><button
+                                        onclick="bookClass('POWERLIFTING 101','10:30 AM','Sarah Strong','Intermediate')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                        Spot</button></td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                    FLOW YOGA</td>
+                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">12:00 PM</td>
+                                <td class="py-6 text-slate-300 text-sm">Elena Zen</td>
+                                <td class="py-6"><span
+                                        class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold border border-primary/20 uppercase rounded-full">All
+                                        Levels</span></td>
+                                <td class="py-6 text-right"><button
+                                        onclick="bookClass('FLOW YOGA','12:00 PM','Elena Zen','All Levels')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                        Spot</button></td>
+                            </tr>
+                            <tr class="group hover:bg-white/5 transition-colors">
+                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                    NIGHT PUMP</td>
+                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">06:00 PM</td>
+                                <td class="py-6 text-slate-300 text-sm">Marcus Thorne</td>
+                                <td class="py-6"><span
+                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
+                                </td>
+                                <td class="py-6 text-right"><button
+                                        onclick="bookClass('NIGHT PUMP','06:00 PM','Marcus Thorne','Intermediate')"
+                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                        Spot</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p id="bookFeedback" class="hidden mt-4 text-center text-sm font-bold uppercase tracking-widest"></p>
+            </div>
+        </section>
+
+        <footer class="bg-[#121212] border-t border-border-dark py-12 px-6 lg:px-20 mt-auto">
+            <div
+                class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
+                <p>© 2026 IRON PULSE. MEMBER EXCLUSIVE PORTAL.</p>
+                <div class="flex gap-8">
+                    <a href="index.html" class="hover:text-primary">Back to site</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Profile Info Modal -->
+    <div id="profileModal" class="fixed inset-0 z-[200] hidden">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md" onclick="closeProfileModal()"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="bg-[#1e1e1e] w-full max-w-md rounded-2xl p-8 border border-white/10 relative">
+                <button onclick="closeProfileModal()"
+                    class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div class="flex items-center gap-4 mb-6">
+                    <div id="profileInitialModal"
+                        class="h-14 w-14 rounded-full bg-primary flex items-center justify-center text-background-dark font-black text-2xl">
+                        ?
+                    </div>
+                    <div>
+                        <h3 id="profileName" class="text-xl font-black italic uppercase">--</h3>
+                        <p id="profileEmail" class="text-slate-400 text-xs font-medium">--</p>
+                    </div>
+                </div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-4 bg-[#121212] rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">card_membership</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Plan</span>
+                        </div>
+                        <span id="profilePlan" class="text-sm font-bold text-primary">--</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-[#121212] rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">verified</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Status</span>
+                        </div>
+                        <span id="profileStatus" class="text-sm font-bold uppercase">--</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-[#121212] rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">calendar_today</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Renewal Date</span>
+                        </div>
+                        <span id="profileRenewal" class="text-sm font-bold">--</span>
+                    </div>
+                    <div class="flex items-center justify-between p-4 bg-[#121212] rounded-xl border border-white/5">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">event_available</span>
+                            <span class="text-xs text-slate-400 font-bold uppercase tracking-widest">Join Date</span>
+                        </div>
+                        <span id="profileJoined" class="text-sm font-bold">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Choice Modal -->
+    <div id="paymentModal" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md"></div>
+        <div class="absolute inset-0 flex items-center justify-center p-4">
+            <div class="glass-card w-full max-w-md rounded-3xl p-8 border-primary/20 animate-in zoom-in duration-300">
+                <h4 id="selectedPlanName" class="text-2xl font-black italic uppercase mb-2">Plan Name</h4>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-8">Select your preferred payment
+                    method</p>
+
+                <div class="space-y-4">
+                    <button onclick="requestMembership('online')"
+                        class="w-full flex items-center justify-between p-6 rounded-2xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary">credit_card</span>
+                            <span class="font-bold">Online Payment</span>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-slate-500 group-hover:text-primary">arrow_forward</span>
+                    </button>
+                    <button onclick="requestMembership('cash')"
+                        class="w-full flex items-center justify-between p-6 rounded-2xl border border-white/10 hover:border-primary/50 hover:bg-white/5 transition-all group">
+                        <div class="flex items-center gap-4">
+                            <span class="material-symbols-outlined text-primary">payments</span>
+                            <span class="font-bold">Pay via Cash / UPI</span>
+                        </div>
+                        <span
+                            class="material-symbols-outlined text-slate-500 group-hover:text-primary">arrow_forward</span>
+                    </button>
+                </div>
+
+                <button onclick="closeModal()"
+                    class="w-full mt-8 text-slate-500 text-[10px] font-black uppercase tracking-widest hover:text-white transition-colors">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function bookClass(className, classTime, instructor, difficulty) {
+            const token = sessionStorage.getItem('memberAuthToken');
+            if (!token) { alert('Session expired. Please log in again.'); return; }
+
+            if (!confirm(`Book a spot in ${className} at ${classTime}?`)) return;
+
+            const feedback = document.getElementById('bookFeedback');
+            feedback.classList.remove('hidden', 'text-red-500', 'text-green-400');
+            feedback.textContent = 'Booking...';
+
+            try {
+                const res = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ className, classTime, instructor, difficulty })
+                });
+                const data = await res.json();
+
+                if (!res.ok) throw new Error(data.message || 'Booking failed');
+
+                feedback.textContent = '✅ ' + data.message;
+                feedback.classList.add('text-green-400');
+                setTimeout(() => { feedback.classList.add('hidden'); }, 3000);
+            } catch (err) {
+                feedback.textContent = '❌ ' + err.message;
+                feedback.classList.add('text-red-500');
+            }
+        }
+    </script>
+    <script type="module">
+        import { initMemberAuthGuard, handleMemberLogout, getMemberAuthHeaders } from './js/user-auth.js';
+
+        // 1. Initialize Auth Guard
+        initMemberAuthGuard();
+        document.getElementById('logoutBtn').addEventListener('click', handleMemberLogout);
+
+        let currentPlanId = null;
+        let memberProfileData = null;
+
+        // 2. Global UI Functions (attached to window for HTML onclicks)
+        window.openPaymentModal = (id, name) => {
+            currentPlanId = id;
+            document.getElementById('selectedPlanName').textContent = name;
+            document.getElementById('paymentModal').classList.remove('hidden');
+        };
+
+        window.closeModal = () => {
+            document.getElementById('paymentModal').classList.add('hidden');
+        };
+
+        window.requestMembership = async (method) => {
+            try {
+                const res = await fetch('/api/memberships/request', {
+                    method: 'POST',
+                    headers: getMemberAuthHeaders(),
+                    body: JSON.stringify({ planId: currentPlanId, paymentMethod: method })
+                });
+
+                if (res.ok) {
+                    alert('Request submitted! Please wait for admin approval.');
+                    location.reload();
+                } else {
+                    const data = await res.json();
+                    alert(data.message || 'Error submitting request');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Connection error');
+            }
+        };
+
+        window.openProfileInfo = () => {
+            if (!memberProfileData) {
+                console.warn('Profile data not loaded yet');
+                return;
+            }
+            const u = memberProfileData;
+            document.getElementById('profileInitialModal').textContent = u.name.charAt(0).toUpperCase();
+            document.getElementById('profileName').textContent = u.name;
+            document.getElementById('profileEmail').textContent = u.email || '--';
+            document.getElementById('profilePlan').textContent = u.planName || '--';
+
+            const statusEl = document.getElementById('profileStatus');
+            statusEl.textContent = u.membershipStatus || '--';
+            statusEl.className = `text-sm font-bold uppercase ${u.membershipStatus === 'active' ? 'text-green-400' : 'text-orange-400'}`;
+
+            if (u.expiryDate) {
+                const expiry = new Date(u.expiryDate);
+                document.getElementById('profileRenewal').textContent = expiry.toLocaleDateString();
+            } else {
+                document.getElementById('profileRenewal').textContent = 'N/A';
+            }
+
+            if (u.joinedDate) {
+                const joined = new Date(u.joinedDate);
+                document.getElementById('profileJoined').textContent = joined.toLocaleDateString();
+            } else {
+                document.getElementById('profileJoined').textContent = '--';
+            }
+
+            document.getElementById('profileModal').classList.remove('hidden');
+        };
+
+        window.closeProfileModal = () => {
+            document.getElementById('profileModal').classList.add('hidden');
+        };
+
+        window.downloadSessions = async () => {
+            try {
+                const res = await fetch('/api/bookings/my', {
+                    headers: getMemberAuthHeaders()
+                });
+
+                if (!res.ok) throw new Error('Failed to fetch bookings');
+
+                const bookings = await res.json();
+
+                if (!bookings || bookings.length === 0) {
+                    alert('Not yet registered any session');
+                    return;
+                }
+
+                // Build file content
+                const userName = memberProfileData ? memberProfileData.name : 'Member';
+                let content = `═══════════════════════════════════════\n`;
+                content += `   IRON PULSE - Booked Sessions\n`;
+                content += `   Member: ${userName}\n`;
+                content += `   Downloaded: ${new Date().toLocaleString()}\n`;
+                content += `═══════════════════════════════════════\n\n`;
+
+                bookings.forEach((b, i) => {
+                    content += `Session #${i + 1}\n`;
+                    content += `───────────────────────────────────────\n`;
+                    content += `  Class:      ${b.className}\n`;
+                    content += `  Time:       ${b.classTime || 'N/A'}\n`;
+                    content += `  Instructor: ${b.instructor || 'N/A'}\n`;
+                    content += `  Difficulty: ${b.difficulty || 'N/A'}\n`;
+                    content += `  Booked On:  ${new Date(b.createdAt).toLocaleString()}\n\n`;
+                });
+
+                content += `═══════════════════════════════════════\n`;
+                content += `  Total Sessions: ${bookings.length}\n`;
+                content += `═══════════════════════════════════════\n`;
+
+                // Trigger download
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `IronPulse_Sessions_${userName.replace(/\s+/g, '_')}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Download error:', err);
+                alert('Not yet registered any session');
+            }
+        };
+
+        // 3. Page Logic Functions
+        async function fetchPlans() {
+            try {
+                const res = await fetch('/api/memberships/plans', { headers: getMemberAuthHeaders() });
+                const plans = await res.json();
+                const grid = document.getElementById('plansGrid');
+                grid.innerHTML = plans.map(p => `
+                    <div class="glass-card plan-card p-10 rounded-3xl text-center border-white/5 transition-all group hover:-translate-y-2">
+                        <span class="text-primary font-black uppercase tracking-[0.3em] text-[10px] mb-4 block">${p.durationDays} Days</span>
+                        <h4 class="text-2xl font-black italic uppercase mb-2">${p.name}</h4>
+                        <p class="text-slate-500 text-xs font-medium mb-8 leading-relaxed">${p.description}</p>
+                        <div class="mb-8">
+                            <span class="text-4xl font-black italic tracking-tighter">$${p.price}</span>
+                        </div>
+                        <button onclick="openPaymentModal('${p.id}', '${p.name}')" class="w-full bg-white/5 border border-white/10 text-white font-bold py-4 rounded-xl group-hover:bg-primary group-hover:text-background-dark transition-all uppercase tracking-widest text-xs">
+                            Select Plan
+                        </button>
+                    </div>
+                `).join('');
+            } catch (err) {
+                console.error('Failed to fetch plans:', err);
+            }
+        }
+
+        async function checkActiveSession(user) {
+            // Future QR session check
+        }
+
+        async function init() {
+            try {
+                const profileRes = await fetch('/api/user/profile', {
+                    headers: getMemberAuthHeaders()
+                });
+                if (!profileRes.ok) throw new Error('Profile fetch failed');
+
+                const user = await profileRes.json();
+                memberProfileData = user;
+
+                // Update UI elements
+                document.getElementById('memberName').textContent = user.name;
+                document.getElementById('memberInitial').textContent = user.name.charAt(0).toUpperCase();
+                document.getElementById('heroName').innerHTML = `${user.name.split(' ')[0]} <span class="text-primary">PULSE</span>`;
+
+                document.getElementById('statStreak').textContent = `${user.streak} DAYS`;
+                document.getElementById('statStatus').textContent = user.membershipStatus;
+                document.getElementById('statProgress').textContent = `${Math.round(user.goalProgress)}%`;
+
+                if (user.expiryDate) {
+                    const expiry = new Date(user.expiryDate);
+                    document.getElementById('statExpiry').textContent = `${expiry.getDate()} ${['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][expiry.getMonth()]}`;
+                } else {
+                    document.getElementById('statExpiry').textContent = 'NONE';
+                }
+
+                // Layout visibility
+                if (user.membershipStatus === 'pending') {
+                    document.getElementById('notificationBar').classList.remove('hidden');
+                } else if (user.membershipStatus === 'none' || user.membershipStatus === 'expired') {
+                    document.getElementById('planSection').classList.remove('hidden');
+                    fetchPlans();
+                } else if (user.membershipStatus === 'active') {
+                    document.getElementById('checkInSection').classList.remove('hidden');
+                    document.getElementById('activeWelcome').classList.remove('hidden');
+                    document.getElementById('classSchedule').classList.remove('hidden');
+                    checkActiveSession(user);
+                }
+
+                // Check for notifications
+                checkNotifications(user);
+
+            } catch (err) {
+                console.error('Init error:', err);
+            }
+        }
+
+        // 4. QR Scan Logic
+        let html5QrCode = null;
+        let userCoords = null;
+
+        document.getElementById('startScanBtn').onclick = () => {
+            const scannerArea = document.getElementById('qrScannerArea');
+            const startBtn = document.getElementById('startScanBtn');
+            const feedback = document.getElementById('scanFeedback');
+
+            feedback.classList.remove('hidden', 'text-red-500', 'text-success');
+            feedback.textContent = 'Getting your location...';
+
+            if (!navigator.geolocation) {
+                feedback.textContent = '❌ Geolocation not supported by your browser';
+                feedback.classList.add('text-red-500');
+                return;
+            }
+
+            // Step 1: Get location FIRST
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    userCoords = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    };
+
+                    feedback.textContent = '📍 Location found! Opening camera...';
+
+                    // Step 2: Open camera after location is confirmed
+                    scannerArea.classList.remove('hidden');
+                    startBtn.classList.add('hidden');
+
+                    html5QrCode = new Html5Qrcode('qrReader');
+
+                    html5QrCode.start(
+                        { facingMode: 'environment' },
+                        { fps: 10, qrbox: { width: 250, height: 250 } },
+                        async (decodedText) => {
+                            // QR scanned - stop scanner
+                            await html5QrCode.stop();
+                            html5QrCode = null;
+                            scannerArea.classList.add('hidden');
+                            startBtn.classList.remove('hidden');
+
+                            feedback.textContent = 'Checking in...';
+
+                            try {
+                                const res = await fetch('/api/checkin/scan', {
+                                    method: 'POST',
+                                    headers: getMemberAuthHeaders(),
+                                    body: JSON.stringify({
+                                        token: decodedText,
+                                        latitude: userCoords.latitude,
+                                        longitude: userCoords.longitude
+                                    })
+                                });
+                                const data = await res.json();
+
+                                if (res.ok) {
+                                    feedback.textContent = `✅ ${data.message} | Streak: ${data.streak} 🔥`;
+                                    feedback.classList.add('text-success');
+                                    setTimeout(() => location.reload(), 3000);
+                                } else {
+                                    feedback.textContent = `❌ ${data.message}`;
+                                    feedback.classList.add('text-red-500');
+                                }
+                            } catch (err) {
+                                feedback.textContent = '❌ Connection Error';
+                                feedback.classList.add('text-red-500');
+                            }
+                        },
+                        (errorMessage) => {
+                            // Keep scanning
+                        }
+                    ).catch(err => {
+                        feedback.textContent = '❌ Camera access denied. Allow camera to scan QR.';
+                        feedback.classList.add('text-red-500');
+                        scannerArea.classList.add('hidden');
+                        startBtn.classList.remove('hidden');
+                    });
+                },
+                (err) => {
+                    feedback.textContent = '❌ Location access denied. Please allow location in your browser settings and refresh.';
+                    feedback.classList.add('text-red-500');
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        };
+
+        document.getElementById('stopScanBtn').onclick = async () => {
+            if (html5QrCode) {
+                await html5QrCode.stop();
+                html5QrCode = null;
+            }
+            document.getElementById('qrScannerArea').classList.add('hidden');
+            document.getElementById('startScanBtn').classList.remove('hidden');
+        };
+
+        // 5. Notification Logic
+        const notiBtn = document.getElementById('notiBtn');
+        const notiDropdown = document.getElementById('notiDropdown');
+        const notiList = document.getElementById('notiList');
+        const notiBadge = document.getElementById('notiBadge');
+        const notiCount = document.getElementById('notiCount');
+
+        notiBtn.onclick = (e) => {
+            e.stopPropagation();
+            notiDropdown.classList.toggle('hidden');
+        };
+
+        document.addEventListener('click', () => notiDropdown.classList.add('hidden'));
+        notiDropdown.onclick = (e) => e.stopPropagation();
+
+        function checkNotifications(user) {
+            const notifications = [];
+
+            if (user.membershipStatus === 'active' && user.expiryDate) {
+                const now = new Date();
+                const expiry = new Date(user.expiryDate);
+                const diffTime = expiry - now;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+                if (diffDays <= 10 && diffDays > 0) {
+                    notifications.push({
+                        title: 'Plan Expiring Soon',
+                        message: `Your plan expires in ${diffDays} day${diffDays > 1 ? 's' : ''}. Please renew to avoid interruption!`,
+                        type: 'warning'
+                    });
+                } else if (diffDays <= 0) {
+                    notifications.push({
+                        title: 'Plan Expired',
+                        message: `Your plan has expired. Please choose a new plan to continue.`,
+                        type: 'danger'
+                    });
+                }
+            } else if (user.membershipStatus === 'expired') {
+                notifications.push({
+                    title: 'Plan Expired',
+                    message: `Your plan has expired. Please choose a new plan to continue.`,
+                    type: 'danger'
+                });
+            }
+
+            // Render Notifications
+            if (notifications.length > 0) {
+                notiBadge.classList.remove('hidden');
+                notiCount.textContent = notifications.length;
+                notiList.innerHTML = notifications.map(n => `
+                    <div class="p-3 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 transition-colors">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="material-symbols-outlined text-sm ${n.type === 'danger' ? 'text-red-500' : 'text-primary'}">
+                                ${n.type === 'danger' ? 'error' : 'warning'}
+                            </span>
+                            <h5 class="text-[10px] font-black uppercase tracking-widest">${n.title}</h5>
+                        </div>
+                        <p class="text-[11px] text-slate-400 leading-relaxed font-medium">${n.message}</p>
+                    </div>
+                `).join('');
+            } else {
+                notiBadge.classList.add('hidden');
+                notiCount.textContent = '0';
+                notiList.innerHTML = '<p class="text-xs text-slate-500 text-center py-4">No new notifications</p>';
+            }
+        }
+
+        // 6. Run Init
+        init();
+    </script>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, err => {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
