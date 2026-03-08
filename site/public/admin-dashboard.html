@@ -31,10 +31,69 @@
         }
     </style>
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#d4ff00">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <script src="/js/mobile-nav.js" defer></script>
+    <script src="/js/pwa-install.js" defer></script>
+    <link rel="stylesheet" href="/css/components.css">
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
+    <!-- Mobile Header -->
+    <header
+        class="md:hidden sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/90 backdrop-blur-md px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary">fitness_center</span>
+            <h2 class="text-lg font-black tracking-tighter italic uppercase">Admin<span
+                    class="text-primary">Pulse</span></h2>
+        </div>
+        <div class="flex items-center gap-2">
+            <button id="pwaInstallBtn" class="hidden text-primary p-2">
+                <span class="material-symbols-outlined">download</span>
+            </button>
+            <button id="mobileMenuBtn" class="text-white p-2">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Sidebar Drawer -->
+    <div id="mobileMenu"
+        class="fixed inset-0 z-[100] bg-background-dark/95 backdrop-blur-xl translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex flex-col h-full p-8">
+            <div class="flex items-center justify-between mb-12">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
+                    <h2 class="text-xl font-black tracking-tighter italic uppercase">Admin<span
+                            class="text-primary">Pulse</span></h2>
+                </div>
+                <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
+                    <span class="material-symbols-outlined text-3xl">close</span>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-6">
+                <a class="flex items-center gap-4 px-6 py-4 rounded-xl bg-primary text-background-dark font-black uppercase tracking-widest text-sm"
+                    href="admin-dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-4 px-6 py-4 rounded-xl hover:bg-white/5 transition-colors font-black uppercase tracking-widest text-sm"
+                    href="members.html">
+                    <span class="material-symbols-outlined">group</span>
+                    <span>Members</span>
+                </a>
+            </nav>
+            <div class="mt-auto">
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';"
+                    class="w-full bg-red-500/10 text-red-500 py-4 rounded-xl font-black uppercase tracking-widest border border-red-500/20 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">logout</span>
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </div>
+
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         <aside
@@ -353,6 +412,30 @@
             fetchBookings();
         }, 10000); // Poll every 10s for notifications
     </script>
+
+    <!-- Mobile Bottom Navigation (Admin) -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Site</span>
+        </a>
+        <a href="admin-dashboard.html" class="nav-item active">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dash</span>
+        </a>
+        <a href="members.html" class="nav-item">
+            <span class="material-symbols-outlined">group</span>
+            <span>Users</span>
+        </a>
+        <a href="check-in.html" class="nav-item">
+            <span class="material-symbols-outlined">how_to_reg</span>
+            <span>Check-in</span>
+        </a>
+        <a href="#" onclick="sessionStorage.clear(); window.location.href='index.html'; return false;" class="nav-item">
+            <span class="material-symbols-outlined text-red-500">logout</span>
+            <span>Exit</span>
+        </a>
+    </nav>
 
     <script>
         if ('serviceWorker' in navigator) {

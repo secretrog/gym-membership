@@ -48,7 +48,11 @@
         }
     </style>
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#d4ff00">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    <script src="/js/mobile-nav.js" defer></script>
+    <script src="/js/pwa-install.js" defer></script>
+    <link rel="stylesheet" href="/css/components.css">
 </head>
 
 <body class="bg-[#121212] font-display text-slate-100 antialiased overflow-x-hidden">
@@ -68,10 +72,12 @@
                     <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
                         href="#book">Book</a>
                 </nav>
+                <div class="flex items-center gap-2 lg:gap-4">
+                    <button id="pwaInstallBtn"
+                        class="hidden bg-white/10 text-primary p-2 rounded-lg hover:bg-white/20 transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined text-xl">download</span>
+                    </button>
 
-                </nav>
-                <div class="flex items-center gap-6">
-                    <!-- Notification Bell -->
                     <div class="relative">
                         <button id="notiBtn"
                             class="text-slate-400 hover:text-primary transition-colors flex items-center relative p-2">
@@ -99,231 +105,270 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center gap-3 pr-6 border-r border-white/10 hidden sm:flex cursor-pointer hover:opacity-80 transition-opacity"
+                    <div class="flex items-center gap-3 pr-2 border-r border-white/10 hidden sm:flex cursor-pointer hover:opacity-80 transition-opacity"
                         onclick="openProfileInfo()">
                         <div class="text-right">
-                            <p class="text-[10px] text-slate-500 font-black uppercase tracking-widest">Active Member</p>
                             <p id="memberName" class="text-sm font-black italic">--</p>
                         </div>
                         <div id="memberInitial"
-                            class="h-10 w-10 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold border border-background-dark text-xl">
+                            class="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold border border-background-dark text-lg">
                             ?
                         </div>
                     </div>
                     <button id="logoutBtn"
-                        class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
-                        <span
-                            class="text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-primary transition-colors">Logout</span>
+                        class="text-slate-400 hover:text-white transition-colors flex items-center p-2 group">
+                        <span class="material-symbols-outlined group-hover:text-primary transition-colors">logout</span>
+                    </button>
 
+                    <!-- Mobile Menu Button -->
+                    <button id="mobileMenuBtn" class="md:hidden text-white p-2 hover:text-primary transition-colors">
+                        <span class="material-symbols-outlined text-3xl">menu</span>
                     </button>
                 </div>
             </div>
-        </header>
+    </div>
+    </header>
 
-        <!-- Notification Bar (Hidden by default) -->
-        <div id="notificationBar"
-            class="hidden bg-primary text-background-dark py-2 px-6 text-center text-xs font-black uppercase tracking-widest animate-pulse">
-            Your membership request is pending approval.
-        </div>
-
-        <!-- Hero Section -->
-        <section class="relative h-[40vh] w-full flex items-center justify-center overflow-hidden">
-            <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-gradient-to-b from-[#121212]/60 via-[#121212]/40 to-[#121212] z-10">
+    <!-- Mobile Navigation Menu -->
+    <div id="mobileMenu"
+        class="fixed inset-0 z-[100] bg-background-dark/95 backdrop-blur-xl translate-x-full transition-transform duration-300 md:hidden">
+        <div class="flex flex-col h-full p-8">
+            <div class="flex items-center justify-between mb-12">
+                <div class="flex items-center gap-3">
+                    <h2 class="text-xl font-black tracking-tighter italic uppercase">IRON<span
+                            class="text-primary">PULSE</span></h2>
                 </div>
-                <img class="w-full h-full object-cover"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DjOrmc8nRwlXjG5dWzTSdq1GDYQ2fdxLMTgsQ-WtMZ90Lgnm7ZN5MPT8208MGbi-Q_vSAd-AWCMG70hP532B3Fhcjao-_9p5NGT4lF1aG65LmHq3t1yGkhsZVJg3LnwZnJHaD0bTypOoVCmMfRfUIY__Dgt7LwIKFsXD13PNTNr3FxpaUjOT6PCtxQ4CBk68jsCmezKFS1jN9QY9VhFYn8NQT6DJAWo_FFwaYoSs9Gf9OWRiF94ARzk1Jfa3M65Efs5o3neGXQ" />
-            </div>
-            <div class="relative z-20 text-center px-4 max-w-4xl">
-                <span class="text-primary font-black uppercase tracking-[0.4em] text-sm mb-4 block">Welcome Back</span>
-                <h1 id="heroName"
-                    class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-6 italic uppercase">
-                    MEMBER <span class="text-primary">PORTAL</span>
-                </h1>
-
-                <!-- Active Check-in Badge -->
-                <div id="activeCheckIn"
-                    class="hidden inline-flex items-center gap-2 bg-success/20 text-green-400 border border-success/30 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mt-4">
-                    <span class="relative flex h-2 w-2">
-                        <span
-                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                    </span>
-                    Active Session: <span id="timeRemaining" class="text-white">--:--</span> left
-                </div>
-            </div>
-        </section>
-
-        <!-- Stats Grid -->
-        <section class="py-8 bg-primary text-[#121212]">
-            <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-2 lg:grid-cols-4 gap-8">
-                <div class="text-center border-r border-black/10 last:border-0">
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Session Streak</p>
-                    <p id="statStreak" class="text-3xl font-black italic">-- DAYS</p>
-                </div>
-                <div class="text-center border-r border-black/10 last:border-0 lg:block hidden">
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Status</p>
-                    <p id="statStatus" class="text-3xl font-black italic uppercase">--</p>
-                </div>
-                <div class="text-center border-r border-black/10 last:border-0">
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Goal Progress</p>
-                    <p id="statProgress" class="text-3xl font-black italic">--%</p>
-                </div>
-                <div class="text-center">
-                    <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Next Renewal</p>
-                    <p id="statExpiry" class="text-3xl font-black italic">--</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Main Workspace -->
-        <section class="py-16 px-6 lg:px-20 max-w-7xl mx-auto w-full">
-
-            <!-- Check-in Section (Only if Active) -->
-            <div id="checkInSection" class="hidden mb-16 p-12 glass-card rounded-3xl text-center border-primary/20">
-                <div class="flex flex-col items-center mb-6">
-                    <span class="material-symbols-outlined text-primary text-5xl mb-2">qr_code_scanner</span>
-                    <span class="text-4xl font-black italic uppercase tracking-tighter text-primary">Scan QR Code</span>
-                </div>
-                <h3 class="text-3xl font-black italic mb-4 uppercase tracking-tighter">Enter the Iron Circle</h3>
-                <p class="text-slate-400 max-w-lg mx-auto mb-8 font-medium">Scan the QR code displayed at the gym to
-                    check in and update your streak.</p>
-
-                <!-- QR Scanner Container -->
-                <div id="qrScannerArea" class="hidden max-w-sm mx-auto mb-6">
-                    <div id="qrReader" class="rounded-2xl overflow-hidden border-2 border-primary/30"></div>
-                    <button id="stopScanBtn"
-                        class="mt-4 text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">
-                        Cancel Scanning
-                    </button>
-                </div>
-
-                <button id="startScanBtn"
-                    class="bg-primary text-background-dark px-12 py-4 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform pulse-btn">
-                    Open Camera & Scan
+                <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
+                    <span class="material-symbols-outlined text-3xl">close</span>
                 </button>
-                <p id="scanFeedback" class="hidden mt-6 text-sm font-bold uppercase tracking-widest"></p>
             </div>
-
-            <!-- Plan Selection (Only if Not Active or Expired) -->
-            <div id="planSection" class="hidden space-y-12">
-                <div class="text-center">
-                    <h3 class="text-4xl font-black italic mb-2 uppercase tracking-tighter">Choose Your <span
-                            class="text-primary">Pulse</span></h3>
-                    <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Unlock unlimited access and
-                        classes</p>
-                </div>
-                <div id="plansGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Plans loaded dynamically -->
-                </div>
-            </div>
-
-            <!-- Generic Info -->
-            <section id="book">
-                <div id="activeWelcome" class="hidden p-12 glass-card rounded-3xl text-center">
-                    <h3 class="text-2xl font-black italic mb-4 uppercase">Unlock Your Potential</h3>
-                    <p class="text-slate-400 max-w-2xl mx-auto mb-8 font-medium">Your membership is active. Track your
-                        attendance, manage your subsciption, and access premium training plans here.</p>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <button onclick="document.getElementById('classSchedule').scrollIntoView({behavior:'smooth'})"
-                            class="bg-primary text-[#121212] px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform">Book
-                            Session</button>
-                        <button onclick="downloadSessions()"
-                            class="border border-white/20 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-white/5 transition-colors">Download
-                            Plan</button>
+            <nav class="flex flex-col gap-8">
+                <a class="text-2xl font-black uppercase tracking-widest text-primary italic"
+                    href="user-portal.html">Dashboard</a>
+                <a class="text-2xl font-black uppercase tracking-widest hover:text-primary transition-colors italic"
+                    href="#book">Book Sessions</a>
+            </nav>
+            <div class="mt-auto pt-8 border-t border-white/10">
+                <div class="flex items-center gap-4 mb-8" onclick="openProfileInfo()">
+                    <div id="memberInitialMobile"
+                        class="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-background-dark font-bold border border-background-dark text-2xl">
+                        ?</div>
+                    <div>
+                        <p id="memberNameMobile" class="text-lg font-black italic uppercase">--</p>
+                        <p class="text-xs text-slate-500 font-bold uppercase tracking-widest">Active Member</p>
                     </div>
                 </div>
-            </section>
-            <!-- Class Schedule (Members Only) -->
-            <div id="classSchedule" class="hidden mt-16">
-                <div class="mb-10 text-center">
-                    <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">Your Classes</span>
-                    <h2 class="text-3xl font-black mt-2 italic uppercase">Book a Session</h2>
+                <button onclick="sessionStorage.clear(); window.location.href='index.html';"
+                    class="w-full bg-red-500/10 text-red-500 py-4 rounded-xl font-black uppercase tracking-widest border border-red-500/20">Sign
+                    Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Bar (Hidden by default) -->
+    <div id="notificationBar"
+        class="hidden bg-primary text-background-dark py-2 px-6 text-center text-xs font-black uppercase tracking-widest animate-pulse">
+        Your membership request is pending approval.
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative h-[40vh] w-full flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-[#121212]/60 via-[#121212]/40 to-[#121212] z-10">
+            </div>
+            <img class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-DjOrmc8nRwlXjG5dWzTSdq1GDYQ2fdxLMTgsQ-WtMZ90Lgnm7ZN5MPT8208MGbi-Q_vSAd-AWCMG70hP532B3Fhcjao-_9p5NGT4lF1aG65LmHq3t1yGkhsZVJg3LnwZnJHaD0bTypOoVCmMfRfUIY__Dgt7LwIKFsXD13PNTNr3FxpaUjOT6PCtxQ4CBk68jsCmezKFS1jN9QY9VhFYn8NQT6DJAWo_FFwaYoSs9Gf9OWRiF94ARzk1Jfa3M65Efs5o3neGXQ" />
+        </div>
+        <div class="relative z-20 text-center px-4 max-w-4xl">
+            <span class="text-primary font-black uppercase tracking-[0.4em] text-sm mb-4 block">Welcome Back</span>
+            <h1 id="heroName"
+                class="text-5xl md:text-7xl font-black tracking-tighter leading-none mb-6 italic uppercase">
+                MEMBER <span class="text-primary">PORTAL</span>
+            </h1>
+
+            <!-- Active Check-in Badge -->
+            <div id="activeCheckIn"
+                class="hidden inline-flex items-center gap-2 bg-success/20 text-green-400 border border-success/30 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mt-4">
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                Active Session: <span id="timeRemaining" class="text-white">--:--</span> left
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Grid -->
+    <section class="py-8 bg-primary text-[#121212]">
+        <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="text-center border-r border-black/10 last:border-0">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Session Streak</p>
+                <p id="statStreak" class="text-3xl font-black italic">-- DAYS</p>
+            </div>
+            <div class="text-center border-r border-black/10 last:border-0 lg:block hidden">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Status</p>
+                <p id="statStatus" class="text-3xl font-black italic uppercase">--</p>
+            </div>
+            <div class="text-center border-r border-black/10 last:border-0">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Goal Progress</p>
+                <p id="statProgress" class="text-3xl font-black italic">--%</p>
+            </div>
+            <div class="text-center">
+                <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Next Renewal</p>
+                <p id="statExpiry" class="text-3xl font-black italic">--</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Workspace -->
+    <section class="py-16 px-6 lg:px-20 max-w-7xl mx-auto w-full">
+
+        <!-- Check-in Section (Only if Active) -->
+        <div id="checkInSection" class="hidden mb-16 p-12 glass-card rounded-3xl text-center border-primary/20">
+            <div class="flex flex-col items-center mb-6">
+                <span class="material-symbols-outlined text-primary text-5xl mb-2">qr_code_scanner</span>
+                <span class="text-4xl font-black italic uppercase tracking-tighter text-primary">Scan QR Code</span>
+            </div>
+            <h3 class="text-3xl font-black italic mb-4 uppercase tracking-tighter">Enter the Iron Circle</h3>
+            <p class="text-slate-400 max-w-lg mx-auto mb-8 font-medium">Scan the QR code displayed at the gym to
+                check in and update your streak.</p>
+
+            <!-- QR Scanner Container -->
+            <div id="qrScannerArea" class="hidden max-w-sm mx-auto mb-6">
+                <div id="qrReader" class="rounded-2xl overflow-hidden border-2 border-primary/30"></div>
+                <button id="stopScanBtn"
+                    class="mt-4 text-slate-400 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">
+                    Cancel Scanning
+                </button>
+            </div>
+
+            <button id="startScanBtn"
+                class="bg-primary text-background-dark px-12 py-4 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform pulse-btn">
+                Open Camera & Scan
+            </button>
+            <p id="scanFeedback" class="hidden mt-6 text-sm font-bold uppercase tracking-widest"></p>
+        </div>
+
+        <!-- Plan Selection (Only if Not Active or Expired) -->
+        <div id="planSection" class="hidden space-y-12">
+            <div class="text-center">
+                <h3 class="text-4xl font-black italic mb-2 uppercase tracking-tighter">Choose Your <span
+                        class="text-primary">Pulse</span></h3>
+                <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Unlock unlimited access and
+                    classes</p>
+            </div>
+            <div id="plansGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plans loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Generic Info -->
+        <section id="book">
+            <div id="activeWelcome" class="hidden p-12 glass-card rounded-3xl text-center">
+                <h3 class="text-2xl font-black italic mb-4 uppercase">Unlock Your Potential</h3>
+                <p class="text-slate-400 max-w-2xl mx-auto mb-8 font-medium">Your membership is active. Track your
+                    attendance, manage your subsciption, and access premium training plans here.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="document.getElementById('classSchedule').scrollIntoView({behavior:'smooth'})"
+                        class="bg-primary text-[#121212] px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:scale-105 transition-transform">Book
+                        Session</button>
+                    <button onclick="downloadSessions()"
+                        class="border border-white/20 px-8 py-3 rounded-xl font-black uppercase tracking-widest text-sm hover:bg-white/5 transition-colors">Download
+                        Plan</button>
                 </div>
-                <div class="overflow-x-auto glass-card rounded-3xl p-8">
-                    <table class="w-full border-collapse">
-                        <thead>
-                            <tr class="border-b border-white/10">
-                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
-                                    Class</th>
-                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
-                                    Time</th>
-                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
-                                    Instructor</th>
-                                <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
-                                    Difficulty</th>
-                                <th class="py-4 text-right"></th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-white/5">
-                            <tr class="group hover:bg-white/5 transition-colors">
-                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
-                                    HIIT BLAST</td>
-                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">08:00 AM</td>
-                                <td class="py-6 text-slate-300 text-sm">Alex 'The Beast'</td>
-                                <td class="py-6"><span
-                                        class="px-3 py-1 bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20 uppercase rounded-full">Advanced</span>
-                                </td>
-                                <td class="py-6 text-right"><button
-                                        onclick="bookClass('HIIT BLAST','08:00 AM','Alex The Beast','Advanced')"
-                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
-                                        Spot</button></td>
-                            </tr>
-                            <tr class="group hover:bg-white/5 transition-colors">
-                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
-                                    POWERLIFTING 101</td>
-                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">10:30 AM</td>
-                                <td class="py-6 text-slate-300 text-sm">Sarah Strong</td>
-                                <td class="py-6"><span
-                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
-                                </td>
-                                <td class="py-6 text-right"><button
-                                        onclick="bookClass('POWERLIFTING 101','10:30 AM','Sarah Strong','Intermediate')"
-                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
-                                        Spot</button></td>
-                            </tr>
-                            <tr class="group hover:bg-white/5 transition-colors">
-                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
-                                    FLOW YOGA</td>
-                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">12:00 PM</td>
-                                <td class="py-6 text-slate-300 text-sm">Elena Zen</td>
-                                <td class="py-6"><span
-                                        class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold border border-primary/20 uppercase rounded-full">All
-                                        Levels</span></td>
-                                <td class="py-6 text-right"><button
-                                        onclick="bookClass('FLOW YOGA','12:00 PM','Elena Zen','All Levels')"
-                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
-                                        Spot</button></td>
-                            </tr>
-                            <tr class="group hover:bg-white/5 transition-colors">
-                                <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
-                                    NIGHT PUMP</td>
-                                <td class="py-6 text-slate-300 font-bold text-sm uppercase">06:00 PM</td>
-                                <td class="py-6 text-slate-300 text-sm">Marcus Thorne</td>
-                                <td class="py-6"><span
-                                        class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
-                                </td>
-                                <td class="py-6 text-right"><button
-                                        onclick="bookClass('NIGHT PUMP','06:00 PM','Marcus Thorne','Intermediate')"
-                                        class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
-                                        Spot</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p id="bookFeedback" class="hidden mt-4 text-center text-sm font-bold uppercase tracking-widest"></p>
             </div>
         </section>
-
-        <footer class="bg-[#121212] border-t border-border-dark py-12 px-6 lg:px-20 mt-auto">
-            <div
-                class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
-                <p>© 2026 IRON PULSE. MEMBER EXCLUSIVE PORTAL.</p>
-                <div class="flex gap-8">
-                    <a href="index.html" class="hover:text-primary">Back to site</a>
-                </div>
+        <!-- Class Schedule (Members Only) -->
+        <div id="classSchedule" class="hidden mt-16">
+            <div class="mb-10 text-center">
+                <span class="text-primary font-bold uppercase tracking-[0.3em] text-sm">Your Classes</span>
+                <h2 class="text-3xl font-black mt-2 italic uppercase">Book a Session</h2>
             </div>
-        </footer>
+            <div class="overflow-x-auto glass-card rounded-3xl p-8">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10">
+                            <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                Class</th>
+                            <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                Time</th>
+                            <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                Instructor</th>
+                            <th class="py-4 text-left text-xs uppercase tracking-widest font-bold text-slate-400">
+                                Difficulty</th>
+                            <th class="py-4 text-right"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        <tr class="group hover:bg-white/5 transition-colors">
+                            <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                HIIT BLAST</td>
+                            <td class="py-6 text-slate-300 font-bold text-sm uppercase">08:00 AM</td>
+                            <td class="py-6 text-slate-300 text-sm">Alex 'The Beast'</td>
+                            <td class="py-6"><span
+                                    class="px-3 py-1 bg-red-500/10 text-red-500 text-xs font-bold border border-red-500/20 uppercase rounded-full">Advanced</span>
+                            </td>
+                            <td class="py-6 text-right"><button
+                                    onclick="bookClass('HIIT BLAST','08:00 AM','Alex The Beast','Advanced')"
+                                    class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                    Spot</button></td>
+                        </tr>
+                        <tr class="group hover:bg-white/5 transition-colors">
+                            <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                POWERLIFTING 101</td>
+                            <td class="py-6 text-slate-300 font-bold text-sm uppercase">10:30 AM</td>
+                            <td class="py-6 text-slate-300 text-sm">Sarah Strong</td>
+                            <td class="py-6"><span
+                                    class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
+                            </td>
+                            <td class="py-6 text-right"><button
+                                    onclick="bookClass('POWERLIFTING 101','10:30 AM','Sarah Strong','Intermediate')"
+                                    class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                    Spot</button></td>
+                        </tr>
+                        <tr class="group hover:bg-white/5 transition-colors">
+                            <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                FLOW YOGA</td>
+                            <td class="py-6 text-slate-300 font-bold text-sm uppercase">12:00 PM</td>
+                            <td class="py-6 text-slate-300 text-sm">Elena Zen</td>
+                            <td class="py-6"><span
+                                    class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold border border-primary/20 uppercase rounded-full">All
+                                    Levels</span></td>
+                            <td class="py-6 text-right"><button
+                                    onclick="bookClass('FLOW YOGA','12:00 PM','Elena Zen','All Levels')"
+                                    class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                    Spot</button></td>
+                        </tr>
+                        <tr class="group hover:bg-white/5 transition-colors">
+                            <td class="py-6 font-black text-lg italic group-hover:text-primary transition-colors">
+                                NIGHT PUMP</td>
+                            <td class="py-6 text-slate-300 font-bold text-sm uppercase">06:00 PM</td>
+                            <td class="py-6 text-slate-300 text-sm">Marcus Thorne</td>
+                            <td class="py-6"><span
+                                    class="px-3 py-1 bg-orange-500/10 text-orange-500 text-xs font-bold border border-orange-500/20 uppercase rounded-full">Intermediate</span>
+                            </td>
+                            <td class="py-6 text-right"><button
+                                    onclick="bookClass('NIGHT PUMP','06:00 PM','Marcus Thorne','Intermediate')"
+                                    class="bg-primary/10 border border-primary/40 text-primary px-4 py-2 text-xs font-bold uppercase tracking-wider hover:bg-primary hover:text-background-dark transition-all rounded-lg">Book
+                                    Spot</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p id="bookFeedback" class="hidden mt-4 text-center text-sm font-bold uppercase tracking-widest"></p>
+        </div>
+    </section>
+
+    <footer class="bg-[#121212] border-t border-border-dark py-12 px-6 lg:px-20 mt-auto">
+        <div
+            class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
+            <p>© 2026 IRON PULSE. MEMBER EXCLUSIVE PORTAL.</p>
+            <div class="flex gap-8">
+                <a href="index.html" class="hover:text-primary">Back to site</a>
+            </div>
+        </div>
+    </footer>
     </div>
 
     <!-- Profile Info Modal -->
@@ -822,6 +867,30 @@
         // 6. Run Init
         init();
     </script>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav md:hidden">
+        <a href="index.html" class="nav-item">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </a>
+        <a href="user-portal.html" class="nav-item active">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Portal</span>
+        </a>
+        <a href="#qr-section" class="nav-item">
+            <span class="material-symbols-outlined text-primary">qr_code_scanner</span>
+            <span>Check-in</span>
+        </a>
+        <a href="gallery.html" class="nav-item">
+            <span class="material-symbols-outlined">photo_library</span>
+            <span>Gallery</span>
+        </a>
+        <a href="#" onclick="openProfileInfo(); return false;" class="nav-item">
+            <span class="material-symbols-outlined">account_circle</span>
+            <span>Profile</span>
+        </a>
+    </nav>
 
     <script>
         if ('serviceWorker' in navigator) {

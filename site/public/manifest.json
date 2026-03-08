@@ -1,10 +1,11 @@
 {
-    "name": "Gym Management System",
-    "short_name": "Gym App",
+    "name": "Iron Pulse Gym",
+    "short_name": "IronPulse",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#1a1a1a",
-    "theme_color": "#1a1a1a",
+    "orientation": "portrait-primary",
+    "background_color": "#121212",
+    "theme_color": "#d4ff00",
     "icons": [
         {
             "src": "/icons/icon-192x192.png",

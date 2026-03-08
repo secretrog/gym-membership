@@ -44,7 +44,8 @@
         }
     </style>
     <link rel="manifest" href="/manifest.json">
-    <meta name="theme-color" content="#1a1a1a">
+    <meta name="theme-color" content="#d4ff00">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
 </head>
 
 <body class="bg-[#121212] flex items-center justify-center min-h-screen p-6 relative overflow-hidden">
@@ -230,7 +231,7 @@
         async function loadMemberProfile() {
             try {
                 const response = await fetch('/api/user/profile', {
-                    headers: getMemberAuthHeaders()
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
                 });
 
                 if (response.ok) {
@@ -257,13 +258,15 @@
         const notiBadge = document.getElementById('notiBadge');
         const notiCount = document.getElementById('notiCount');
 
-        notiBtn.onclick = (e) => {
-            e.stopPropagation();
-            notiDropdown.classList.toggle('hidden');
-        };
+        if (notiBtn) {
+            notiBtn.onclick = (e) => {
+                e.stopPropagation();
+                notiDropdown.classList.toggle('hidden');
+            };
+        }
 
-        document.addEventListener('click', () => notiDropdown.classList.add('hidden'));
-        notiDropdown.onclick = (e) => e.stopPropagation();
+        document.addEventListener('click', () => notiDropdown?.classList.add('hidden'));
+        if (notiDropdown) notiDropdown.onclick = (e) => e.stopPropagation();
 
         function checkNotifications(user) {
             const notifications = [];
@@ -295,7 +298,7 @@
                 });
             }
 
-            if (notifications.length > 0) {
+            if (notifications.length > 0 && notiBadge && notiCount && notiList) {
                 notiBadge.classList.remove('hidden');
                 notiCount.textContent = notifications.length;
                 notiList.innerHTML = notifications.map(n => `
@@ -309,7 +312,7 @@
                         <p class="text-[11px] text-slate-400 leading-relaxed font-medium">${n.message}</p>
                     </div>
                 `).join('');
-            } else {
+            } else if (notiBadge && notiCount && notiList) {
                 notiBadge.classList.add('hidden');
                 notiCount.textContent = '0';
                 notiList.innerHTML = '<p class="text-xs text-slate-500 text-center py-4">No new notifications</p>';
