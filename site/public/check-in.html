@@ -6,9 +6,9 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Iron Pulse - Admin Check-In</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
@@ -42,8 +42,8 @@
         class="md:hidden sticky top-0 z-50 w-full border-b border-white/10 bg-background-dark/90 backdrop-blur-md px-6 py-4 flex items-center justify-between shrink-0">
         <div class="flex items-center gap-3">
             <span class="material-symbols-outlined text-primary">fitness_center</span>
-            <h2 class="text-lg font-black tracking-tighter italic uppercase">Admin<span
-                    class="text-primary">Pulse</span></h2>
+            <h2 class="text-lg font-black tracking-tighter italic uppercase text-white">IRON<span
+                    class="text-primary">PULSE</span></h2>
         </div>
         <div class="flex items-center gap-2">
             <button id="pwaInstallBtn" class="hidden text-primary p-2">
@@ -62,8 +62,8 @@
             <div class="flex items-center justify-between mb-12">
                 <div class="flex items-center gap-3">
                     <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
-                    <h2 class="text-xl font-black tracking-tighter italic uppercase">Admin<span
-                            class="text-primary">Pulse</span></h2>
+                    <h2 class="text-xl font-black tracking-tighter italic uppercase text-white">IRON<span
+                            class="text-primary">PULSE</span></h2>
                 </div>
                 <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
                     <span class="material-symbols-outlined text-3xl">close</span>
@@ -104,8 +104,9 @@
                     <span class="material-symbols-outlined font-bold">fitness_center</span>
                 </div>
                 <div>
-                    <h1 class="text-sm font-bold uppercase tracking-wider">Iron Pulse</h1>
-                    <p class="text-xs text-slate-500">Admin Portal</p>
+                    <h1 class="text-sm font-black uppercase tracking-tighter italic">IRON<span
+                            class="text-primary">PULSE</span></h1>
+                    <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Admin Portal</p>
                 </div>
             </div>
             <nav class="flex-1 px-4 space-y-2 mt-4">
@@ -135,13 +136,12 @@
         <!-- Main Content -->
         <main class="flex-1 flex flex-col h-screen overflow-hidden">
             <header class="h-20 border-b border-border-dark px-8 flex items-center justify-between shrink-0">
-                <h2 class="text-2xl font-bold italic uppercase tracking-tighter">Facility <span
+                <h2 class="text-2xl font-bold italic uppercase tracking-tighter"><span
                         class="text-primary">Check-In</span></h2>
                 <div id="connectionStatus" class="flex items-center gap-4">
                     <div class="flex flex-col items-end">
                         <p class="text-sm font-bold text-success flex items-center gap-1">
-                            <span class="material-symbols-outlined text-sm">fiber_manual_record</span>
-                            System Online
+                            <span class="material-symbols-outlined text-sm"></span>
                         </p>
                     </div>
                 </div>
@@ -261,7 +261,7 @@
                             Daily QR Code</h4>
 
                         <div id="qrPlaceholder" class="text-center py-6">
-                            <span class="material-symbols-outlined text-primary text-5xl mb-4 block">qr_code_2</span>
+                            <span class="material-symbols-outlined text-primary text-5xl mb-4 block">Qr code</span>
                             <p class="text-slate-500 text-xs font-bold mb-6">Generate today's attendance QR code for
                                 members to scan</p>
                             <button id="generateQrBtn"
@@ -276,7 +276,7 @@
                             </div>
                             <p
                                 class="text-xs text-success font-black uppercase tracking-widest flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-sm animate-pulse">fiber_manual_record</span>
+                                <span class="material-symbols-outlined text-sm animate-pulse"></span>
                                 QR Active for Today
                             </p>
                             <p id="qrToken" class="text-[10px] text-slate-600 font-mono mt-2 break-all"></p>

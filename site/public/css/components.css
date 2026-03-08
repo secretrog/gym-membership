@@ -2,9 +2,17 @@
 
 /* Smart CTA Animation */
 @keyframes pulse-glow {
-    0% { box-shadow: 0 0 0 0 rgba(212, 255, 0, 0.4); }
-    70% { box-shadow: 0 0 0 15px rgba(212, 255, 0, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(212, 255, 0, 0); }
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 255, 0, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(212, 255, 0, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 255, 0, 0);
+    }
 }
 
 .smart-cta-pulsing {
@@ -54,6 +62,25 @@
 
 .nav-item .material-symbols-outlined {
     font-size: 24px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Global Icon Hardening */
+.material-symbols-outlined {
+    font-display: block;
+    min-width: 1em;
+    min-height: 1em;
+    direction: ltr;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    text-transform: none;
+    letter-spacing: normal;
 }
 
 /* Glass Card Enhanced */
