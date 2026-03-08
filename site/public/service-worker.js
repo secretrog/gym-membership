@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iron-pulse-v2'; // Incremented version
+const CACHE_NAME = 'iron-pulse-v3'; // Incremented version to v3
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -48,6 +48,16 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
+    // Navigation requests (HTML) - Network First
+    if (event.request.mode === 'navigate') {
+        event.respondWith(
+            fetch(event.request).catch(() => {
+                return caches.match(event.request);
+            })
+        );
+        return;
+    }
+
     // Static assets - Cache First, then Network
     if (event.request.method === 'GET') {
         event.respondWith(
@@ -57,3 +67,4 @@ self.addEventListener('fetch', (event) => {
         );
     }
 });
+
