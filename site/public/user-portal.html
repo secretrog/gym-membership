@@ -57,14 +57,21 @@
 
 <body class="bg-[#121212] font-display text-slate-100 antialiased overflow-x-hidden">
     <div class="relative flex h-auto min-h-screen w-full flex-col">
+        <!-- Update Notification Banner -->
+        <div id="pwaUpdateBanner"
+            class="hidden fixed top-0 left-0 w-full z-[100] bg-primary text-background-dark py-3 px-6 text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-4 animate-in slide-in-from-top duration-500">
+            <span>New Content Available!</span>
+            <button id="pwaUpdateBtn"
+                class="bg-background-dark text-white px-4 py-1 rounded-full text-[10px] hover:scale-105 transition-transform">Update
+                Now</button>
+        </div>
         <!-- Navigation -->
         <header
             class="sticky top-0 z-50 w-full border-b border-border-dark bg-[#121212]/90 backdrop-blur-md px-6 lg:px-20 py-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <a href="user-portal.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-
-                    <h2 class="text-xl font-black tracking-tighter italic uppercase">IRON<span
-                            class="text-primary">PULSE</span></h2>
+                    <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                        class="h-10 w-auto object-contain">
                 </a>
                 <nav class="hidden md:flex items-center gap-10">
                     <a class="text-sm font-bold uppercase tracking-widest text-primary"
@@ -134,8 +141,8 @@
             <div class="flex flex-col h-full p-8">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <h2 class="text-xl font-black tracking-tighter italic uppercase">IRON<span
-                                class="text-primary">PULSE</span></h2>
+                        <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                            class="h-10 w-auto object-contain brightness-0 invert">
                     </div>
                     <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
                         <span class="material-symbols-outlined text-3xl">close</span>
@@ -459,8 +466,15 @@
         </div>
     </div>
 
-    <script>
-        async function bookClass(className, classTime, instructor, difficulty) {
+    <script type="module">
+        import API_BASE_URL from './js/config.js';
+        import { initMemberAuthGuard, handleMemberLogout, getMemberAuthHeaders } from './js/user-auth.js';
+
+        // 1. Initialize Auth Guard
+        initMemberAuthGuard();
+        document.getElementById('logoutBtn').addEventListener('click', handleMemberLogout);
+
+        window.bookClass = async (className, classTime, instructor, difficulty) => {
             const token = sessionStorage.getItem('memberAuthToken');
             if (!token) { alert('Session expired. Please log in again.'); return; }
 
@@ -471,7 +485,7 @@
             feedback.textContent = 'Booking...';
 
             try {
-                const res = await fetch('/api/bookings', {
+                const res = await fetch(`${API_BASE_URL}/bookings`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -490,14 +504,7 @@
                 feedback.textContent = '❌ ' + err.message;
                 feedback.classList.add('text-red-500');
             }
-        }
-    </script>
-    <script type="module">
-        import { initMemberAuthGuard, handleMemberLogout, getMemberAuthHeaders } from './js/user-auth.js';
-
-        // 1. Initialize Auth Guard
-        initMemberAuthGuard();
-        document.getElementById('logoutBtn').addEventListener('click', handleMemberLogout);
+        };
 
         let currentPlanId = null;
         let memberProfileData = null;
@@ -515,7 +522,7 @@
 
         window.requestMembership = async (method) => {
             try {
-                const res = await fetch('/api/memberships/request', {
+                const res = await fetch(`${API_BASE_URL}/memberships/request`, {
                     method: 'POST',
                     headers: getMemberAuthHeaders(),
                     body: JSON.stringify({ planId: currentPlanId, paymentMethod: method })
@@ -572,7 +579,7 @@
 
         window.downloadSessions = async () => {
             try {
-                const res = await fetch('/api/bookings/my', {
+                const res = await fetch(`${API_BASE_URL}/bookings/my`, {
                     headers: getMemberAuthHeaders()
                 });
 
@@ -626,7 +633,7 @@
         // 3. Page Logic Functions
         async function fetchPlans() {
             try {
-                const res = await fetch('/api/memberships/plans', { headers: getMemberAuthHeaders() });
+                const res = await fetch(`${API_BASE_URL}/memberships/plans`, { headers: getMemberAuthHeaders() });
                 const plans = await res.json();
                 const grid = document.getElementById('plansGrid');
                 grid.innerHTML = plans.map(p => `
@@ -653,7 +660,7 @@
 
         async function init() {
             try {
-                const profileRes = await fetch('/api/user/profile', {
+                const profileRes = await fetch(`${API_BASE_URL}/user/profile`, {
                     headers: getMemberAuthHeaders()
                 });
                 if (!profileRes.ok) throw new Error('Profile fetch failed');
@@ -716,16 +723,22 @@
             const startBtn = document.getElementById('startScanBtn');
             const feedback = document.getElementById('scanFeedback');
 
-            feedback.classList.remove('hidden', 'text-red-500', 'text-success');
-            feedback.textContent = 'Getting your location...';
+            feedback.classList.remove('hidden', 'text-red-500', 'text-green-400');
+            feedback.textContent = '🔍 Checking location permissions...';
+            feedback.classList.remove('hidden');
 
             if (!navigator.geolocation) {
-                feedback.textContent = '❌ Geolocation not supported by your browser';
+                feedback.textContent = '❌ Geolocation not supported';
                 feedback.classList.add('text-red-500');
                 return;
             }
 
-            // Step 1: Get location FIRST
+            const geoOptions = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     userCoords = {
@@ -733,28 +746,30 @@
                         longitude: position.coords.longitude
                     };
 
-                    feedback.textContent = '📍 Location found! Opening camera...';
+                    feedback.textContent = '📍 Location verified. Starting camera...';
 
-                    // Step 2: Open camera after location is confirmed
                     scannerArea.classList.remove('hidden');
                     startBtn.classList.add('hidden');
 
-                    html5QrCode = new Html5Qrcode('qrReader');
+                    if (!html5QrCode) {
+                        html5QrCode = new Html5Qrcode('qrReader');
+                    }
 
                     html5QrCode.start(
                         { facingMode: 'environment' },
-                        { fps: 10, qrbox: { width: 250, height: 250 } },
+                        { fps: 15, qrbox: { width: 250, height: 250 } },
                         async (decodedText) => {
-                            // QR scanned - stop scanner
-                            await html5QrCode.stop();
-                            html5QrCode = null;
-                            scannerArea.classList.add('hidden');
-                            startBtn.classList.remove('hidden');
-
-                            feedback.textContent = 'Checking in...';
+                            feedback.textContent = '⚡ QR Detected! Validating...';
 
                             try {
-                                const res = await fetch('/api/checkin/scan', {
+                                await html5QrCode.stop();
+                                html5QrCode = null;
+                                scannerArea.classList.add('hidden');
+                                startBtn.classList.remove('hidden');
+
+                                feedback.textContent = '🔄 Processing check-in...';
+
+                                const res = await fetch(`${API_BASE_URL}/checkin/scan`, {
                                     method: 'POST',
                                     headers: getMemberAuthHeaders(),
                                     body: JSON.stringify({
@@ -767,32 +782,35 @@
 
                                 if (res.ok) {
                                     feedback.textContent = `✅ ${data.message} | Streak: ${data.streak} 🔥`;
-                                    feedback.classList.add('text-success');
-                                    setTimeout(() => location.reload(), 3000);
+                                    feedback.classList.add('text-green-400');
+                                    // Trigger a nice success vibration if supported
+                                    if (window.navigator.vibrate) window.navigator.vibrate([100, 50, 100]);
+                                    setTimeout(() => location.reload(), 2500);
                                 } else {
                                     feedback.textContent = `❌ ${data.message}`;
                                     feedback.classList.add('text-red-500');
                                 }
                             } catch (err) {
-                                feedback.textContent = '❌ Connection Error';
+                                feedback.textContent = '❌ Check-in failed. Try again.';
                                 feedback.classList.add('text-red-500');
+                                startBtn.classList.remove('hidden');
                             }
                         },
-                        (errorMessage) => {
-                            // Keep scanning
-                        }
+                        (errorMessage) => { /* ignore scan errors */ }
                     ).catch(err => {
-                        feedback.textContent = '❌ Camera access denied. Allow camera to scan QR.';
+                        feedback.textContent = '❌ Camera error. Please allow camera access.';
                         feedback.classList.add('text-red-500');
                         scannerArea.classList.add('hidden');
                         startBtn.classList.remove('hidden');
                     });
                 },
                 (err) => {
-                    feedback.textContent = '❌ Location access denied. Please allow location in your browser settings and refresh.';
+                    let errMsg = 'Location access denied.';
+                    if (err.code === 3) errMsg = 'Location timeout. Try again in an open area.';
+                    feedback.textContent = `❌ ${errMsg}`;
                     feedback.classList.add('text-red-500');
                 },
-                { enableHighAccuracy: true, timeout: 10000 }
+                geoOptions
             );
         };
 
@@ -909,6 +927,57 @@
                     console.log('ServiceWorker registration failed: ', err);
                 });
             });
+        }
+    </script>
+    <!-- iOS PWA Install Guide -->
+    <div id="iosInstallModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md" onclick="closeIosInstallModal()"></div>
+        <div
+            class="relative bg-card-dark border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+            <button onclick="closeIosInstallModal()" class="absolute top-4 right-4 text-white/40 hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="mb-6">
+                <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="Logo" class="h-16 mx-auto mb-4">
+                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Iron Pulse</h3>
+                <p class="text-slate-400 text-sm mt-2">Add this app to your home screen for the best experience.</p>
+            </div>
+
+            <div class="space-y-6 text-left">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        1</div>
+                    <p class="text-sm">Tap the <span
+                            class="material-symbols-outlined text-base align-middle text-blue-400">ios_share</span>
+                        share button in Safari.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        2</div>
+                    <p class="text-sm">Scroll down and tap <span class="font-bold">"Add to Home Screen"</span> <span
+                            class="material-symbols-outlined text-base align-middle">add_box</span>.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        3</div>
+                    <p class="text-sm">Tap <span class="font-bold text-primary">"Add"</span> at the top right.</p>
+                </div>
+            </div>
+
+            <button onclick="closeIosInstallModal()"
+                class="w-full mt-8 bg-primary text-background-dark py-3 rounded-xl font-black uppercase tracking-widest hover:brightness-110 transition-all">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function closeIosInstallModal() {
+            document.getElementById('iosInstallModal').classList.add('hidden');
+            document.getElementById('iosInstallModal').classList.remove('flex');
         }
     </script>
 </body>

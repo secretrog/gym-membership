@@ -5,6 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Iron Pulse - Gallery</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
@@ -54,11 +55,8 @@
             <div class="flex flex-col h-full p-8">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <div class="bg-primary p-2 rounded-sm">
-                            <span class="material-symbols-outlined text-background-dark font-bold">fitness_center</span>
-                        </div>
-                        <h2 class="text-xl font-black tracking-tighter italic uppercase text-white">IRON<span
-                                class="text-primary">PULSE</span></h2>
+                        <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                            class="h-10 w-auto object-contain brightness-0 invert">
                     </div>
                     <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
                         <span class="material-symbols-outlined text-3xl">close</span>
@@ -81,11 +79,8 @@
         <header
             class="flex items-center justify-between border-b border-slate-border px-6 md:px-10 py-4 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
             <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                <div class="bg-primary p-1.5 rounded-sm">
-                    <span class="material-symbols-outlined text-background-dark font-bold">fitness_center</span>
-                </div>
-                <h2 class="text-slate-100 text-xl font-black tracking-tighter uppercase italic md:text-3xl">IRON<span
-                        class="text-primary">PULSE</span></h2>
+                <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                    class="h-10 w-auto object-contain">
             </a>
             <nav class="hidden md:flex items-center gap-8">
                 <a class="text-slate-400 hover:text-primary text-sm font-semibold transition-colors"
@@ -267,10 +262,8 @@
         <footer class="border-t border-slate-border mt-20 py-10 px-6 md:px-10 bg-background-dark">
             <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div class="flex items-center gap-3 opacity-50 grayscale">
-                    <div class="bg-slate-300 p-1.5 rounded-sm">
-                        <span class="material-symbols-outlined text-background-dark font-bold">fitness_center</span>
-                    </div>
-                    <h2 class="text-slate-100 text-xl font-black tracking-tighter uppercase">EliteGym</h2>
+                    <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                        class="h-8 w-auto object-contain brightness-0 invert">
                 </div>
                 <div class="flex gap-8">
                     <a class="text-slate-500 hover:text-primary transition-colors text-xs font-bold tracking-widest uppercase"
@@ -280,7 +273,7 @@
                     <a class="text-slate-500 hover:text-primary transition-colors text-xs font-bold tracking-widest uppercase"
                         href="#">Contact</a>
                 </div>
-                <p class="text-slate-600 text-[10px] font-bold tracking-widest uppercase">© 2026 ELITEGYM GLOBAL
+                <p class="text-slate-600 text-[10px] font-bold tracking-widest uppercase">© 2026 IRON PULSE GLOBAL
                     HOLDINGS</p>
             </div>
         </footer>
@@ -354,7 +347,9 @@
             class="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl scale-95 transition-transform duration-300">
     </div>
 
-    <script>
+    <script type="module">
+        import API_BASE_URL from './js/config.js';
+
         let memberProfileData = null;
 
         // Fetch member profile on load
@@ -363,7 +358,7 @@
             if (!token) return;
 
             try {
-                const res = await fetch('/api/user/profile', {
+                const res = await fetch(`${API_BASE_URL}/user/profile`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
@@ -388,7 +383,7 @@
             return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
         }
 
-        function openProfileInfo() {
+        window.openProfileInfo = () => {
             if (!memberProfileData) {
                 alert('Please log in to view your profile.');
                 return;
@@ -410,14 +405,14 @@
             }
 
             document.getElementById('profileModal').classList.remove('hidden');
-        }
+        };
 
-        function closeProfileModal() {
+        window.closeProfileModal = () => {
             document.getElementById('profileModal').classList.add('hidden');
-        }
+        };
 
         // Lightbox functions
-        function openLightbox(src) {
+        window.openLightbox = (src) => {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             lightboxImg.src = src;
@@ -428,9 +423,9 @@
                 lightboxImg.classList.remove('scale-95');
                 lightboxImg.classList.add('scale-100');
             }, 10);
-        }
+        };
 
-        function closeLightbox() {
+        window.closeLightbox = () => {
             const lightbox = document.getElementById('lightbox');
             const lightboxImg = document.getElementById('lightbox-img');
             lightbox.classList.add('opacity-0');
@@ -440,7 +435,7 @@
                 lightbox.classList.add('hidden');
                 lightbox.classList.remove('flex');
             }, 300);
-        }
+        };
 
         document.addEventListener('keydown', function (event) {
             if (event.key === "Escape" && !document.getElementById('lightbox').classList.contains('hidden')) {

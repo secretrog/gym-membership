@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iron-pulse-v3'; // Incremented version to v3
+const CACHE_NAME = 'iron-will-v1'; // Re-branded and updated for notification system
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -16,7 +16,8 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-    self.skipWaiting();
+    // We no longer call skipWaiting() here immediately
+    // to allow the user to trigger it manually via the banner.
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS_TO_CACHE);
@@ -68,3 +69,9 @@ self.addEventListener('fetch', (event) => {
     }
 });
 
+// Handle manual activation message
+self.addEventListener('message', (event) => {
+    if (event.data === 'SKIP_WAITING') {
+        self.skipWaiting();
+    }
+});

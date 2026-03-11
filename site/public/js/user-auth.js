@@ -1,5 +1,7 @@
+import API_BASE_URL from './config.js';
+
 // Member-specific authentication logic
-const API_URL = '/api';
+const API_URL = API_BASE_URL;
 const AUTH_KEY = 'memberAuthToken';
 const USER_KEY = 'memberUser';
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Premium Gym Public Showcase</title>
+    <title>Iron Pulse - Elite Fitness & Performance</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet">
@@ -2998,14 +2998,21 @@
 <body
     class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden">
     <div class="relative flex h-auto min-screen w-full flex-col">
+        <!-- Update Notification Banner -->
+        <div id="pwaUpdateBanner"
+            class="hidden fixed top-0 left-0 w-full z-[100] bg-primary text-background-dark py-3 px-6 text-center font-black uppercase tracking-widest text-sm flex items-center justify-center gap-4 animate-in slide-in-from-top duration-500">
+            <span>New Content Available!</span>
+            <button id="pwaUpdateBtn"
+                class="bg-background-dark text-white px-4 py-1 rounded-full text-[10px] hover:scale-105 transition-transform">Update
+                Now</button>
+        </div>
         <!-- Navigation -->
         <header
             class="fixed top-0 z-50 w-full border-b border-border-dark bg-background-dark/90 backdrop-blur-md px-6 lg:px-20 py-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
-                    <h2 class="text-xl font-black tracking-tighter italic uppercase">IRON<span
-                            class="text-primary">PULSE</span></h2>
+                    <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                        class="h-10 w-auto object-contain">
                 </div>
                 <nav class="hidden md:flex items-center gap-10">
                     <a class="text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors"
@@ -3052,9 +3059,8 @@
             <div class="flex flex-col h-full p-8">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
-                        <h2 class="text-xl font-black tracking-tighter italic uppercase text-white">IRON<span
-                                class="text-primary">PULSE</span></h2>
+                        <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                            class="h-10 w-auto object-contain brightness-0 invert">
                     </div>
                     <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
                         <span class="material-symbols-outlined text-3xl">close</span>
@@ -3812,8 +3818,9 @@
         });
     </script>
 
-    <!-- Script to handle Join Logic -->
-    <script>
+    <script type="module">
+        import API_BASE_URL from './js/config.js';
+
         let availablePlans = [];
         let selectedPlan = null;
         let selectedPaymentMethod = null;
@@ -3821,7 +3828,7 @@
         // Fetch plans on load so we have the IDs
         async function fetchPlans() {
             try {
-                const res = await fetch('/api/memberships/plans');
+                const res = await fetch(`${API_BASE_URL}/memberships/plans`);
                 if (res.ok) {
                     availablePlans = await res.json();
                 }
@@ -3833,7 +3840,7 @@
         // Execute on page load
         fetchPlans();
 
-        function openJoinModal(planName) {
+        window.openJoinModal = (planName) => {
             selectedPlan = availablePlans.find(p => p.name.toLowerCase() === planName.toLowerCase());
 
             if (!selectedPlan) {
@@ -3851,13 +3858,13 @@
 
             // Show modal
             document.getElementById('joinModal').classList.remove('hidden');
-        }
+        };
 
-        function closeJoinModal() {
+        window.closeJoinModal = () => {
             document.getElementById('joinModal').classList.add('hidden');
-        }
+        };
 
-        function selectPayment(method) {
+        window.selectPayment = (method) => {
             selectedPaymentMethod = method;
             // Simulated transaction for online payment
             if (method === 'online') {
@@ -3867,7 +3874,7 @@
             // Move to step 2
             document.getElementById('stepPayment').classList.add('hidden');
             document.getElementById('stepDetails').classList.remove('hidden');
-        }
+        };
 
         document.getElementById('joinForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -3885,7 +3892,7 @@
             spinner.classList.remove('hidden');
 
             try {
-                const res = await fetch('/api/public-memberships/request', {
+                const res = await fetch(`${API_BASE_URL}/public-memberships/request`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -4031,6 +4038,57 @@
         </a>
     </nav>
 
+    <!-- iOS PWA Install Guide -->
+    <div id="iosInstallModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4">
+        <div class="absolute inset-0 bg-background-dark/95 backdrop-blur-md" onclick="closeIosInstallModal()"></div>
+        <div
+            class="relative bg-card-dark border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+            <button onclick="closeIosInstallModal()" class="absolute top-4 right-4 text-white/40 hover:text-white">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <div class="mb-6">
+                <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="Logo" class="h-16 mx-auto mb-4">
+                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Iron Pulse</h3>
+                <p class="text-slate-400 text-sm mt-2">Add this app to your home screen for the best experience.</p>
+            </div>
+
+            <div class="space-y-6 text-left">
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        1</div>
+                    <p class="text-sm">Tap the <span
+                            class="material-symbols-outlined text-base align-middle text-blue-400">ios_share</span>
+                        share button in Safari.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        2</div>
+                    <p class="text-sm">Scroll down and tap <span class="font-bold">"Add to Home Screen"</span> <span
+                            class="material-symbols-outlined text-base align-middle">add_box</span>.</p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-primary/20 text-primary flex items-center justify-center font-bold">
+                        3</div>
+                    <p class="text-sm">Tap <span class="font-bold text-primary">"Add"</span> at the top right.</p>
+                </div>
+            </div>
+
+            <button onclick="closeIosInstallModal()"
+                class="w-full mt-8 bg-primary text-background-dark py-3 rounded-xl font-black uppercase tracking-widest hover:brightness-110 transition-all">
+                Got it
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function closeIosInstallModal() {
+            document.getElementById('iosInstallModal').classList.add('hidden');
+            document.getElementById('iosInstallModal').classList.remove('flex');
+        }
+    </script>
     <script src="/js/mobile-nav.js" defer></script>
     <script src="/js/pwa-install.js" defer></script>
     <script>

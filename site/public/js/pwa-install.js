@@ -15,6 +15,11 @@ const isStandalone = () => {
     return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
 };
 
+// Check if device is iOS
+const isIOS = () => {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+};
+
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
@@ -41,9 +46,24 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial set based on environment
         updateSmartCTA('initial');
     }
+
+    // Show iOS install invite if on iOS and not installed
+    if (isIOS() && !isStandalone()) {
+        const installBtn = document.getElementById('pwaInstallBtn');
+        if (installBtn) installBtn.classList.remove('hidden');
+    }
 });
 
 async function triggerInstall() {
+    if (isIOS()) {
+        const modal = document.getElementById('iosInstallModal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+        return;
+    }
+
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
@@ -56,11 +76,16 @@ async function triggerInstall() {
 
 function handleSmartAction(e) {
     if (isMobile()) {
-        if (!isStandalone() && deferredPrompt) {
-            e.preventDefault();
-            triggerInstall();
+        if (!isStandalone()) {
+            if (deferredPrompt || isIOS()) {
+                e.preventDefault();
+                triggerInstall();
+            } else {
+                // No prompt but not standalone, go to portal
+                window.location.href = 'user-portal.html';
+            }
         } else {
-            // Already standalone or no prompt available, let it link or handle redirect
+            // Already standalone
             window.location.href = 'user-portal.html';
         }
     } else {
@@ -80,7 +105,7 @@ function updateSmartCTA(state) {
         if (isStandalone()) {
             if (label) label.textContent = 'Open Portal';
             if (icon) icon.textContent = 'dashboard_customize';
-        } else if (state === 'install-ready' || deferredPrompt) {
+        } else if (state === 'install-ready' || deferredPrompt || isIOS()) {
             if (label) label.textContent = 'Get the App';
             if (icon) icon.textContent = 'download_for_offline';
             smartCTA.classList.add('smart-cta-pulsing');
@@ -95,6 +120,51 @@ function updateSmartCTA(state) {
         smartCTA.classList.remove('smart-cta-pulsing');
     }
 }
+
+// --- PWA Update Logic ---
+let newWorker;
+
+function showUpdateBanner() {
+    const banner = document.getElementById('pwaUpdateBanner');
+    if (banner) {
+        banner.classList.remove('hidden');
+        banner.classList.add('flex');
+    }
+}
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js').then(reg => {
+            reg.addEventListener('updatefound', () => {
+                newWorker = reg.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        showUpdateBanner();
+                    }
+                });
+            });
+        });
+
+        let refreshing;
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            if (refreshing) return;
+            window.location.reload();
+            refreshing = true;
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const updateBtn = document.getElementById('pwaUpdateBtn');
+    if (updateBtn) {
+        updateBtn.addEventListener('click', () => {
+            if (newWorker) {
+                newWorker.postMessage('SKIP_WAITING');
+            }
+        });
+    }
+});
+// -------------------------
 
 window.addEventListener('appinstalled', (evt) => {
     console.log('Iron Pulse was installed.');
