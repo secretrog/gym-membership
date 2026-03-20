@@ -694,16 +694,29 @@
                 }
 
                 // Layout visibility
+                console.log('User status:', user.membershipStatus);
+
+                // Hide all sections first just in case
+                const sections = ['notificationBar', 'planSection', 'checkInSection', 'activeWelcome', 'classSchedule'];
+                sections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.classList.add('hidden');
+                });
+
                 if (user.membershipStatus === 'pending') {
-                    document.getElementById('notificationBar').classList.remove('hidden');
+                    document.getElementById('notificationBar')?.classList.remove('hidden');
                 } else if (user.membershipStatus === 'none' || user.membershipStatus === 'expired') {
-                    document.getElementById('planSection').classList.remove('hidden');
+                    document.getElementById('planSection')?.classList.remove('hidden');
                     fetchPlans();
                 } else if (user.membershipStatus === 'active') {
-                    document.getElementById('checkInSection').classList.remove('hidden');
-                    document.getElementById('activeWelcome').classList.remove('hidden');
-                    document.getElementById('classSchedule').classList.remove('hidden');
+                    document.getElementById('checkInSection')?.classList.remove('hidden');
+                    document.getElementById('activeWelcome')?.classList.remove('hidden');
+                    document.getElementById('classSchedule')?.classList.remove('hidden');
                     checkActiveSession(user);
+                } else {
+                    // Fallback: show plans if status is unknown
+                    document.getElementById('planSection')?.classList.remove('hidden');
+                    fetchPlans();
                 }
 
                 // Check for notifications
@@ -711,11 +724,14 @@
 
             } catch (err) {
                 console.error('Init error:', err);
+                // Fallback on error: show generic section
+                document.getElementById('planSection')?.classList.remove('hidden');
+                fetchPlans();
             }
         }
 
-        // Call init when page loads
-        document.addEventListener('DOMContentLoaded', init);
+        // Call init immediately since we are in a module script
+        init();
 
         // 4. QR Scan Logic
         let html5QrCode = null;
