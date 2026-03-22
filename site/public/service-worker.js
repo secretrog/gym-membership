@@ -1,4 +1,4 @@
-const CACHE_NAME = 'iron-will-v1'; // Re-branded and updated for notification system
+const CACHE_NAME = 'iron-will-v3'; // Bumped to v3 - Network First strategy
 const ASSETS_TO_CACHE = [
     '/',
     '/index.html',
@@ -16,8 +16,8 @@ const ASSETS_TO_CACHE = [
 ];
 
 self.addEventListener('install', (event) => {
-    // We no longer call skipWaiting() here immediately
-    // to allow the user to trigger it manually via the banner.
+    // Immediately activate the new service worker
+    self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
             return cache.addAll(ASSETS_TO_CACHE);
@@ -29,6 +29,7 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(
         Promise.all([
             self.clients.claim(),
+            // Delete ALL old caches
             caches.keys().then((cacheNames) => {
                 return Promise.all(
                     cacheNames.map((cacheName) => {
@@ -49,22 +50,23 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Navigation requests (HTML) - Network First
-    if (event.request.mode === 'navigate') {
-        event.respondWith(
-            fetch(event.request).catch(() => {
-                return caches.match(event.request);
-            })
-        );
-        return;
-    }
-
-    // Static assets - Cache First, then Network
+    // ALL other requests - Network First, fall back to cache
+    // This ensures you ALWAYS get the latest version of every file
     if (event.request.method === 'GET') {
         event.respondWith(
-            caches.match(event.request).then((response) => {
-                return response || fetch(event.request);
-            })
+            fetch(event.request)
+                .then((response) => {
+                    // Save a copy to cache for offline use
+                    const responseClone = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, responseClone);
+                    });
+                    return response;
+                })
+                .catch(() => {
+                    // Offline: serve from cache
+                    return caches.match(event.request);
+                })
         );
     }
 });
