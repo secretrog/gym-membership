@@ -1,7 +1,6 @@
 @echo off
 TITLE Iron Pulse Gym - Starting Backend
 echo 🚀 Starting Gym Management Backend...
-cd /d "%~dp0backend"
 
 :: Start the backend in a new minimized window
 start /min cmd /c "npm run dev"

@@ -1,13 +1,33 @@
 {
-  "name": "gym-management-root",
-  "version": "1.0.0",
-  "description": "Root package to help Railway deploy the backend folder automatically",
-  "scripts": {
-    "install": "cd backend && npm install",
-    "build": "cd backend && npm run build",
-    "start": "cd backend && npx prisma migrate deploy && npm start"
-  },
-  "engines": {
-    "node": ">=18.0.0"
-  }
-}
+    "name": "gym-management-backend",
+    "version": "1.0.0",
+    "description": "Backend API for Gym Membership Management System",
+    "main": "src/server.js",
+    "scripts": {
+        "start": "node src/server.js",
+        "build": "prisma generate",
+        "dev": "nodemon src/server.js",
+        "postinstall": "prisma generate",
+        "prisma:generate": "prisma generate",
+        "prisma:migrate": "prisma migrate dev",
+        "prisma:studio": "prisma studio",
+        "seed": "node prisma/seed.js && node prisma/seed-plans.js"
+    },
+    "dependencies": {
+        "@prisma/client": "^6.19.2",
+        "axios": "^1.13.6",
+        "bcryptjs": "^2.4.3",
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.7",
+        "express": "^4.21.2",
+        "jsonwebtoken": "^9.0.2",
+        "morgan": "^1.10.0",
+        "prisma": "^6.19.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.9"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
