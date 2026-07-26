@@ -8,6 +8,6 @@ build/
 .agent/
 brain/
 ip.txt
- Launch-Gym.bat
+Launch-Gym.bat
 backend/mkcert.exe
 site/public/js/mobile-nav-old.js

@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 // Static files
-app.use(express.static(path.join(__dirname, '../../site/public')));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Basic health check
 app.get('/health', (req, res) => {

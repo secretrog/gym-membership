@@ -1,0 +1,21 @@
+{
+    "name": "Freedom Fitness Gym",
+    "short_name": "Freedom Fitness",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#121212",
+    "theme_color": "#d4ff00",
+    "icons": [
+        {
+            "src": "/icons/logo.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
