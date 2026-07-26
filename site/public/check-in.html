@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Iron Pulse - Admin Check-In</title>
+    <title>Freedom Fitness - Admin Check-In</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet">
@@ -1465,7 +1465,7 @@
                     <span class="material-symbols-outlined font-bold">fitness_center</span>
                 </div>
                 <div>
-                    <h1 class="text-sm font-bold uppercase tracking-wider">Iron Pulse</h1>
+                    <h1 class="text-sm font-bold uppercase tracking-wider">Freedom Fitness</h1>
                     <p class="text-xs text-slate-500">Admin Portal</p>
                 </div>
             </div>
@@ -1621,8 +1621,8 @@
                             class="text-sm font-black italic uppercase tracking-widest mb-6 underline decoration-primary decoration-4 underline-offset-8">
                             Daily QR Code</h4>
 
-                        <div id="qrPlaceholder" class="text-center py-6 hidden">
-                            <span class="material-symbols-outlined text-primary text-5xl mb-4 block">QR Code</span>
+                        <div id="qrPlaceholder" class="text-center py-6">
+                            <span class="material-symbols-outlined text-primary text-5xl mb-4 block">qr_code</span>
                             <p class="text-slate-500 text-xs font-bold mb-6">Generate today's attendance QR code for
                                 members to scan</p>
                             <button id="generateQrBtn"
@@ -1631,10 +1631,10 @@
                             </button>
                         </div>
 
-                        <div id="qrDisplay" class="text-center">
+                        <div id="qrDisplay" class="text-center hidden">
                             <div class="bg-white rounded-2xl p-4 inline-block mb-4">
                                 <img id="qrImage"
-                                    src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&amp;data=IRONPULSE-2026-03-07-a2944034c3cde0b3"
+                                    src=""
                                     alt="Daily QR Code" class="w-64 h-64">
                             </div>
                             <p
@@ -1642,8 +1642,7 @@
                                 <span class="material-symbols-outlined text-sm animate-pulse"></span>
                                 QR Active for Today
                             </p>
-                            <p id="qrToken" class="text-[10px] text-slate-600 font-mono mt-2 break-all">
-                                IRONPULSE-2026-03-07-a2944034c3cde0b3</p>
+                            <p id="qrToken" class="text-[10px] text-slate-600 font-mono mt-2 break-all"></p>
                         </div>
 
                         <p id="qrError" class="hidden text-red-400 text-xs font-bold text-center mt-4"></p>

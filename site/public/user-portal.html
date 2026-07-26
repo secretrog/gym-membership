@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Iron Pulse - Member Portal</title>
+    <title>Freedom Fitness - Member Portal</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
@@ -70,8 +70,7 @@
             class="sticky top-0 z-50 w-full border-b border-border-dark bg-[#121212]/90 backdrop-blur-md px-6 lg:px-20 py-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <a href="user-portal.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                    <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
-                        class="h-10 w-auto object-contain">
+                    <img src="/icons/logo.png" alt="FREEDOM FITNESS Logo" class="h-10 w-auto object-contain">
                 </a>
                 <nav class="hidden md:flex items-center gap-10">
                     <a class="text-sm font-bold uppercase tracking-widest text-primary"
@@ -141,7 +140,7 @@
             <div class="flex flex-col h-full p-8">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                        <img src="/icons/logo.png" alt="FREEDOM FITNESS Logo"
                             class="h-10 w-auto object-contain brightness-0 invert">
                     </div>
                     <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
@@ -210,19 +209,31 @@
             <div class="max-w-7xl mx-auto px-6 lg:px-20 grid grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="text-center border-r border-black/10 last:border-0">
                     <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Session Streak</p>
-                    <p id="statStreak" class="text-3xl font-black italic">-- DAYS</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-4xl text-orange-600">local_fire_department</span>
+                        <p id="statStreak" class="text-3xl font-black italic">-- DAYS</p>
+                    </div>
                 </div>
                 <div class="text-center border-r border-black/10 last:border-0 lg:block hidden">
                     <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Status</p>
-                    <p id="statStatus" class="text-3xl font-black italic uppercase">--</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-3xl text-green-700" style="font-variation-settings: 'FILL' 1;">circle</span>
+                        <p id="statStatus" class="text-3xl font-black italic uppercase">--</p>
+                    </div>
                 </div>
                 <div class="text-center border-r border-black/10 last:border-0">
                     <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Goal Progress</p>
-                    <p id="statProgress" class="text-3xl font-black italic">--%</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-4xl">flag</span>
+                        <p id="statProgress" class="text-3xl font-black italic">--%</p>
+                    </div>
                 </div>
                 <div class="text-center">
                     <p class="text-[10px] font-black uppercase tracking-widest mb-1 opacity-60">Next Renewal</p>
-                    <p id="statExpiry" class="text-3xl font-black italic">--</p>
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-3xl">calendar_month</span>
+                        <p id="statExpiry" class="text-3xl font-black italic">--</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -369,7 +380,7 @@
         <footer class="bg-[#121212] border-t border-border-dark py-12 px-6 lg:px-20 mt-auto">
             <div
                 class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs font-bold uppercase tracking-[0.2em]">
-                <p>© 2026 IRON PULSE. MEMBER EXCLUSIVE PORTAL.</p>
+                <p>© 2026 FREEDOM FITNESS. MEMBER EXCLUSIVE PORTAL.</p>
                 <div class="flex gap-8">
                     <a href="index.html" class="hover:text-primary">Back to site</a>
                 </div>
@@ -595,7 +606,7 @@
                 // Build file content
                 const userName = memberProfileData ? memberProfileData.name : 'Member';
                 let content = `═══════════════════════════════════════\n`;
-                content += `   IRON PULSE - Booked Sessions\n`;
+                content += `   FREEDOM FITNESS - Booked Sessions\n`;
                 content += `   Member: ${userName}\n`;
                 content += `   Downloaded: ${new Date().toLocaleString()}\n`;
                 content += `═══════════════════════════════════════\n\n`;
@@ -619,7 +630,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `IronPulse_Sessions_${userName.replace(/\s+/g, '_')}.txt`;
+                a.download = `FreedomFitness_Sessions_${userName.replace(/\s+/g, '_')}.txt`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -683,12 +694,44 @@
                 document.getElementById('heroName').innerHTML = `${user.name.split(' ')[0]} <span class="text-primary">PULSE</span>`;
 
                 document.getElementById('statStreak').textContent = `${user.streak} DAYS`;
-                document.getElementById('statStatus').textContent = user.membershipStatus;
+                
+                // Check if membership has expired by date
+                const statusEl = document.getElementById('statStatus');
+                const statusDot = document.querySelector('#statStatus')?.closest('.flex')?.querySelector('.material-symbols-outlined');
+                
+                let isExpiredByDate = false;
+                if (user.expiryDate) {
+                    const expiry = new Date(user.expiryDate);
+                    const now = new Date();
+                    if (expiry < now) {
+                        isExpiredByDate = true;
+                    }
+                }
+
+                if (isExpiredByDate || user.membershipStatus === 'expired') {
+                    statusEl.textContent = 'EXPIRED';
+                    if (statusDot) {
+                        statusDot.classList.remove('text-green-700');
+                        statusDot.classList.add('text-red-600');
+                    }
+                } else {
+                    statusEl.textContent = user.membershipStatus;
+                    if (statusDot) {
+                        statusDot.classList.remove('text-red-600');
+                        statusDot.classList.add('text-green-700');
+                    }
+                }
+
                 document.getElementById('statProgress').textContent = `${Math.round(user.goalProgress)}%`;
 
                 if (user.expiryDate) {
                     const expiry = new Date(user.expiryDate);
-                    document.getElementById('statExpiry').textContent = `${expiry.getDate()} ${['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][expiry.getMonth()]}`;
+                    const now = new Date();
+                    if (expiry < now) {
+                        document.getElementById('statExpiry').textContent = 'EXPIRED';
+                    } else {
+                        document.getElementById('statExpiry').textContent = `${expiry.getDate()} ${['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'][expiry.getMonth()]}`;
+                    }
                 } else {
                     document.getElementById('statExpiry').textContent = 'NONE';
                 }
@@ -968,8 +1011,8 @@
                 <span class="material-symbols-outlined">close</span>
             </button>
             <div class="mb-6">
-                <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="Logo" class="h-16 mx-auto mb-4">
-                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Iron Pulse</h3>
+                <img src="/icons/logo.png" alt="Logo" class="h-16 mx-auto mb-4">
+                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Freedom Fitness</h3>
                 <p class="text-slate-400 text-sm mt-2">Add this app to your home screen for the best experience.</p>
             </div>
 

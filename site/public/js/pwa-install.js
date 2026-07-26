@@ -167,6 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // -------------------------
 
 window.addEventListener('appinstalled', (evt) => {
-    console.log('Iron Pulse was installed.');
+    console.log('Freedom Fitness was installed.');
     updateSmartCTA('installed');
 });

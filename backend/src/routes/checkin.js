@@ -44,7 +44,7 @@ router.post('/generate-qr', auth, async (req, res) => {
         }
 
         // Generate unique token
-        const token = `IRONPULSE-${today.toISOString().split('T')[0]}-${crypto.randomBytes(8).toString('hex')}`;
+        const token = `FREEDOMFITNESS-${today.toISOString().split('T')[0]}-${crypto.randomBytes(8).toString('hex')}`;
 
         const dailyQR = await prisma.dailyQR.create({
             data: {
@@ -164,6 +164,20 @@ router.post('/scan', auth, async (req, res) => {
         // 5. Create check-in
         const expiresAt = new Date(now.getTime() + 4 * 60 * 60 * 1000);
 
+        // Calculate new streak: reset to 1 if user missed a day
+        let newStreak = 1;
+        if (member.lastScanDate) {
+            const lastScan = new Date(member.lastScanDate);
+            const lastScanDay = new Date(lastScan.getFullYear(), lastScan.getMonth(), lastScan.getDate());
+            const yesterday = new Date(today.getTime() - 24 * 60 * 60 * 1000);
+
+            if (lastScanDay.getTime() === yesterday.getTime()) {
+                // Scanned yesterday — continue the streak
+                newStreak = member.streak + 1;
+            }
+            // Otherwise (missed a day or more) — streak resets to 1
+        }
+
         await prisma.$transaction(async (tx) => {
             await tx.attendance.create({
                 data: {
@@ -178,13 +192,13 @@ router.post('/scan', auth, async (req, res) => {
             await tx.member.update({
                 where: { id: member.id },
                 data: {
-                    streak: { increment: 1 },
+                    streak: newStreak,
                     lastScanDate: now
                 }
             });
         });
 
-        res.json({ message: 'Check-in successful! Welcome to Iron Pulse 💪', expiresAt, streak: member.streak + 1 });
+        res.json({ message: 'Check-in successful! Welcome to Freedom Fitness 💪', expiresAt, streak: newStreak });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

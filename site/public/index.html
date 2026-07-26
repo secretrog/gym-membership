@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Iron Pulse - Elite Fitness & Performance</title>
+    <title>Freedom Fitness - Elite Fitness & Performance</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet">
@@ -3011,9 +3011,9 @@
             class="fixed top-0 z-50 w-full border-b border-border-dark bg-background-dark/90 backdrop-blur-md px-6 lg:px-20 py-4">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 <div class="flex items-center gap-3">
-                    <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                    <img src="/icons/logo.png" alt="FREEDOM FITNESS Logo"
                         class="h-10 w-auto object-contain">
-                    <h2 class="text-xl font-black tracking-tighter italic">IRON<span class="text-primary">PULSE</span>
+                    <h2 class="text-xl font-black tracking-tighter italic">FREEDOM<span class="text-primary">FITNESS</span>
                     </h2>
                 </div>
                 <nav class="hidden md:flex items-center gap-10">
@@ -3061,7 +3061,7 @@
             <div class="flex flex-col h-full p-8">
                 <div class="flex items-center justify-between mb-12">
                     <div class="flex items-center gap-3">
-                        <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="IRON PULSE Logo"
+                        <img src="/icons/logo.png" alt="FREEDOM FITNESS Logo"
                             class="h-10 w-auto object-contain brightness-0 invert">
                     </div>
                     <button id="closeMenuBtn" class="text-white hover:text-primary p-2">
@@ -3483,7 +3483,7 @@
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                 <div class="col-span-1 md:col-span-1">
                     <div class="flex items-center gap-3 mb-6">
-                        <span class="material-symbols-outlined text-primary text-3xl">Fitness center</span>
+                        <span class="material-symbols-outlined text-primary text-3xl">fitness_center</span>
                     </div>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">The definitive fitness experience designed
                         for those who demand excellence from themselves and their equipment.</p>
@@ -4026,11 +4026,24 @@
             <span class="material-symbols-outlined">photo_library</span>
             <span>Gallery</span>
         </a>
-        <a href="user-login.html" class="nav-item">
+        <a href="user-login.html" class="nav-item" id="mobileNavLoginBtn">
             <span class="material-symbols-outlined">account_circle</span>
-            <span>Portal</span>
+            <span>Login</span>
         </a>
     </nav>
+
+    <script>
+        // Dynamically change or hide login button based on auth state
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = sessionStorage.getItem('memberAuthToken');
+            const loginBtn = document.getElementById('mobileNavLoginBtn');
+            if (token && loginBtn) {
+                // User is logged in, change Login to Profile/Portal
+                loginBtn.innerHTML = '<span class="material-symbols-outlined">account_circle</span><span>Profile</span>';
+                loginBtn.href = 'user-portal.html';
+            }
+        });
+    </script>
 
     <!-- iOS PWA Install Guide -->
     <div id="iosInstallModal" class="fixed inset-0 z-[200] hidden items-center justify-center p-4">
@@ -4041,8 +4054,8 @@
                 <span class="material-symbols-outlined">close</span>
             </button>
             <div class="mb-6">
-                <img src="/icons/WhatsApp Image 2026-03-08 at 5.39.03 PM.jpeg" alt="Logo" class="h-16 mx-auto mb-4">
-                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Iron Pulse</h3>
+                <img src="/icons/logo.png" alt="Logo" class="h-16 mx-auto mb-4">
+                <h3 class="text-xl font-black italic uppercase tracking-tight">Install Freedom Fitness</h3>
                 <p class="text-slate-400 text-sm mt-2">Add this app to your home screen for the best experience.</p>
             </div>
 

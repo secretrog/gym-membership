@@ -9,9 +9,30 @@ const { auth } = require('../middleware/auth');
 // @desc    Authenticate user & get token
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
+    const loginId = (email || '').trim();
+
+    if (!loginId || !password) {
+        return res.status(400).json({ message: 'Email or phone and password are required' });
+    }
 
     try {
-        const user = await prisma.user.findUnique({ where: { email } });
+        let user;
+
+        if (loginId.includes('@')) {
+            user = await prisma.user.findUnique({
+                where: { email: loginId.toLowerCase() }
+            });
+        } else {
+            user = await prisma.user.findFirst({
+                where: {
+                    OR: [
+                        { email: loginId.toLowerCase() },
+                        { member: { phone: loginId } }
+                    ]
+                }
+            });
+        }
+
         if (!user || !user.isActive) {
             return res.status(400).json({ message: 'Invalid credentials' });
         }
