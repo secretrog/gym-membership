@@ -4,13 +4,16 @@ const bcrypt = require('bcryptjs');
 const prisma = new PrismaClient();
 
 async function main() {
-    const adminEmail = 'admin@ironpulse.com';
+    // Read credentials from environment variables to avoid committing plain-text passwords to GitHub
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@gmail.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'password123';
+    
     const existingAdmin = await prisma.user.findUnique({
         where: { email: adminEmail }
     });
 
     if (!existingAdmin) {
-        const hashedPassword = await bcrypt.hash('admin123', 12);
+        const hashedPassword = await bcrypt.hash(adminPassword, 12);
         await prisma.user.create({
             data: {
                 name: 'System Admin',
@@ -19,7 +22,7 @@ async function main() {
                 role: 'owner'
             }
         });
-        console.log('✅ Admin user created: admin@ironpulse.com / admin123');
+        console.log(`✅ Admin user created: ${adminEmail} (password loaded from environment)`);
     } else {
         console.log('ℹ️ Admin user already exists');
     }
